@@ -1,0 +1,4 @@
+#!/bin/sh
+# $URL: svn+ssh://blerubrus@scm.forge.imag.fr/var/lib/gforge/chroot/scmrepos/svn/bworld/trunk/module/dev/module/myApt/src/site/resources/myAptResources $
+# $Id: myAptResources 152 2014-03-02 17:05:39Z blerubrus $
+java -jar ~/bin/myApt_20140302-r149.jar -Dtype=resources -DresourcesDir=$1

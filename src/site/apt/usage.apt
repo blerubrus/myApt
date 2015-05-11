@@ -1,0 +1,316 @@
+ ---
+ myApt Usage
+ ---
+ blerubrus (via b2do MyApt program)
+ ---
+ 2012-04-15
+ 
+myApt Usage
+
+ The "myApt" distribution proposes a generator of custom files in the APT format.
+ 
+ Please read the {{Install}} section then the various features of the myApt tool:
+ 
+ * <<<{{myApt}}>>> to create a custom shell of an apt file;
+ 
+ * <<<{{myAptMonthDone}}>>> to generate a calendar listing of days for the current month as a custom apt file;
+ 
+ * <<<{{myAptImageDir}}>>> to generate a custom apt file for each image located in a given directory (with a file
+ providing links to be copied pasted to a Maven <<<site.xml>>> site descriptor, and an xdoc file
+ providing an overview with thumbnails).
+ 
+ * <<<{{myAptResources}}>>> to generate a custom apt file whose body provides a list of links to the files located in a given directory.
+
+* {Install}
+
+ <<myApt>> is distributed as a Java executable <<<jar>>> file or a zip archive containing 
+ the jar file and some shortcut scripts for Unix-based users.
+ 
+ <<myApt>> can be
+ executed on any java-enabled platform. In the following, the jar file is named <<<myApt-version.jar>>>.
+ 
+ Requirements: a Java Runtime Environment version 1.6 or upper correctly installed on your system.
+ 
+ Unix-based users: get the latest version of the <<myApt>> distribution zip archive. Unzip it then copy the sh and jar files to your <<<~/bin/>>> directory
+ (which is available from your system <Path> environment variable).
+ 
+ Here is the expected list of files in this <<<~/bin/>>> directory:
+ 
++---+
+~/bin/
+ |- myApt
+ |- myAptImageDir
+ |- myAptMonthDone
+ |- myAptResources
+ |- myApt_20150511.jar
++---+
+ 
+ Turn all <<<myApt*>>> files to executable :
+ 
++---+
+$ cd ~/bin
+$ chmod +x myApt*
++---+
+
+ Test: open a new terminal and type <<myApt>>. A file named <<<yyyyMMdd_myApt.apt>>> (where <<<yyyyMMdd>>>
+ is the current date) is expected to be created, as shown below:
+  
++---+
+blerubrus@moon:~$ myApt
+Build succeeded!
+   Generated apt file 20140302_myApt.apt
++---+
+
+ Windows users can currently not use the shortcut scripts, they have to type the full command:
+ 
++---+
+java -jar myApt_version.jar
++---+
+
+* {myApt}: empty sheel
+
+ myApt generates an empty shell of APT file, with a title, a date of creation, an author, and a footer
+ that displays the SVN (Subversion) keywords "Revision", "Date" and "Author".
+ 
+ 
+ The following screenshot shows the result of such a generated file:
+ 
+[./myAptNewFile.png] 
+ 
+ 
+
+ Generating the custom apt file with <<<myApt_version.jar>>> supports the following input arguments:
+ 
+ * <<<-Dtarget=filename>>>\
+ where <<<filename>>> is the path and name of the apt file to be generated.
+ 
+ * <<<-Dtitle=DocTitle>>>\
+ where <<<DocTitle>>> is the title of the APT page that will appear once the Maven site generated.
+ 
+ * <<<-Dscm=git>>> (default)\
+ then none rcs keyword will be injected in the generated apt file
+ 
+ * <<<-Dscm=svn>>>\
+ then rcs keywords will be injected in the generated apt file: id, url, author, date, revision.
+ 
+ []
+ 
+ Creating a "myApt" file named <<<myAptNewFile.apt>>> in the
+ current directory (where the command is launched from) with the "<<<MyTitle>>>" title can be done by executing the following command on
+ one line, expecting the name of the file to create then the title of the page:
+ 
++---+
+java -jar myApt_version.jar
+ -Dtarget=myAptNewFile.apt
+ -Dtitle=MyTitle
++---+
+ 
+ 
+ Unix-based users can use the shortcut shell script {{{./myApt}<<<myApt>>>}} in the <<<~/bin/>>> directory
+ (see {{Install}} section):
+ 
++---+
+myApt myAptNewFile.apt MyTitle
++---+
+ 
+
+ Both previous command return the following message to the console:
+ 
++---+
+Build succeeded: generated myAptNewFile.apt
++---+
+ 
+ The content of the generated apt file is shown in the figure above, or click
+ {{{./myAptNewFile.apt}myAptNewFile.apt}} to see its content.
+
+
+ 
+* {myAptMonthDone}
+
+ The <<MonthDone>> variante aims at generating a kind of calendar for a given  month in the
+ APT format. Weekends are "apt" commented (lines start with double tilde).
+ 
+ To create the "<month done>" apt file for the current month, specify the <<<-Dtype=monthDone>>> option
+ to the following command:
+ 
++---+
+java -jar myApt_version.jar -Dtype=done
++---+
+
+ Output (on the 2013-05-02):
+ 
++---+
+Build succeeded!
+   Generated apt file 2013-05_done.apt
++---+
+
+ Unix-based users can use the shorctut script if the {{{./myAptMonthDone}<<<myAptMonthDone>>>}} file is in the <<<~/bin/>>> directory
+ (see {{Install}} section):
+ 
++---+
+myAptMonthDone
++---+
+
+ Here is a screenshot of the start of the generated file:
+ 
+[./myAptMonthDone.png]
+
+ Providing, once generated in html via the <<mvn site>> command:
+ 
+[./myAptMonthDoneResult.png]
+
+** More parameters
+
+ Specify the path to the jar file then the following options:
+ 
+   * <<<-Dtype=done>>>
+   
+   Tells the program to generate a "done" apt file
+   
+   * <<<-Dyear=yyyy>>>
+   
+   Where <<<yyyy>>> is the year
+   
+   * <<<-Dmonth=m>>>
+   
+   Where <<<m>>> is the month number (January: 1, etc)
+   
+ Example to generate a "done" apt file for August 2013 (full java command to be typed on one line):
+ 
++---+
+java -jar myApt_version.jar -Dtype=done -Dyear=2013 -Dmonth=8
++---+
+
+ Alternative using the script {{{./myAptMonthDone}<<<myAptMonthDone>>>}} in the <<<~/bin>>> directory
+ (see {{Install}} section):
+ 
++---+
+myAptMonthDone 2013 8
++---+
+
+ Output:
+ 
++---+
+Build succeeded!
+   Generated apt file 2013-08_done.apt
++---+
+ 
+* myAptImage (draft)
+
+ The "myAptImage" aims at generating a custom apt file with the display of an image file.
+ 
+ This tool also allows to generate as many apt files as there are found images in a given directory, hence both following sections.
+
+  Let's assume that a directory named <<<myDirectoryOfImages>>> contains the following images files
+ 
++---+
+logo_benartvic.jpg
+logo_benartvic.png
+logo_Steamer.png
+logo_Steamer.svg
++---+
+
+** myAptImageFile
+
+ The <<-DimageFile=pathToImageFilename>> option aims at generating an apt file for the given image file.
+ Example (to be typed on one single line):
+ 
++---+
+$ java -jar myApt_version.jar
+ -DimageFile=myDirectoryOfImages/logo_benartvic.png
++---+
+
+ Output:
+
++---+
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_benartvic.png.apt
+Build succeeded!
+   Generated apt file logo_benartvic.png.apt 
++---+
+
+** {myAptImageDir}
+
+ The <<-DimageDir=path/to/resources/images/folder>> option aims at generating an apt file for each image in the given directory:
+ 
+   [Note:] When the given parameter <<<path/to/resources/images/folder>>> includes a "<<<resources/>>> directory, the program
+   will try to extract the relative directory from this "<<<resources>>>" parent.
+   
+ Shortcut script, if {{{./myAptImageDir}<<<myAptImageDir>>>}} file is in the <<<~/bin>>> directory (see {{Install}} section):
+
++---+
+myAptImageDir /home/blerubrus/Bureau/t2/
++---+
+
+ Output:
+  
++---+
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_Steamer.svg.apt
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_benartvic.jpg.apt
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_benartvic.png.apt
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_Steamer.png.apt
+Successfully created the 'list items' xml file /home/blerubrus/Bureau/t2/20130502131533_list_items.xml
+Build succeeded!
+   Generated apt file logo_Steamer.svg.apt
+   Generated apt file logo_benartvic.jpg.apt
+   Generated apt file logo_benartvic.png.apt
+   Generated apt file logo_Steamer.png.apt
++---+
+ 
+ This script also generates a <<<yyyyMMddhhmm_list_items.xml>>> file proposing
+ links to be included in the <<<site.xml>>> (for the menu of the Maven site).
+ 
+ Since version 20130521-r91, it has also generated a file named <<<yyyyMMddhhmm_gal.xml>>>
+ proposing the codes to be included in a source file in <<<xdoc>>> format to generate
+ an image gallery.
+ 
+ Indeed, the <<<-DimageDir>>> option now generates an additional file in xml format that
+ lists, for each image in the folder given as parameter, the tags to be included
+ into an "<xdoc>" document (in the <<<src/site/xdoc/>>>) folder. Each of the generated
+ lines contains for example for an image file basename <<<20120919_calamondin1.jpg>>>:
+ 
++---+
+<div class="imgGal">
+   <a href="./20120919_calamondin1.jpg.html" title="2012-09-19">
+      <img src="./images/20120919_calamondin1.jpg_thumb.png"
+           alt="20120919_calamondin1.jpg"
+           width="100" height="100"/>
+   </a>
+   <div class="desc">2012-09-19</div>
+</div>
++---+
+
+ This feature assumes that the associated generated thumbnail exists, with 
+ the following name pattern for an image named <<<myImage.jpg>>>: <<<myImage.jpg_thumb.png>>>.
+ Ideally, this thumbnail may have been generated with the <<convert>> script given
+ in the {{{./index.html}Home}} page, its size will be 100 x 100 pixels.
+ 
+ This also assumes that the original image basename includes the date in yyyyMMdd format in 
+ its filename, used for the description "<div class=desc>".
+ 
+ This also assumes that the Maven site disposes the expected css file: TODO! 
+ 
+* {myAptResources} (draft)
+
+ Aims at generating an apt file whose body proposes a listing of links to the files contained
+ in a specified folder.
+ 
+ Type on one line: 
+ 
++---+
+java -jar myApt_version.jar
+ -Dtype=resources
+ -DresourcesDir=path/to/the/folder
++---+
+
+ This will generate a file named <<<yyyyMMdd_myAptResources.apt>>> in the current directory.
+ 
+ Unix-based users can use the shortcut script, if {{{./myAptResources}<<<myAptResources>>>}} file is in the <<<~/bin>>> directory
+ (see {{Install}} section):
+ 
++---+
+myAptResources path/to/the/folder
++---+
+ 
+===
+
+ <$Date$>

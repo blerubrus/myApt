@@ -1,0 +1,158 @@
+<project
+ xmlns="http://maven.apache.org/POM/4.0.0" 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                     http://maven.apache.org/maven-v4_0_0.xsd">
+                     
+<!--
+Last change:
+$Date$
+-->
+
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>fr.free.bworld</groupId>
+   <artifactId>bworld-myApt</artifactId>
+   <packaging>jar</packaging>
+   <version>1.1-SNAPSHOT</version>
+   <name>bworld-myApt</name>
+   <description>A simple java program to generate custom files in the Doxia APT format</description>
+   <url>http://bworld.free.fr/myApt/</url>
+   
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
+      <build.date>${maven.build.timestamp}</build.date>
+   </properties>
+  
+
+  <!-- 
+   <scm>
+      <connection>scm:svn:svn+ssh://username@scm.forge.imag.fr/var/lib/gforge/chroot/scmrepos/svn/bworld/trunk/module/dev/module/myApt</connection>
+      <tag>HEAD</tag>
+   </scm>
+   -->
+   <reporting>
+      <plugins>
+      
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>2.1.2</version>
+            <reportSets>
+               <reportSet>
+                  <reports>
+                     <report>mailing-list</report>
+                     <report>cim</report>
+                  </reports>
+               </reportSet>
+               
+            </reportSets>
+         </plugin>
+      
+         <!-- the javadoc for the site (warning: it may be different from the javadoc standalone defined in build) -->
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.8.1</version>
+            <configuration>
+               <show>private</show>
+               <quiet>false</quiet>
+               <doctitle>${project.name} API Javadoc ${project.version}</doctitle> <!-- Used by javadoc:javadoc goal -->
+               <windowtitle>${project.name} API Javadoc ${project.version}</windowtitle> <!-- Used by javadoc:javadoc goal -->
+               <testDoctitle>${project.name} - Tests - API Javadoc ${project.version}</testDoctitle> <!-- Used by javadoc:test-javadoc goal -->
+               <testWindowtitle>${project.name} - Tests - API Javadoc ${project.version}</testWindowtitle> <!-- Used by javadoc:test-javadoc goal -->
+            </configuration>
+         </plugin>
+         
+         <!-- in order to generate the TODO / FIXME list -->
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>taglist-maven-plugin</artifactId>
+            <version>2.4</version>
+            <configuration>
+               <tagListOptions>
+                  <tagClasses>
+                     <tagClass>
+                        <displayName>Todo and Fixme</displayName>
+                        <tags>
+                           <tag>
+                              <matchString>TODO</matchString>
+                              <matchType>exact</matchType>
+                           </tag>
+                           <tag>
+                              <matchString>FIXME</matchString>
+                              <matchType>exact</matchType>
+                           </tag>
+                        </tags>
+                     </tagClass>
+                  </tagClasses>
+               </tagListOptions>
+            </configuration>
+         </plugin>
+         
+         <!-- for junit tests reports -->
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+            <version>2.4.2</version>
+         </plugin>
+         
+         <!-- overview camembert chart -->
+         <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>dashboard-maven-plugin</artifactId>
+          </plugin>
+      </plugins>
+      
+      
+   </reporting>
+   
+   <build>
+   
+      <!-- final name of the jar using build date  -->
+      <finalName>myApt_${build.date}</finalName>
+      
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+               <source>1.6</source>
+               <target>1.6</target>
+            </configuration>
+         </plugin>
+	      
+	      <!-- to build the jar file for "myapt"-->
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-jar-plugin</artifactId>
+	        <version>2.4</version>
+	        <configuration>
+	            <archive>
+	               <index>true</index>
+	               <manifest>
+	                  <addClasspath>true</addClasspath>
+	                  <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+	                  <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+	                  <mainClass>fr.free.bworld.myapt.Main</mainClass>	                  
+	               </manifest>
+	               <manifestEntries>
+	                  <Build-date>${build.date}</Build-date>
+	                  <Implementation-Build>${buildNumber}</Implementation-Build>
+	               </manifestEntries>
+	            </archive>
+	        </configuration>
+	      </plugin>			
+
+      </plugins>
+    </build>
+    
+    <dependencies>
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.8.1</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+</project>

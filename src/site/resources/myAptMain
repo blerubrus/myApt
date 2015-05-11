@@ -1,0 +1,3 @@
+# $Id$
+# Shortcut script to invoke the myApt Java executable jar file
+java -jar ~/workspace/bworld/module/dev/module/myApt/src/site/resources/myApt_20130627-r97.jar $1 $2

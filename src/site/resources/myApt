@@ -1,0 +1,26 @@
+#!/bin/sh
+# This script proposes a shortcut to generate an apt file with the myApt_yyyyMMdd.jar executable jar file expected in the ~/bin/ directory of the current user
+# This script is configured to handle default values for 3 possible input arguments:
+# $1: the filename of the apt file to generate. Default is "src/site/apt/yyyyMMdd_myApt.apt" (with the current date)
+# $2: the title of the document (default: "yyyy-MM-dd myApt")
+# $3: "git" (default) or "svn" as value for the "-Dscm=" parameter in order to inject respective rcs keywords in the generated file
+FILENAME=$1
+TITLE=$2
+SCM=$3
+TODAY=$(date +"%Y-%m-%d")
+TODAY_ATTACHED=$(date +"%Y%m%d")
+if [ -z "$FILENAME" ]
+then
+   FILENAME=src/site/apt/$TODAY_ATTACHED"_myApt.apt"
+fi
+if [ -z "$TITLE" ]
+then
+   TITLE=$TODAY" myApt"
+fi
+if [ -z "$SCM" ]
+then
+   SCM=git
+fi
+
+#java -jar ~/bin/myApt_20150511.jar -Dtarget=$FILENAME -Dtitle="$TITLE"
+java -jar myApt_20150511.jar -Dtarget=$FILENAME -Dtitle="$TITLE" -Dscm="$SCM"

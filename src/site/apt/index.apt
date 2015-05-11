@@ -1,0 +1,28 @@
+  ---
+  Home
+  ---
+  bwa
+  ---
+  2012-03-09
+
+Home
+
+ Welcome to myApt module!
+ 
+ <<<fr.free.bworld.myapt>>> aims at generating custom APT (<Almost Plain Text> Doxia format) files ready to be edited.
+
+ The APT format is quite easy to write and supported by the Maven site documentation plugin.
+ 
+ For more information about the APT format, please consult {{{http://maven.apache.org/doxia/references/apt-format.html}The APT format}} on the Maven Web Site (2012-02-15).
+ 
+ Please consult the {{{./download.html}Download}} menu item  for descriptions of available versions of the program.  
+
+ For information on how to use various tools of this "<<myApt>>" program, please consult the {{{./usage.html}Usage}} page.
+ 
+ For developer's guide, please consult the {{{./devguide.html}Dev Guide}} page.
+ 
+ 
+
+===
+
+ <$Date$>
