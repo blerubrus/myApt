@@ -12,6 +12,15 @@ import java.util.Properties;
  */
 public class Main {
 
+   /**Possible argument to display the version of the software.*/
+   private static final String ARGUMENT_VERSION_3 = "-v";
+
+   /**Possible argument to display the version of the software.*/
+   private static final String ARGUMENT_VERSION_2 = "-version";
+   
+   /**Possible argument to display the version of the software.*/
+   private static final String ARGUMENT_VERSION_1 = "--version";
+
    /** The key in the resource properties file to get the build date. */
    private static final String VERSION_KEY_BUILD_DATE = "build.date";
 
@@ -70,18 +79,22 @@ public class Main {
     * @param args is the list of input parameters on the command line.
     */
    public static void main(String[] args) {
-      if (args != null && args.length == 1 && "--version".equals(args[0])){
+      // checks if the user only wants to display the version
+	  if (args != null && args.length == 1 && 
+    		  (ARGUMENT_VERSION_1.equals(args[0])
+    			||
+    		   ARGUMENT_VERSION_2.equals(args[0])
+    		   	||
+    		   ARGUMENT_VERSION_3.equals(args[0]))){
     	  System.out.println(new Main().getVersion());
     	  return;
       }
       
-      System.out.println(new Main().getVersion());
 	  GenerateApt ma = MyAptFactory.getMyApt(args);
       if (ma.generate()){
          System.out.println("Build succeeded!");         
          for (String currGeneratedFilename : ma.getGeneratedFilenames()){
             System.out.println("   Generated apt file " + currGeneratedFilename);
-            
             System.out.println("You may wish to add the following line in the site.xml file:");
             System.out.println("   " + ma.getMenuAdd());
             
@@ -105,7 +118,7 @@ public class Main {
 			Properties props = new Properties();
 			InputStream is = this.getClass().getResourceAsStream(CLASSPATH_TO_VERSION_PROPERTIES_FILE);
 			if (is == null) {
-				System.out.print("Could not find the version properties resource...");
+				System.out.println("Could not find the version properties resource...");
 			}
 			else {
 				props.load(is);
@@ -120,7 +133,7 @@ public class Main {
 			}
 		}
 		catch (IOException e) {
-			System.out.print("Could not find the version properties resource... Exception: " + e.getMessage());
+			System.out.println("Could not find the version properties resource... Exception: " + e.getMessage());
 		}
 		return result;
 
