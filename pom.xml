@@ -23,19 +23,13 @@ $Date$
    </organization>   
    <inceptionYear>2015</inceptionYear>
    
+   <!-- a custom property for build timestamp  -->
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
+      <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
       <build.date>${maven.build.timestamp}</build.date>
    </properties>
   
-
-  <!-- 
-   <scm>
-      <connection>scm:svn:svn+ssh://username@scm.forge.imag.fr/var/lib/gforge/chroot/scmrepos/svn/bworld/trunk/module/dev/module/myApt</connection>
-      <tag>HEAD</tag>
-   </scm>
-   -->
    <reporting>
       <plugins>
       
@@ -108,14 +102,20 @@ $Date$
               <artifactId>dashboard-maven-plugin</artifactId>
           </plugin>
       </plugins>
-      
-      
    </reporting>
    
    <build>
    
-      <!-- final name of the jar using build date  -->
-      <finalName>myApt_${build.date}</finalName>
+      <!-- final name of the jar -->
+      <finalName>myApt</finalName>
+      
+      <!-- aims at updating the "src/main/resources/bworld-myApt_version.properties" file with the current project version and build date-->
+      <resources>
+         <resource>
+            <directory>src/main/resources/</directory>
+            <filtering>true</filtering>
+         </resource>
+      </resources>
       
       <plugins>
          <plugin>

@@ -1,5 +1,9 @@
 package fr.free.bworld.myapt;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * Entry point of the myApt program.
  * 
@@ -8,7 +12,17 @@ package fr.free.bworld.myapt;
  */
 public class Main {
 
-   /**Expected "property key value" argument on the command line when the user wants to generate an apt file for an image file.*/
+   /** The key in the resource properties file to get the build date. */
+   private static final String VERSION_KEY_BUILD_DATE = "build.date";
+
+   /** The key in the resource properties file to get the version of the project. */
+   private static final String VERSION_KEY_PROJECT_VERSION = "project.version";
+
+	
+   /**Classpath to the properties file that is updated by maven build process and that contains the build date and project version.*/
+   private static final String CLASSPATH_TO_VERSION_PROPERTIES_FILE = "/bworld-myApt_version.properties";
+
+	/**Expected "property key value" argument on the command line when the user wants to generate an apt file for an image file.*/
    protected static final String ARGUMENT_IMAGE_FILE = "-DimageFile=";
 
    /**Expected "property key value" argument on the command line when the user wants to generate an apt file for each image in a directory.*/
@@ -44,8 +58,7 @@ public class Main {
    /**Expected argument prefix for specifying the directory to browse when the type of apt file to generate is "resources". Expects the absolute path.*/
    public static final String ARGUMENT_RESOURCES_DIR = "-DresourcesDir=";
    
-   /**
-    * Expected argument prefix for specifying if the apt will contain rcs keywords, depending on the value ({@link #ARGUMENT_SCM_GIT} or {@link #ARGUMENT_SCM_GIT}.*/
+   /**Expected argument prefix for specifying if the apt will contain rcs keywords, depending on the value ({@link #ARGUMENT_SCM_GIT} or {@link #ARGUMENT_SCM_GIT}.*/
    public static final String ARGUMENT_SCM = "-Dscm=";
    
    /**Possible value for the argument {@link #ARGUMENT_SCM}. If set so, the apt files will contain rcs Id URL Author and Date keywords.*/
@@ -57,7 +70,13 @@ public class Main {
     * @param args is the list of input parameters on the command line.
     */
    public static void main(String[] args) {
-      GenerateApt ma = MyAptFactory.getMyApt(args);
+      if (args != null && args.length == 1 && "--version".equals(args[0])){
+    	  System.out.println(new Main().getVersion());
+    	  return;
+      }
+      
+      System.out.println(new Main().getVersion());
+	  GenerateApt ma = MyAptFactory.getMyApt(args);
       if (ma.generate()){
          System.out.println("Build succeeded!");         
          for (String currGeneratedFilename : ma.getGeneratedFilenames()){
@@ -69,8 +88,44 @@ public class Main {
          }
       }
       else{
-         System.out.println("Build failed: could not generate apt file :(");
+         System.out.println("Build failed: could not generate an apt file :(");
       }
+      
+      
    }
+   
+   /**
+	 * Loads the properties resource file updated by maven build and reads keys.
+	 * 
+	 * @return a custom message providing the version and build date.
+	 */
+	private String getVersion() {
+		String result = "Unknown version...";
+		try {
+			Properties props = new Properties();
+			InputStream is = this.getClass().getResourceAsStream(CLASSPATH_TO_VERSION_PROPERTIES_FILE);
+			if (is == null) {
+				System.out.print("Could not find the version properties resource...");
+			}
+			else {
+				props.load(is);
+
+				StringBuffer buf = new StringBuffer("bworld-myApt");
+				buf.append(" Version ");
+				buf.append(props.get(VERSION_KEY_PROJECT_VERSION));
+				buf.append(" Build ");
+				buf.append(props.get(VERSION_KEY_BUILD_DATE));
+				
+				result = buf.toString();
+			}
+		}
+		catch (IOException e) {
+			System.out.print("Could not find the version properties resource... Exception: " + e.getMessage());
+		}
+		return result;
+
+	}
+   
+   
 
 }

@@ -32,21 +32,15 @@ public class MyAptFactory {
          // parses params
          String targetFile = null;
          String title = null;
-         
          String year = null;
          String month = null;
-         
-         
          boolean aptForMonthDone = false;
-         
          boolean aptForImage = false;//flag showing if the generation concerns an image
          String imageArg = null; // if the generation concerns an image, provides the path to the file or directory
          BrowseImageDirStyleEnum imageAptStyleEnum = BrowseImageDirStyleEnum.GARDI;//if the generation concerns apt for images in a directory, the main may provide an argument "style"
          String imageAptStyle = null;// eventual input value
-         
          boolean aptForResources = false;//flag showing if the user wants to generate an apt file listing resources
          String resourcesArg = null;//if the generation concerns a "resources listing apt file", stores the expected argument value whose value is the directory to browse
-         
          String scm = null;//eventual scm value
          
          for (String arg : args){//browses the input arguments and tries to match expected parameters
