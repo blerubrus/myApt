@@ -7,5 +7,23 @@
 Download
 
  This page proposes the latest binary distribution of the <<myApt>> software.
+ 
+ Version 2015-05-12
+ 
+ 
+ Java Executable Archive : {{{./myApt_20150512.jar}myApt_20150512.jar}}
+ 
+ Associated useful shortcut scripts:
 
- TODO
+   * {{{./myApt}myApt}}
+
+   * {{{./myAptImageDir}myAptImageDir}}
+
+   * {{{./myAptMonthDone}myAptMonthDone}}
+   
+   * {{{./myAptResources}myAptResources}}
+
+   []
+   
+ See {{{./usage.html}Usage}} page for install configuration and usage.
+

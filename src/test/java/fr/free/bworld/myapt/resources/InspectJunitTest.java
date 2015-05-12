@@ -49,7 +49,7 @@ public class InspectJunitTest {
 	}
 	
 	/**
-	 * Checks the user.dir directory: 3 expected resources: .classpath, .project and pom.xml 
+	 * Checks the user.dir directory: 4 expected resources: .classpath, .project, .gitignore and pom.xml 
 	 * 
 	 */
 	@Test
@@ -63,7 +63,7 @@ public class InspectJunitTest {
 		for (Resource r : resources){
 			System.out.println(r.toString());
 		}
-		Assert.assertEquals("unexpected nb of res", 3, resources.size());
+		Assert.assertEquals("unexpected nb of res", 4, resources.size());
 	}
 	
 	@Test

@@ -9,7 +9,7 @@ Home
 
  Welcome to myApt module!
  
- <<<fr.free.bworld.myapt>>> aims at generating custom APT (<Almost Plain Text> Doxia format) files ready to be edited.
+ <<<bworld-myApt>>> aims at generating custom APT (<Almost Plain Text> Doxia format) files ready to be edited.
 
  The APT format is quite easy to write and supported by the Maven site documentation plugin.
  

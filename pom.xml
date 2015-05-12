@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project
  xmlns="http://maven.apache.org/POM/4.0.0" 
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -17,6 +18,10 @@ $Date$
    <name>bworld-myApt</name>
    <description>A simple java program to generate custom files in the Doxia APT format</description>
    <url>http://bworld.free.fr/myApt/</url>
+   <organization>
+      <name>blr.org</name>
+   </organization>   
+   <inceptionYear>2015</inceptionYear>
    
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,8 +46,8 @@ $Date$
             <reportSets>
                <reportSet>
                   <reports>
-                     <report>mailing-list</report>
-                     <report>cim</report>
+                     <report>project-team</report>
+                     <report>scm</report>
                   </reports>
                </reportSet>
                
@@ -142,7 +147,16 @@ $Date$
 	               </manifestEntries>
 	            </archive>
 	        </configuration>
-	      </plugin>			
+	      </plugin>
+         
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <version>3.0</version>
+            <configuration>
+               <locales>en</locales>
+            </configuration>
+         </plugin>			
 
       </plugins>
     </build>
@@ -155,4 +169,22 @@ $Date$
          <scope>test</scope>
       </dependency>
    </dependencies>
+   
+   <developers>
+      <developer>
+         <id>blerubrus</id>
+         <name>Benoit Le Rubrus</name>
+         <email>blerubrus@free.fr</email>
+         <organization>blr.org</organization>
+         <roles>
+            <role>All</role>            
+         </roles>
+         <timezone>2</timezone>
+      </developer>
+   </developers>
+   
+   <scm>
+      <connection>scm:git+ssh://git@mars.local/home/git/myApt.git</connection>
+      <tag>HEAD</tag>
+   </scm>
 </project>

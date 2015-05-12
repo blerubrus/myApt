@@ -197,21 +197,11 @@ public class MyApt implements GenerateApt {
 		buf.append(LINE_SEPARATOR);
 		buf.append(LINE_SEPARATOR);
 		
-		// comment with svn id keyword ?
+		// 2 comment lines with svn Id and URL rcs keywords
 		if (scm != null && Main.ARGUMENT_SCM_SVN.equalsIgnoreCase(scm)){
-			buf.append("~~ $");
-			buf.append("Id$");
-			
-			// comment with svn URL keyword
-			buf.append(LINE_SEPARATOR);
-			buf.append("~~ $");
-			buf.append("URL$");
-			
-			buf.append(LINE_SEPARATOR);
-			buf.append(LINE_SEPARATOR);
+			buf.append(getSvnIdUrlComments());
 		}
-		
-		
+
 		// title of the page
 		buf.append(title);
 		buf.append(LINE_SEPARATOR);
@@ -219,36 +209,50 @@ public class MyApt implements GenerateApt {
 		
 		return buf;
 	}
+	
+	/**
+	 * Builds two lines of apt comments with the Id and URL svn rcs auto-completed keywords.
+	 * @return a custom apt instruction with svn Id and URL keywords.
+	 */
+	public static StringBuffer getSvnIdUrlComments(){
+		StringBuffer buf = new StringBuffer();
+		buf.append("~~ $");
+		buf.append("Id$");
+		buf.append(LINE_SEPARATOR);
+		buf.append("~~ $");
+		buf.append("URL$");
+		buf.append(LINE_SEPARATOR);
+		buf.append(LINE_SEPARATOR);
+		return buf;
+	}
+	
+	/**
+	 * Getter.
+	 * @return the scm attribute value.
+	 */
+	public String getScm(){
+		return this.scm;
+	}
 
 	
 	/**
-	 * Builds a line separator and a page information based on rcs keywords in italics
-	 *  in the APT Doxia format.
-	 * @param scm if svn, includes revision date author, if git, includes date.
+	 * If the given parameter is "svn", adds a line separator and rcs keywords in italics.
+	 * @param scm if svn, includes revision date author.
 	 * @return a custom footer including rcs keywords in italics that depend on the given parameter.
 	 */
 	protected static StringBuffer generateFooter(String scm) {
 		StringBuffer buf = new StringBuffer("");
-		if (scm != null){
-			if (Main.ARGUMENT_SCM_SVN.equalsIgnoreCase(scm) || Main.ARGUMENT_SCM_GIT.equalsIgnoreCase(scm)){
-				buf.append(LINE_SEPARATOR);
-				buf.append(LINE_SEPARATOR);
-				buf.append("===");// apt line
-				buf.append(LINE_SEPARATOR);
-				buf.append(LINE_SEPARATOR);
-			}
-			if (Main.ARGUMENT_SCM_SVN.equalsIgnoreCase(scm)){
-				buf.append(" <$Revision");
-				buf.append("$ on $");
-				buf.append("Date$ by $");
-				buf.append("Author$>");
-				buf.append(LINE_SEPARATOR);
-			}
-			else if (Main.ARGUMENT_SCM_GIT.equalsIgnoreCase(scm)){
-				buf.append(" <$Date");
-				buf.append("$>");
-				buf.append(LINE_SEPARATOR);
-			}
+		if (scm != null && Main.ARGUMENT_SCM_SVN.equalsIgnoreCase(scm)){
+			buf.append(LINE_SEPARATOR);
+			buf.append(LINE_SEPARATOR);
+			buf.append("===");// apt line
+			buf.append(LINE_SEPARATOR);
+			buf.append(LINE_SEPARATOR);
+			buf.append(" <$Revision");
+			buf.append("$ on $");
+			buf.append("Date$ by $");
+			buf.append("Author$>");
+			buf.append(LINE_SEPARATOR);
 		}
 		return buf;
 	}

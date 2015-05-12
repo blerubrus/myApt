@@ -11,7 +11,9 @@ myApt Usage
  
  Please read the {{Install}} section then the various features of the myApt tool:
  
- * <<<{{myApt}}>>> to create a custom shell of an apt file;
+ * <<<{{myApt}}>>> to create a simple apt file;
+ 
+ * <<<{{myAptResources}}>>> to generate a custom apt file whose body provides a list of links to the files located in a given directory.
  
  * <<<{{myAptMonthDone}}>>> to generate a calendar listing of days for the current month as a custom apt file;
  
@@ -19,7 +21,15 @@ myApt Usage
  providing links to be copied pasted to a Maven <<<site.xml>>> site descriptor, and an xdoc file
  providing an overview with thumbnails).
  
- * <<<{{myAptResources}}>>> to generate a custom apt file whose body provides a list of links to the files located in a given directory.
+ []
+ 
+===
+
+ Table Of Contents
+ 
+%{toc|fromDepth=2}
+
+=== 
 
 * {Install}
 
@@ -27,12 +37,14 @@ myApt Usage
  the jar file and some shortcut scripts for Unix-based users.
  
  <<myApt>> can be
- executed on any java-enabled platform. In the following, the jar file is named <<<myApt-version.jar>>>.
+ executed on any java-enabled platform. In the following, the jar file is named <<<myApt_version.jar>>>,
+ with "<<<version>>>" showing the build date (example: <<<20150512>>> is the 12th of May 2015).
  
  Requirements: a Java Runtime Environment version 1.6 or upper correctly installed on your system.
  
- Unix-based users: get the latest version of the <<myApt>> distribution zip archive. Unzip it then copy the sh and jar files to your <<<~/bin/>>> directory
- (which is available from your system <Path> environment variable).
+ Unix-based users: get the latest version of the <<myApt>> jar file and scripts (see {{{./download.html}Download}}. 
+ Copy all "<<<myApt>>>" files to your <<<~/bin/>>> directory
+ (thus, apt commands are available from your system <Path> environment variable).
  
  Here is the expected list of files in this <<<~/bin/>>> directory:
  
@@ -42,7 +54,7 @@ myApt Usage
  |- myAptImageDir
  |- myAptMonthDone
  |- myAptResources
- |- myApt_20150511.jar
+ |- myApt_20150512.jar
 +---+
  
  Turn all <<<myApt*>>> files to executable :
@@ -56,9 +68,11 @@ $ chmod +x myApt*
  is the current date) is expected to be created, as shown below:
   
 +---+
-blerubrus@moon:~$ myApt
+blerubrus@moon:~/workspace/myApt$ myApt
 Build succeeded!
-   Generated apt file 20140302_myApt.apt
+   Generated apt file src/site/apt/20150512_myApt.apt
+You may wish to add the following line in the site.xml file:
+   <item name="2015-05-12 myApt" href="20150512_myApt.html"/>
 +---+
 
  Windows users can currently not use the shortcut scripts, they have to type the full command:
@@ -67,10 +81,14 @@ Build succeeded!
 java -jar myApt_version.jar
 +---+
 
-* {myApt}: empty sheel
+* {myApt}
 
- myApt generates an empty shell of APT file, with a title, a date of creation, an author, and a footer
- that displays the SVN (Subversion) keywords "Revision", "Date" and "Author".
+ myApt generates an empty shell of APT file, with a title, a date of creation, an author.
+ 
+ A footer that displays the SVN (Subversion) keywords "Revision", "Date" and "Author" if
+ the "<<<-Dscm=svn>>>" option is given on the command line of the jar file, or "<<<svn>>>" when
+ using the <<<myApt>>> script.
+ 
  
  
  The following screenshot shows the result of such a generated file:
@@ -87,9 +105,6 @@ java -jar myApt_version.jar
  * <<<-Dtitle=DocTitle>>>\
  where <<<DocTitle>>> is the title of the APT page that will appear once the Maven site generated.
  
- * <<<-Dscm=git>>> (default)\
- then none rcs keyword will be injected in the generated apt file
- 
  * <<<-Dscm=svn>>>\
  then rcs keywords will be injected in the generated apt file: id, url, author, date, revision.
  
@@ -101,8 +116,9 @@ java -jar myApt_version.jar
  
 +---+
 java -jar myApt_version.jar
- -Dtarget=myAptNewFile.apt
+ -Dtarget=src/site/apt/myAptNewFile.apt
  -Dtitle=MyTitle
+ -Dscm=svn
 +---+
  
  
@@ -110,20 +126,74 @@ java -jar myApt_version.jar
  (see {{Install}} section):
  
 +---+
-myApt myAptNewFile.apt MyTitle
+myApt myAptNewFile.apt MyTitle svn
 +---+
  
 
  Both previous command return the following message to the console:
  
 +---+
-Build succeeded: generated myAptNewFile.apt
+blerubrus@moon:~/workspace/myApt$ myApt myAptNewFile.apt MyTitle svn
+Build succeeded!
+   Generated apt file myAptNewFile.apt
+You may wish to add the following line in the site.xml file:
+   <item name="MyTitle" href="myAptNewFile.html"/>
 +---+
+
+ The last line indicates the instruction to be copied pasted to the Maven site descriptor file <<<src/site/site.xml>>> 
+ in order to add a link to the created file from the menu of the build site.
  
  The content of the generated apt file is shown in the figure above, or click
  {{{./myAptNewFile.apt}myAptNewFile.apt}} to see its content.
 
+* {myAptResources}
 
+ Aims at generating an apt file whose body proposes a listing of links to the files contained
+ in a specified folder.
+ 
+ Type on one line: 
+ 
++---+
+java -jar myApt_version.jar
+ -Dtype=resources
+ -DresourcesDir=path/to/the/folder
++---+
+
+ This will generate a file named <<<yyyyMMdd_myAptResources.apt>>> in the current directory.
+ 
+ Unix-based users can use the shortcut script, if {{{./myAptResources}<<<myAptResources>>>}} file is in the <<<~/bin>>> directory
+ (see {{Install}} section):
+ 
+ Example: let's generate an apt file containing links to all files in the "<<<src/site/resources/>>>" directory.
+ Type: <<myAptResources src/site/resources>>
+
+ Output: 
+ 
++--+
+blerubrus@moon:~/workspace/myApt$ myAptResources src/site/resources/
+Build succeeded!
+   Generated apt file 20150512_myAptResources.apt
+You may wish to add the following line in the site.xml file:
+   <item name="null" href="20150512_myAptResources.html"/>
++--+
+
+ 
+ 
+ Besides the header and footer of the apt file, it proposes a list with, for each item, an apt link to the file located
+ in the <<<src/site/resources/>>> folder.
+ 
+ The generated file can be seen here: {{{./20150512_myAptResources.apt}20150512_myAptResources.apt}}
+
+ To add svn rcs keyword in header and footer of the generated apt file:
+ 
+   * with the <<<myAptResources>>> script, add "<<<svn>>>" argument:
+   
+   <<myAptResources src/site/resources svn>>
+   
+   * with the java executable archive, type:
+   
+   <<java -jar myApt-version.jar src/site/resources -Dscm=svn>>
+ 
  
 * {myAptMonthDone}
 
@@ -134,22 +204,27 @@ Build succeeded: generated myAptNewFile.apt
  to the following command:
  
 +---+
-java -jar myApt_version.jar -Dtype=done
+java -jar myApt_version.jar -Dtype=done [-Dscm=svn]
 +---+
 
- Output (on the 2013-05-02):
+ Output with the <<<myAptMonthDone>>> script:
  
 +---+
+blerubrus@moon:~/workspace/myApt$ myAptMonthDone 
+Could not convert the given year '' to an integer, using current year
+Could not convert the given month '' to an integer, using current month
 Build succeeded!
-   Generated apt file 2013-05_done.apt
+   Generated apt file 2015-05_done.apt
+You may wish to add the following line in the site.xml file:
+   <item name="Done May 2015" href="2015-05_done.html"/>
 +---+
+
+ The last line indicates the instruction to be copied pasted to the Maven site descriptor file <<<src/site/site.xml>>> 
+ in order to add a link to the created file from the menu of the build site.
 
  Unix-based users can use the shorctut script if the {{{./myAptMonthDone}<<<myAptMonthDone>>>}} file is in the <<<~/bin/>>> directory
  (see {{Install}} section):
  
-+---+
-myAptMonthDone
-+---+
 
  Here is a screenshot of the start of the generated file:
  
@@ -159,7 +234,7 @@ myAptMonthDone
  
 [./myAptMonthDoneResult.png]
 
-** More parameters
+** {More parameters}
 
  Specify the path to the jar file then the following options:
  
@@ -174,6 +249,10 @@ myAptMonthDone
    * <<<-Dmonth=m>>>
    
    Where <<<m>>> is the month number (January: 1, etc)
+   
+   * <<<-Dscm=svn>>>
+   
+   To add svn rcs keywords in the generated apt file.
    
  Example to generate a "done" apt file for August 2013 (full java command to be typed on one line):
  
@@ -194,8 +273,9 @@ myAptMonthDone 2013 8
 Build succeeded!
    Generated apt file 2013-08_done.apt
 +---+
+
  
-* myAptImage (draft)
+* {myAptImage (draft)}
 
  The "myAptImage" aims at generating a custom apt file with the display of an image file.
  
@@ -210,7 +290,7 @@ logo_Steamer.png
 logo_Steamer.svg
 +---+
 
-** myAptImageFile
+** {myAptImageFile}
 
  The <<-DimageFile=pathToImageFilename>> option aims at generating an apt file for the given image file.
  Example (to be typed on one single line):
@@ -289,28 +369,4 @@ Build succeeded!
  
  This also assumes that the Maven site disposes the expected css file: TODO! 
  
-* {myAptResources} (draft)
 
- Aims at generating an apt file whose body proposes a listing of links to the files contained
- in a specified folder.
- 
- Type on one line: 
- 
-+---+
-java -jar myApt_version.jar
- -Dtype=resources
- -DresourcesDir=path/to/the/folder
-+---+
-
- This will generate a file named <<<yyyyMMdd_myAptResources.apt>>> in the current directory.
- 
- Unix-based users can use the shortcut script, if {{{./myAptResources}<<<myAptResources>>>}} file is in the <<<~/bin>>> directory
- (see {{Install}} section):
- 
-+---+
-myAptResources path/to/the/folder
-+---+
- 
-===
-
- <$Date$>

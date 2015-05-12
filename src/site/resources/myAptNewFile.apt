@@ -1,19 +1,17 @@
  ---
- Title of my new apt file
+ MyTitle
  ---
- blerubrus (via b2do MyApt program)
+ blerubrus (with bworld-myApt)
  ---
- 2013-05-02
+ 2015-05-12
 
-~~ $Id: myAptNewFile.apt 81 2013-05-02 12:21:00Z blerubrus $
-~~ $URL: svn+ssh://blerubrus@scm.forge.imag.fr/var/lib/gforge/chroot/scmrepos/svn/bworld/trunk/module/dev/module/myApt/src/site/resources/myAptNewFile.apt $
+~~ $Id$
+~~ $URL$
 
-Title of my new apt file
+MyTitle
 
 
 
-~~~~~~~~~~~~~~~~~~~~
-~~Footer of the page: displays a line then the svn rev date author
 ===
 
- <$Revision: 81 $ on $Date: 2013-05-02 14:21:00 +0200 (Thu, 02 May 2013) $ by $Author: blerubrus $>
+ <$Revision$ on $Date$ by $Author$>

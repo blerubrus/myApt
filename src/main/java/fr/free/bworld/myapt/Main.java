@@ -50,9 +50,6 @@ public class Main {
    
    /**Possible value for the argument {@link #ARGUMENT_SCM}. If set so, the apt files will contain rcs Id URL Author and Date keywords.*/
    public static final String ARGUMENT_SCM_SVN = "svn";
-   
-   /**Possible value for the argument {@link #ARGUMENT_SCM}. If set so, the apt files will contain rcs Date keyword in the footer.*/
-   public static final String ARGUMENT_SCM_GIT = "git";
 
    /**
     * Invokes the factory to handle input parameters and generates the apt file, then displays the build result

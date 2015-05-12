@@ -66,13 +66,13 @@ public class MyAptResources extends MyApt implements GenerateApt {
 		String listing = inspector.toApt();
 
 		StringBuffer buf = new StringBuffer();
-		buf.append(generateHeader(DEFAULT_RESOURCES_APT_PAGE_TITLE, null, null));
+		buf.append(generateHeader(DEFAULT_RESOURCES_APT_PAGE_TITLE, null, getScm()));
 		buf.append(LINE_SEPARATOR);
 		buf.append(LINE_SEPARATOR);
 		buf.append(listing);
 		buf.append(LINE_SEPARATOR);
 		buf.append(LINE_SEPARATOR);
-		buf.append(generateFooter(null));
+		buf.append(generateFooter(getScm()));
 
 		File file = new File(getAptFilename());
 		try{

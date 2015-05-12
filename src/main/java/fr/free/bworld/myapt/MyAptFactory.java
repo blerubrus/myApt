@@ -90,15 +90,14 @@ public class MyAptFactory {
             }
             else if (arg.startsWith(Main.ARGUMENT_SCM)){
             	String givenScm = arg.substring(Main.ARGUMENT_SCM.length());
-            	if (Main.ARGUMENT_SCM_GIT.equalsIgnoreCase(givenScm)){
-            		scm = Main.ARGUMENT_SCM_GIT;
-            	}
-            	else if (Main.ARGUMENT_SCM_SVN.equalsIgnoreCase(givenScm)){
+            	if (Main.ARGUMENT_SCM_SVN.equalsIgnoreCase(givenScm)){
             		scm = Main.ARGUMENT_SCM_SVN;
-            	}//else: scm = null
+            	}
+            	else{
+            		System.out.println("The given scm parameter value is not handled: " + givenScm);
+            		scm = null;
+            	}
             }
-            
-            
          }//end browsing arg
          
          // now knows the type of apt to generate

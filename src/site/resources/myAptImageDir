@@ -1,4 +1,5 @@
 #!/bin/sh
-# $URL: svn+ssh://blerubrus@scm.forge.imag.fr/var/lib/gforge/chroot/scmrepos/svn/bworld/trunk/module/dev/module/myApt/src/site/resources/myAptImageDir $
-# $Id: myAptImageDir 152 2014-03-02 17:05:39Z blerubrus $
-java -jar ~/bin/myApt_20140302-r149.jar -DimageDir=$1
+# This script is a shortcut to invoke the myApt jar file expected in the bin directory with options to generate a set of "images" apt file
+# Expected parameter: the path to a directory containing images
+# Usage example: "myAptImageDir src/site/resources/images/"
+java -jar ~/bin/myApt_20150512.jar -DimageDir=$1

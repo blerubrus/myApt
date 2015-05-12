@@ -110,27 +110,7 @@ public class MyAptJunitTest {
 		Assert.assertEquals(expected.toString(), actual.toString());
 	}
 	
-	/**
-	 * Tests the generation of the footer for git param.
-	 */
-	@Test
-	public void testGenerateFooterGit(){
-		StringBuffer actual = MyApt.generateFooter(Main.ARGUMENT_SCM_GIT);
-		
-		//System.out.println(actual.toString());
-		
-		StringBuffer expected = new StringBuffer(System.getProperty("line.separator"));
-		expected.append(System.getProperty("line.separator"));
-		expected.append("===");
-		expected.append(System.getProperty("line.separator"));
-		expected.append(System.getProperty("line.separator"));
-		expected.append(" <$Date");
-		expected.append("$>");
-		expected.append(System.getProperty("line.separator"));
-		Assert.assertEquals(expected.toString(), actual.toString());
-		
-		Assert.assertEquals(expected.toString(), actual.toString());
-	}
+	
 	
 	/**
 	 * Tests the generation of the footer for empty param.
@@ -165,8 +145,8 @@ public class MyAptJunitTest {
 	 * Checks the indexes of the two occurrences of this title, and the index of the occurrence of the author. 
 	 */
 	@Test
-	public void testGenerateHeaderGit(){
-		StringBuffer actual = MyApt.generateHeader(JUNIT_TITLE, JUNIT_AUTHOR, Main.ARGUMENT_SCM_GIT);
+	public void testGenerateHeaderToto(){
+		StringBuffer actual = MyApt.generateHeader(JUNIT_TITLE, JUNIT_AUTHOR, "toto");
 		// first occurrence of the given title
 		//System.out.println(actual.indexOf(JUNIT_TITLE));
 		Assert.assertEquals(6, actual.indexOf(JUNIT_TITLE));

@@ -222,7 +222,7 @@ public class MonthDoneJunitTest {
 		try {
 			md = new MonthDone(2011, 07);
 		
-			StringBuffer actual = md.generateHeader();
+			StringBuffer actual = md.generateHeader(null);
 			
 			StringBuffer expected = new StringBuffer(" ---");
 			expected.append(MonthDone.LINE_SEPARATOR);

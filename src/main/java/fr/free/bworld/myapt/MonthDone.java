@@ -55,63 +55,12 @@ public class MonthDone implements GenerateApt {
    /**The path to the generated file. The default value is set by the constructor, but can be overriden by the user on using the setter.*/
    private String outputFilePath;
    
-   /**Depending on the value (git or svn), injects rcs keywords in the apt file to generate.*/
+   /**Depending on the value (svn), injects rcs keywords in the apt file to generate.*/
    private String scm;
    
    /**The title of the document.*/
    private String title;
-
-
-/**
-    * Aims at generating a new "done.apt" file for the current year month.
-    * @param args can provide the year (4 digits) and the month (example: 4, for April).
-    */
-   public static void main(String[] args){
-      int year = 0;
-      int month = 0;
-
-      if (args == null || args.length != 2){// use current month
-         Calendar c = Calendar.getInstance();
-         year = c.get(Calendar.YEAR);
-         month = c.get(Calendar.MONTH) + 1;
-         System.out.println("No arguments given: using current year " + year  + " and month " + month);
-      }
-      else{
-         try{
-            System.out.println("Given arguments are year " + args[0]  + " and month " + args[1]);
-            year = Integer.parseInt(args[0]);
-            month = Integer.parseInt(args[1]);
-         }
-         catch(NumberFormatException nfe){
-            System.err.println("Invalid numbers given as parameters... They must be the year and month.");
-         }
-      }
-
-      try {
-         if (year == 0 || month == 0){
-            System.err.println("Sorry, invalid year and month (0).");
-         }
-         else{
-            MonthDone md = new MonthDone(year, month);
-            // overrides the path to the file to be generated, with the default output directory name
-            md.setOutputFilePath(DEFAULT_APT_DIRECTORY + md.getOutputFilePath());
-            if (! md.generate()){
-               System.err.println("Sorry, the apt file could not be created :(");
-            }
-            else{
-               System.out.println("Successfully created the apt done file '" + md.getOutputFilePath() + "'");
-            }
-         }
-
-
-      }
-
-      catch (Exception e) {
-         e.printStackTrace();
-      }
-
-   }
-
+   
    /**
     * Sets the attributes: year, month and default output filename.
     * 
@@ -139,7 +88,7 @@ public class MonthDone implements GenerateApt {
    }
 
    /**
-    * Invokes the {@link #generateHeader()} and {@link #generateCalendar()} then
+    * Invokes the {@link #generateHeader(String)} and {@link #generateCalendar()} then
     * prints to the file.
     * 
     * @return shows if the creation succeeded.
@@ -148,7 +97,7 @@ public class MonthDone implements GenerateApt {
    public boolean generate(){
 
       StringBuffer buf = new StringBuffer();
-      buf.append(generateHeader());
+      buf.append(generateHeader(scm));
       buf.append(generateCalendar());
       buf.append(MyApt.generateFooter(scm));
 
@@ -172,9 +121,10 @@ public class MonthDone implements GenerateApt {
 
    /**
     * 
+    * @param scm if the value is "svn", adds 2 comment lines with Id and URL
     * @return the start of the generated file.
     */
-   protected StringBuffer generateHeader(){
+   protected StringBuffer generateHeader(String scm){
       //title of the page
       StringBuffer titleBuf = new StringBuffer("Done ");		
 
@@ -187,7 +137,7 @@ public class MonthDone implements GenerateApt {
       titleBuf.append(getYear());
       this.title = titleBuf.toString();
 
-      StringBuffer buf = MyApt.generateHeader(titleBuf.toString(), null, null);
+      StringBuffer buf = MyApt.generateHeader(titleBuf.toString(), null, scm);
 
       buf.append(" This page lists the things I did in ");
       buf.append(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH));
