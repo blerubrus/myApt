@@ -18,8 +18,8 @@ import fr.free.bworld.myapt.MyApt;
  */
 public class MyAptResources extends MyApt implements GenerateApt {
 	
-	/**The filename to generate, commposed of the date yyyyMMdd then "_myAptResources.apt" suffix.*/
-	protected static final String DEFAULT_RESOURCES_APT_TARGET_FILENAME = new SimpleDateFormat("yyyyMMdd").format(new Date()) + "_myAptResources.apt";
+	/**The filename to generate, commposed of the date "yyyyMMddHHmm" then "_myAptResources.apt" suffix.*/
+	protected static final String DEFAULT_RESOURCES_APT_TARGET_FILENAME = new SimpleDateFormat("yyyyMMddHHmm").format(new Date()) + "_myAptResources.apt";
 	
 	/**The title of the apt page to generate.*/
 	private static final String DEFAULT_RESOURCES_APT_PAGE_TITLE = "Resources Listing";
@@ -34,16 +34,17 @@ public class MyAptResources extends MyApt implements GenerateApt {
 	public MyAptResources(String dir) {
 		//check the dir exists
 		if (dir == null){
-			throw new IllegalArgumentException("The path to browsed directory must not been null...");
+			throw new IllegalArgumentException("myAptResources expects at least one parameter: the path to an existing directory.");
 		}
 		else{
 			File f = new File(dir);
 			if (! f.exists() || ! f.isDirectory()){
-				throw new IllegalArgumentException("The given path argument '" + dir + "' must be an existing directory...");
+				throw new IllegalArgumentException("myAptResources expects an existing directory as parameter. The given input is not: '" + dir + "'.");
 			}
 			else{
 				this.dir = dir;
 				this.setAptFilename(DEFAULT_RESOURCES_APT_TARGET_FILENAME);
+				this.setTitle(DEFAULT_RESOURCES_APT_PAGE_TITLE);
 			}
 		}
 	}

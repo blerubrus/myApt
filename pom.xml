@@ -16,10 +16,11 @@ $Date$
    <packaging>jar</packaging>
    <version>1.1-SNAPSHOT</version>
    <name>bworld-myApt</name>
-   <description>A simple java program to generate custom files in the Doxia APT format</description>
+   <description>A simple java program to generate custom files in the Doxia APT format.</description>
    <url>http://bworld.free.fr/myApt/</url>
    <organization>
-      <name>blr.org</name>
+      <name>bworld</name>
+      <url>http://bworld.free.fr/</url>
    </organization>   
    <inceptionYear>2015</inceptionYear>
    

@@ -6,10 +6,14 @@
 # $2: the month (example: "1" for January)
 # Example: myAptMonthDone 2004 1
 # To add svn rcs keywods (Id URL Author Revision Date) in the apt file, specify the year the month then add "svn" to the command
-# Example: myAptMonthDone 2004 1 svn
+# Example: "./myAptMonthDone.sh 2004 1 svn"
+# To display the version: "./myAptMonthDone.sh -v"
 
 # eventual third option to inject rcs keywords in the apt
 SCM=$3
+
+# eventual first option may be a request to display the version of the program
+VERSION=""
 
 # appends the "-Dscm=" with the eventual third user input (overwritten to an empty string if the third option is not given)
 SCM_OPTION="-Dscm="$3
@@ -20,5 +24,11 @@ then
    SCM_OPTION=""
 fi
 
+# checks if the first parameter is a request for the version
+case $1 in -v | -version | --version )
+   VERSION="-v"
+   ;;
+esac
+
 # launches the command
-java -jar ~/bin/myApt_20150512.jar -Dtype=done -Dyear=$1 -Dmonth=$2 $SCM_OPTION
+java -jar ~/bin/myApt.jar -Dtype=done -Dyear=$1 -Dmonth=$2 $SCM_OPTION $VERSION

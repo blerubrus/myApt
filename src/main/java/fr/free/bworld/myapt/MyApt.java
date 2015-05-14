@@ -54,20 +54,36 @@ public class MyApt implements GenerateApt {
 	
 	
 	/**
-	 * Invokes {@link #MyApt(String, String)} with default file path and null title.
+	 * Invokes {@link #MyApt(String, String)} with default file path and default title.
 	 */
 	public MyApt(){
-		this(DEFAULT_TARGET_FILE_PATH, null);
+		this(DEFAULT_TARGET_FILE_PATH, DEFAULT_TITLE);
 	}
 	
 	/**
-	 * Invokes {@link #MyApt(String, String)} with given file path and null title.
+	 * Invokes {@link #MyApt(String, String)} with given file path and default title.
 	 * @param targetFile is the file (path and name) to generate.
 	 */
 	public MyApt(String targetFile){
-		this(targetFile, null);
+		this(targetFile, DEFAULT_TITLE);
 	}
 	
+	/**
+	 * Getter.
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * Setter.
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	/**
 	 * Sets attributes.
 	 * @param targetFile is the file (path and name) to generate.

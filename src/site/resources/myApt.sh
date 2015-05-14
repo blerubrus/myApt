@@ -1,11 +1,13 @@
 #!/bin/sh
-# This script is a shortcut to generate an apt file on invoking the myApt_yyyyMMdd.jar executable jar file expected in the ~/bin/ directory of the current user
+# This script is a shortcut to generate an apt file on invoking the myApt.jar executable jar file expected in the ~/bin/ directory of the current user
 # This script is configured to handle default values for 3 possible input arguments:
 # $1: the filename of the apt file to generate. Default is "src/site/apt/yyyyMMdd_myApt.apt" (with the current date)
 # $2: the title of the document (default: "yyyy-MM-dd myApt")
 # $3: "svn" optional option to inject svn Id URL Date Author Revision rcs auto-completed keywords in the generated file (header and footer)
+# Note: typing "-v" or "-version" or "--version" as single argument will display the jar version.
 
-# user input as first parameter is the filename and path to generate 
+
+# user input as first parameter is the filename and path of the apt file to generate (or version) 
 FILENAME=$1
 
 # user input as second parameter is the title of the document to generate
@@ -16,6 +18,9 @@ SCM=$3
 
 # appends the "-Dscm=" with the eventual third user input (overwritten to an empty string if the third option is not given)
 SCM_OPTION="-Dscm="$3
+
+# maybe the user just asks to display the version
+VERSION=""
 
 # current system date in the yyyy-MM-dd format (if no title is given) for the title
 TODAY=$(date +"%Y-%m-%d")
@@ -41,5 +46,12 @@ then
    SCM_OPTION=""
 fi
 
+# checks if the first parameter (value of FILENAME) is a request for the version
+case $FILENAME in -v | -version | --version )
+   VERSION="-v"
+   ;;
+esac
+
+
 # invokes the myApt jar file (expected in the bin directory) with given parameters
-java -jar ~/bin/myApt_20150512.jar -Dtarget=$FILENAME -Dtitle="$TITLE" $SCM_OPTION
+java -jar ~/bin/myApt.jar -Dtarget=$FILENAME -Dtitle="$TITLE" $SCM_OPTION $VERSION

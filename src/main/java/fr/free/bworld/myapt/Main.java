@@ -79,17 +79,21 @@ public class Main {
     * @param args is the list of input parameters on the command line.
     */
    public static void main(String[] args) {
-      // checks if the user only wants to display the version
-	  if (args != null && args.length == 1 && 
-    		  (ARGUMENT_VERSION_1.equals(args[0])
-    			||
-    		   ARGUMENT_VERSION_2.equals(args[0])
-    		   	||
-    		   ARGUMENT_VERSION_3.equals(args[0]))){
-    	  System.out.println(new Main().getVersion());
-    	  return;
-      }
-      
+      // checks if the user wants to display the version. 3 possible arguments
+	  if (args != null){
+		  for (String arg : args){
+			  if (ARGUMENT_VERSION_1.equals(arg)
+		    			||
+		          ARGUMENT_VERSION_2.equals(arg)
+		     		   	||
+		   		  ARGUMENT_VERSION_3.equals(arg)){
+		     	  System.out.println(new Main().getVersion());
+		     	  return;
+		      }
+		  }
+	  }
+    		  
+      // not "-v" as argument: let's create a file
 	  GenerateApt ma = MyAptFactory.getMyApt(args);
       if (ma.generate()){
          System.out.println("Build succeeded!");         
@@ -97,7 +101,6 @@ public class Main {
             System.out.println("   Generated apt file " + currGeneratedFilename);
             System.out.println("You may wish to add the following line in the site.xml file:");
             System.out.println("   " + ma.getMenuAdd());
-            
          }
       }
       else{
