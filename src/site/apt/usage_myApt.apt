@@ -1,0 +1,71 @@
+ ---
+ Usage - myApt
+ ---
+ blerubrus (with bworld-myApt)
+ ---
+ 2015-05-14
+
+Usage - myApt
+
+ <<myApt>> aims at generating a simple APT file with a title, a date of creation, an author,
+ as expected for a typical document in the Doxia APT Format.
+ 
+ For this aim, <<<myApt.jar>>> Main class supports the following input arguments:
+ 
+    * <<<-Dtarget=filename>>>\
+    where <<<filename>>> is the path and name of the apt file to be generated.
+    
+    * <<<-Dtitle=DocTitle>>>\
+    where <<<DocTitle>>> is the title of the APT page document.
+    
+    * <<<-Dscm=svn>>>\
+    designed for Subversion users, this option injects RCS auto-substituted keywords in the generated apt file:
+    Id, URL, Author, Date, Revision.
+    
+    []
+ 
+ To create a "<myApt>" file named "<<<myAptNewFile.apt>>>" in the
+ "<<<src/site/apt/>>>" subfolder with the "<<<MyTitle>>>" title, and "svn" RCS injected keywords,
+ type the following command (on one line):
+ 
++---+
+java -jar path/to/myApt.jar
+ -Dtarget=src/site/apt/myAptNewFile.apt
+ -Dtitle=MyTitle
+ -Dscm=svn
++---+
+
+ Unix-based users can use the shortcut shell script with 3 arguments:
+ 
+   * the target filename
+   
+   * the doc title (without any space character)
+   
+   * svn mention
+   
+ Example:
+ 
++--+
+myApt src/site/apt/myAptNewFile.apt MyTitle svn
++--+
+
+ Both previous commands return the following message to the console:
+ 
++---+
+blerubrus@moon:~/workspace/myApt$ myApt src/site/apt/myAptNewFile.apt MyTitle svn
+Build succeeded!
+   Generated apt file myAptNewFile.apt
+You may wish to add the following line in the site.xml file:
+   <item name="MyTitle" href="myAptNewFile.html"/>
++---+
+
+ The content of the generated apt file is shown in the figure below, or click
+ {{{./myAptNewFile.apt}myAptNewFile.apt}} to see its content.
+ 
+ The last line of the console output indicates the instruction to be copied pasted to the Maven site
+ descriptor file <<<src/site/site.xml>>> in order to add a link to the created file from the menu.
+ 
+ The following screenshot shows the result of the generated file in Eclipse IDE:
+ 
+[./myAptNewFile.png]
+

@@ -1,0 +1,74 @@
+ ---
+ Usage - myAptMonthDone
+ ---
+ blerubrus (with bworld-myApt)
+ ---
+ 2015-05-14
+
+Usage - myAptMonthDone
+
+ The <<MonthDone>> variante aims at generating a kind of calendar for a given  month in the
+ APT format. I use this feature to list the things I do, month by month, hence the "<done>" name.
+ Each day is an "APT section level 1". Weekends are "apt" commented (lines start with a double tilde).
+ 
+ For this aim, invoke the jar file with the following parameters:
+ 
+   * <<<-Dtype=done>>>\
+   indicates that the type of apt file to generate is "month done".
+   
+   * <<<-Dyear=yyyy>>>\
+   indicates the year, <<<yyyy>>> must be a positive integer.
+   
+   * <<<-Dmonth=m>>>\
+   indicates the month, <<<m>>> must be an integer between 1 (January) and 12 (December).
+   
+   * <<<-Dscm=svn>>>\
+   to inject Subversion svn keywords in the header and footer of the generated apt file.
+   
+   []
+   
+ If neither year nor month arguments are specified, the program will use the current month and date.
+ 
+ Usage example: <<java -jar path/to/myApt.jar -Dtype=done [-Dscm=svn]>>
+
+ Unix-based users can use the shorcut shell script <<myAptMonthDone>> and simply type: <<myAptMonthDone>>
+
+ Output example to generate an apt "done" file for the current month (typed in May 2015):
+ 
++---+
+blerubrus@moon:~/workspace/myApt$ myAptMonthDone 
+Could not convert the given year '' to an integer, using current year
+Could not convert the given month '' to an integer, using current month
+Build succeeded!
+   Generated apt file 2015-05_done.apt
+You may wish to add the following line in the site.xml file:
+   <item name="Done May 2015" href="2015-05_done.html"/>
++---+
+
+ The last line indicates the instruction to be copied pasted to the Maven site descriptor file <<<src/site/site.xml>>> 
+ in order to add a link to the created file from the menu of the Maven site.
+
+ Click the following link to see the content of the generated file, the screenshot below
+ shows the start of the generated file in Eclipse IDE: {{{./2015-05_done.apt}2015-05_done.apt}}.
+ 
+[./myAptMonthDone.png]
+
+ Once generated to html via the <<mvn site>> command, the final output of this apt file in the Maven Web site is 
+ shown below:
+ 
+[./myAptMonthDoneResult.png]
+
+ Another example of the command is given below to generate a "done" apt file for August 2013:
+ 
+   * with the java command:
+   
++---+
+java -jar path/to/myApt.jar -Dtype=done -Dyear=2013 -Dmonth=8
++---+
+
+   * with the shortcut shell script:
+ 
++---+
+myAptMonthDone 2013 8
++---+
+

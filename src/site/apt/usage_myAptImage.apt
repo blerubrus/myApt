@@ -1,0 +1,236 @@
+ ---
+ Usage - myAptImage
+ ---
+ blerubrus (with bworld-myApt)
+ ---
+ 2015-05-14
+
+Usage - myAptImage
+
+ <<Warning: experimental>>
+
+ The "myAptImage" aims at generating a custom apt file whose body contains the apt code to display an image.
+ 
+===
+
+ Table Of Contents
+ 
+%{toc|fromDepth=2}
+
+===  
+ 
+ 
+ This tool also allows to generate as many apt files as there are found images in a given directory, hence both following sections.
+
+ Let's assume that a directory named <<<myDirectoryOfImages>>> contains the following images files.
+ 
++---+
+logo_benartvic.jpg
+logo_benartvic.png
+logo_Steamer.png
+logo_Steamer.svg
++---+
+
+* {myAptImageFile}
+
+ Aim: generate an apt file displaying an existing image. The generated apt file is named with the image filename
+ as prefix, then the "<<<.apt>>>" extension.
+ 
+ For this aim, the myApt main method proposes the following argument:
+ 
+   * <<<-DimageFile=path/to/imageFilename>>>\
+   indicates to generate an apt image file for the specified path to the existing image.
+   
+   * <<<-Dscm=svn>>>\
+   to inject Subversion RCS keywords in the generated apt file.
+   
+   []
+
+ Usage example: <<java -jar path/to/myApt.jar -DimageFile=myDirectoryOfImages/logo_benartvic.png>>
+
+ (<Currently the shortcut script for Unix-based users does not exist>)
+ 
+ Command execution expected output:
+
++---+
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_benartvic.png.apt
+Build succeeded!
+   Generated apt file logo_benartvic.png.apt 
++---+
+
+* {myAptImageDir}
+
+ Aim: for each file in a specified folder, creates an apt file with the code to display the image
+ and a link to this image.
+ 
+ For this aim, the main method of the <<myApt.jar>> proposes the following arguments:
+ 
+   * <<<-DimageDir=path/to/folder/>>>\
+   indicates to browse the given directory and to create an apt image file for each file (should be
+   image only) found in this directory.
+   
+   * <<<-Dscm=svn>>>\
+   to inject Subversion RCS keywords in the generated apt file.
+   
+   []
+   
+ Usage example: <<java -jar path/to/myApt.jar -DimageDir=path/to/folder/of/images/>>
+
+ Unix-based users can use the shortcut shell script: <<myAptImageDir path/to/folder/of/images/>>
+
+ Expected command execution output:
+  
++---+
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_Steamer.svg.apt
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_benartvic.jpg.apt
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_benartvic.png.apt
+Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_Steamer.png.apt
+Successfully created the 'list items' xml file /home/blerubrus/Bureau/t2/20130502131533_list_items.xml
+Build succeeded!
+   Generated apt file logo_Steamer.svg.apt
+   Generated apt file logo_benartvic.jpg.apt
+   Generated apt file logo_benartvic.png.apt
+   Generated apt file logo_Steamer.png.apt
++---+
+ 
+ This script also generates a <<<yyyyMMddhhmm_list_items.xml>>> file proposing an item for each
+ generated file, to be included in the Maven site descriptor <<<site.xml>>> file, this file lists
+ the generated pages. 
+ 
+ 
+** {Gallery}
+
+ Since version 2013-05-21, the previous command of <<myApt>> has also generated a file named <<<yyyyMMddhhmm_gal.xml>>>.
+ This file contains the codes to be included in an <<<xdoc>>> file format to generate
+ an image gallery. <<This feature is currently experimental>>.
+ 
+ The <<<-DimageDir>>> option of the <<myApt>> program generates a file in xml format that
+ lists, for each image in the folder given as parameter, the tags to be included
+ into an "<xdoc>" document (in the <<<src/site/xdoc/>>>) folder. Each of the generated
+ lines contains (example for an image file named <<<20120919_calamondin1.jpg>>>):
+ 
++---+
+<div class="imgGal">
+   <a href="./20120919_calamondin1.jpg.html" title="2012-09-19">
+      <img src="./images/20120919_calamondin1.jpg_thumb.png"
+           alt="20120919_calamondin1.jpg"
+           width="100" height="100"/>
+   </a>
+   <div class="desc">2012-09-19</div>
+</div>
++---+
+
+ This feature assumes that the associated generated thumbnail exists, with 
+ the following name pattern for an image named <<<myImage.jpg>>>: <<<myImage.jpg_thumb.png>>>.
+ Ideally, the size of the thumbnail should be 100 x 100 pixels.
+ 
+ For this purpose, the "Image Magick Convert" program can be used. See
+ {{{http://www.imagemagick.org/Usage/thumbnails/#height}Image Magick}} (2013-05-06) for further info.
+ 
+ For each image in JPG format found in the current directory, the following command generates a thumb in png format,
+ the size of this thumb is 100/100 pixels, the ratio is conserved, and the gap between the image and
+ the the 100x100 frame is filled with a black background color. The generated thumb filename appends
+ "<<<_thumb.png>>>" suffix to the original image filename:
+ 
++--+
+#!/bin/sh 
+ls *.JPG | xargs -I FILE convert FILE -thumbnail '100x100>' -background black -gravity center -extent 100x100 FILE_thumb.png
++--+
+
+ 
+ The "gallery" feature also assumes that the original image basename includes the date in yyyyMMdd format in 
+ its filename, used for the description "<div class=desc>".
+ 
+ It also assumes that the Maven site custom css file (<<<src/site/resources/css/site.css>>>) contains
+ the following instructions. This CSS is based on the following resource:
+ 
+ {{{http://www.dynamicdrive.com/style/csslibrary/item/css-image-gallery/#thumb}Dynamic Drive}} (2013)
+ 
++--+
+img{
+   max-width: 100%;
+}
+
+div.calaRight img {
+  /*float:left;*/
+  border:1px dotted black;
+  margin:5px 5px 5px 20px;
+}
+
+
+div.imgGal {
+  margin:2px;
+  border:1px solid #000000;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+}
+div.imgGal img {
+  /*display:inline;*/
+  margin:3px;
+  border:1px solid #ffffff;
+}
+div.imgGal a:hover img {
+  border:1px solid #0000ff;
+}
+div.desc {
+  text-align:center;
+  font-weight:normal;
+  width:120px;
+  margin:2px;
+}
+
+/*gallery based on http://www.dynamicdrive.com/style/csslibrary/item/css-image-gallery/#thumb */
+.gallerycontainer{
+position: relative;
+/*Add a height attribute and set to largest image's height to prevent overlaying*/
+height: 200;
+max-width: 100%; 
+}
+
+.thumbnail img{
+border: 1px solid white;
+margin: 0 5px 5px 0;
+}
+
+.thumbnail:hover{
+background-color: transparent;
+}
+
+.thumbnail:hover img{
+border: 1px solid blue;
+}
+
+.thumbnail span{ /*CSS for enlarged image*/
+position: absolute;
+background-color: lightyellow;
+padding: 5px;
+left: -1000px;
+border: 1px dashed gray;
+visibility: hidden;
+color: black;
+text-decoration: none;
+
+}
+
+.thumbnail span img{ /*CSS for enlarged image*/
+border-width: 0;
+padding: 2px;
+
+}
+
+.thumbnail:hover span{ /*CSS for enlarged image*/
+visibility: visible;
+top: 0;
+left: 10px; /*position where enlarged image should offset horizontally */
+z-index: 50;
+max-width: 500;
+}
++--+
+
+ To be further developped tested and simplified!
+ 
+
+ 
+

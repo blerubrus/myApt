@@ -1,0 +1,92 @@
+ ---
+ Usage - myAptResources
+ ---
+ blerubrus (with bworld-myApt)
+ ---
+ 2015-05-14
+
+Usage - myAptResources
+
+ Aim: generating an APT file whose body displays a list of links to the files contained
+ in a specified folder. Of course, this folder must exist.
+ 
+ For this aim, <<<myApt.jar>>> Main class supports the following arguments:
+ 
+   * <<<-Dtype=resources>>>\
+   specifies the type of apt file to generate
+   
+   * <<<-DresourcesDir=path/to/an/existing/folder>>>\
+   specifies the directory to browse
+   
+   * <<<-Dscm=svn>>>\
+   injects Subversion RCS keywords in the generated apt file
+   
+   []
+   
+ Example when using the jar, type on one line: 
+ 
++---+
+java -jar path/to/myApt.jar
+ -Dtype=resources
+ -DresourcesDir=path/to/the/folder
++---+
+
+ Unix-based users can use the shortcut script "<<<myAptResources>>>":
+ 
++--+
+myAptResources path/to/the/folder
++--+
+
+ This will generate a file named <<<yyyyMMddhhmm_myAptResources.apt>>> in the current directory. The prefix
+ indicates the build timestamp made of the year, month, date, hour, minutes.
+ 
+ If none parameter is given, the java command returns an exception and exits. On the contrary, the <<<myAptResources>>>
+ shortcut shell script will invoke the java command with a default value: <<<src/site/resources/>>> folder.
+ 
+ Example: let's generate an apt file containing links to all files in the "<<<src/site/resources/>>>" subfolder.
+ 
+ This folder contains the following files:
+ 
++--+
+src/site/resources
+  |- 20150512_myAptResources.apt
+  |- monthDoneExecution.png
+  |- myApt.jar
+  |- myApt.sh
+  |- myApt_20150512.jar
+  |- myAptImageDir.sh
+  |- myAptMonthDone.png
+  |- myAptMonthDone.sh
+  |- myAptMonthDoneResult.png
+  |- myAptNewFile.apt
+  |- myAptNewFile.png
+  |- myAptResources.sh
+  |- tasks-2013-09-04.csv
++--+
+ 
+   * Windows users type: <<java -jar path/to/myApt.jar -Dtype=resources -DresourcesDir=src/site/resources>>
+   
+   * Unix users type: <<myAptResources>>
+
+ Output example:
+ 
++--+
+blerubrus@moon:~/workspace/myApt$ myAptResources 
+Build succeeded!
+   Generated apt file 201505141158_myAptResources.apt
+You may wish to add the following line in the site.xml file:
+   <item name="Resources Listing" href="201505141158_myAptResources.html"/>
++--+
+
+ The command generated a file named <<<201505141158_myAptResources.apt>>> in the current directory.
+ Click the following link to see its content: {{{./201505141158_myAptResources.apt}201505141158_myAptResources.apt}},
+ also shown in the following screenshot:
+ 
+[./201505141158_myAptResources.png]
+ 
+ Besides the header (and footer with the <<<-Dscm=svn>>> option) of the apt file, the generated file
+ proposes a list in APT format with a link to each file in the specified folder.
+ 
+ Once generated to html with the <<mvn site>> command, the final output is shown below:
+ 
+[./201505141158_myAptResourcesResult.png]

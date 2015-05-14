@@ -14,7 +14,12 @@
       <menu name="Overview">
          <item name="Home" href="index.html"/>
          <item name="Download" href="download.html"/>
-         <item name="Usage" href="usage.html"/>
+         <item name="Usage" href="usage.html" collapse="true">
+            <item name="myApt" href="usage_myApt.html"/>
+            <item name="myAptResources" href="usage_myAptResources.html"/>
+            <item name="myAptMonthDone" href="usage_myAptMonthDone.html"/>
+            <item name="myAptImage" href="usage_myAptImage.html"/>
+         </item>
       </menu>
       <menu name="About" ref="reports"/>
    </body>
