@@ -7,22 +7,27 @@
 
 Home
 
- Welcome to myApt module!
+ Welcome to <<bworld-myApt>> Web site!
  
- <<<bworld-myApt>>> aims at generating custom APT (<Almost Plain Text> Doxia format) files ready to be edited.
-
- The APT format is quite easy to write and supported by the Maven site documentation plugin.
+ <<myApt>> is a Java standalone command-line application that aims at generating files in the
+ <Almost Plain Text> (APT) Doxia Format.
  
- For more information about the APT format, please consult {{{http://maven.apache.org/doxia/references/apt-format.html}The APT format}} on the Maven Web Site (2012-02-15).
+ APT is a convenient plain text format mainly useful to write a Maven project documentation Web site.
+ For further information, see {{{http://maven.apache.org/doxia/references/apt-format.html}The APT format}}
+ on the Maven Web Site (2012-02-15).
  
- Please consult the {{{./download.html}Download}} menu item  for descriptions of available versions of the program.  
-
- For information on how to use various tools of this "<<myApt>>" program, please consult the {{{./usage.html}Usage}} page.
+ Site content: please consult
  
- For developer's guide, please consult the {{{./devguide.html}Dev Guide}} page.
+   * the {{{./download.html}Download}} page to get the <<bworld-myApt>> program.
+   
+   * the {{{./usage.html}Usage}} page for instructions on how to install configure and use it.
+   
+   []
  
+ For further information about this project, see also the Maven auto-generated pages in the "About" menu:
  
-
-===
-
- <$Date$>
+   * {{{./project-info.html}Project Information}}
+   
+   * {{{./project-reports.html}Project Reports}}
+ 
+   []

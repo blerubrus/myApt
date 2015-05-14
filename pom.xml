@@ -22,7 +22,7 @@ $Date$
       <name>bworld</name>
       <url>http://bworld.free.fr/</url>
    </organization>   
-   <inceptionYear>2015</inceptionYear>
+   <inceptionYear>2011</inceptionYear>
    
    <!-- a custom property for build timestamp  -->
    <properties>
