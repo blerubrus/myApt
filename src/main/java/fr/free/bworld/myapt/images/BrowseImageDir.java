@@ -46,8 +46,20 @@ public abstract class BrowseImageDir implements GenerateApt {
 
    /**The list of generated apt filenames.*/
    protected List<String> generatedFilenames;
+   
+	/**Depending on the value (git or svn), injects rcs keywords in the apt file to generate.*/
+	private String scm;
 
-   /**List of extensions for supported images.*/
+   /**
+	 * Getter.
+	 * @return the scm
+	 */
+	public String getScm() {
+		return scm;
+	}
+
+
+/**List of extensions for supported images.*/
    public String[] SUPPORTED_FORMATS = {".JPG", ".jpg", ".JPEG", ".JPEG", ".png", ".PNG", ".SVG", ".svg", ".GIF", ".gif"};
 
    /**
@@ -248,6 +260,12 @@ public abstract class BrowseImageDir implements GenerateApt {
    }
 
 
-
+	/**
+	 * @see fr.free.bworld.myapt.GenerateApt#setScm(java.lang.String)
+	 */
+	@Override
+	public void setScm(String scm) {
+		this.scm = scm;
+	}
 
 }

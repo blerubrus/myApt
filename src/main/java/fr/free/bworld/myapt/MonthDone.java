@@ -30,9 +30,6 @@ import java.util.Locale;
  */
 public class MonthDone implements GenerateApt {
 
-   /**The default directory where the done file is generated to.*/
-   private static final String DEFAULT_APT_DIRECTORY = "./";
-
    /**An APT comment line that separates each date of the generated file.*/
    protected static final String APT_DECO_SEPARATION = "~~===============================================================================";
 

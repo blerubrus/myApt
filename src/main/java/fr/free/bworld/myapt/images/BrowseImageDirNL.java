@@ -14,8 +14,7 @@ import java.util.List;
  */
 public class BrowseImageDirNL extends BrowseImageDir {
 
-	/**Depending on the value (git or svn), injects rcs keywords in the apt file to generate.*/
-	private String scm;
+
 	   
 	public BrowseImageDirNL() {
 		super();
@@ -124,15 +123,7 @@ public class BrowseImageDirNL extends BrowseImageDir {
         return imageKeyword;
 	}
 
-	/**
-	 * @see fr.free.bworld.myapt.GenerateApt#setScm(java.lang.String)
-	 */
-	@Override
-	public void setScm(String scm) {
-		this.scm = scm;
-		
-	}
-
+	
 	/**
 	 * Returns the filename of the generated menu extract.
 	 * @see fr.free.bworld.myapt.GenerateApt#getTitles()
