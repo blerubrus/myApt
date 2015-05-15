@@ -12,13 +12,13 @@ Usage - myAptResources
  
  For this aim, <<<myApt.jar>>> Main class supports the following arguments:
  
-   * <<<-Dtype=resources>>>\
+   * <<-Dtype=resources>>\
    specifies the type of apt file to generate
    
-   * <<<-DresourcesDir=path/to/an/existing/folder>>>\
+   * <<-DresourcesDir=path/to/an/existing/folder>>\
    specifies the directory to browse
    
-   * <<<-Dscm=svn>>>\
+   * <<-Dscm=svn>>\
    injects Subversion RCS keywords in the generated apt file
    
    []

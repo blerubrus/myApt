@@ -72,11 +72,12 @@ $ chmod +x myApt*
  
  
 +--+
-ln -s path/to/myApt-version-folder/myApt.jar ~/bin/myApt.jar
-ln -s path/to/myApt-version-folder/myApt.sh ~/bin/myApt
-ln -s path/to/myApt-version-folder/myAptResources.sh ~/bin/myAptResources
-ln -s path/to/myApt-version-folder/myAptMonthDone.sh ~/bin/myAptMonthDone
-ln -s path/to/myApt-version-folder/myAptImageDir.sh ~/bin/myAptImageDir
+cd ~/bin
+ln -s path/to/myApt-version-folder/myApt.jar myApt.jar
+ln -s path/to/myApt-version-folder/myApt.sh myApt
+ln -s path/to/myApt-version-folder/myAptResources.sh myAptResources
+ln -s path/to/myApt-version-folder/myAptMonthDone.sh myAptMonthDone
+ln -s path/to/myApt-version-folder/myAptImageDir.sh myAptImageDir
 +--+
 
  From now, here is the expected list of files in this "<<<~/bin/>>>" directory:
@@ -94,17 +95,55 @@ ln -s path/to/myApt-version-folder/myAptImageDir.sh ~/bin/myAptImageDir
 
  The first expected feature of <<myApt>> software is to display its version:
  
-   * windows users: open a Dos console in the directory where the jar file is located and type <<java -jar myApt.jar -v>>.
+   * windows users: open a Dos console in the directory where the jar file is located and type:
    
-   * unix-based users: open a new terminal and type <<myApt -v>>
+   <<java -jar myApt.jar -v>>.
+   
+   * unix-based users: open a new terminal and type
+   
+   <<myApt -v>>
+   
+   []
  
- Expected output example:
+ Expected output (to be double-checked with the current version written in the {{{./download.html}download}} page): 
  
 +--+
-bworld-myApt Version 1.1-SNAPSHOT Build 2015-05-14 10:51:03
-+--+ 
+bworld-myApt Version 1.1-SNAPSHOT Build 2015-05-15 11:07:23
++--+
 
-
-
+ The version of the jar file can also be checked by unzipping the jar file (<<unzip myApt.jar>>) then read the content
+ of the files named:
  
- 
+   * <<<bworld-myApt_version.properties>>>
+   
+   This properties file is automatically updated by Maven during the build process of the jar file. It contains the
+   project version and the build date as two key-value pairs, example:
+
++--+   
+project.version=1.1-SNAPSHOT
+build.date=2015-05-15 11:07:23
++--+
+
+   * <<<META-INF/MANIFEST.MF>>>
+   
+   This file is also created by the Maven build process. Example of its content:
+   
++--+
+Manifest-Version: 1.0
+Implementation-Title: bworld-myApt
+Implementation-Version: 1.1-SNAPSHOT
+Built-By: blerubrus
+Specification-Vendor: bworld
+Created-By: Apache Maven
+Build-date: 2015-05-15 11:07:23
+Implementation-Vendor: bworld
+Implementation-Vendor-Id: fr.free.bworld
+Build-Jdk: 1.6.0_35
+Specification-Title: bworld-myApt
+Specification-Version: 1.1-SNAPSHOT
+Implementation-Build: 
+Main-Class: fr.free.bworld.myapt.Main
+Archiver-Version: Plexus Archiver
++--+
+
+   []

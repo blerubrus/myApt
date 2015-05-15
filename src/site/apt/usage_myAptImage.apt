@@ -38,10 +38,10 @@ logo_Steamer.svg
  
  For this aim, the myApt main method proposes the following argument:
  
-   * <<<-DimageFile=path/to/imageFilename>>>\
+   * <<-DimageFile=path/to/imageFilename>>\
    indicates to generate an apt image file for the specified path to the existing image.
    
-   * <<<-Dscm=svn>>>\
+   * <<-Dscm=svn>>\
    to inject Subversion RCS keywords in the generated apt file.
    
    []

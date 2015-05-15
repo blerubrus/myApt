@@ -13,16 +13,16 @@ Usage - myAptMonthDone
  
  For this aim, invoke the jar file with the following parameters:
  
-   * <<<-Dtype=done>>>\
+   * <<-Dtype=done>>\
    indicates that the type of apt file to generate is "month done".
    
-   * <<<-Dyear=yyyy>>>\
+   * <<-Dyear=yyyy>>\
    indicates the year, <<<yyyy>>> must be a positive integer.
    
-   * <<<-Dmonth=m>>>\
+   * <<-Dmonth=m>>\
    indicates the month, <<<m>>> must be an integer between 1 (January) and 12 (December).
    
-   * <<<-Dscm=svn>>>\
+   * <<-Dscm=svn>>\
    to inject Subversion svn keywords in the header and footer of the generated apt file.
    
    []

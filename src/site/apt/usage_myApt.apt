@@ -12,13 +12,13 @@ Usage - myApt
  
  For this aim, <<<myApt.jar>>> Main class supports the following input arguments:
  
-    * <<<-Dtarget=filename>>>\
+    * <<-Dtarget=filename>>\
     where <<<filename>>> is the path and name of the apt file to be generated.
     
-    * <<<-Dtitle=DocTitle>>>\
+    * <<-Dtitle=DocTitle>>\
     where <<<DocTitle>>> is the title of the APT page document.
     
-    * <<<-Dscm=svn>>>\
+    * <<-Dscm=svn>>\
     designed for Subversion users, this option injects RCS auto-substituted keywords in the generated apt file:
     Id, URL, Author, Date, Revision.
     
