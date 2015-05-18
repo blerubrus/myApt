@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  <properties>
+    <title>Page Title</title>
+    <author email="user@company.com">John Doe</author>
+  </properties>
+  
+  <body>
+    <section name="Test">
+    
+<div class="imgGal"><a href="./20140309_SunsetLandscape.jpg.html" title="SunsetLandscape"><img src="./myAptImageDirTest/20140309_SunsetLandscape.jpg_thumb.png" alt="20140309_SunsetLandscape.jpg" width="100" height="100"/></a><div class="desc">2014-03-09</div></div>
+<div class="imgGal"><a href="./20140309_SunsetPortrait.jpg.html" title="SunsetPortrait"><img src="./myAptImageDirTest/20140309_SunsetPortrait.jpg_thumb.png" alt="20140309_SunsetPortrait.jpg" width="100" height="100"/></a><div class="desc">2014-03-09</div></div>
+<div class="imgGal"><a href="./20140309_SunsetShot.jpg.html" title="SunsetShot"><img src="./myAptImageDirTest/20140309_SunsetShot.jpg_thumb.png" alt="20140309_SunsetShot.jpg" width="100" height="100"/></a><div class="desc">2014-03-09</div></div>
+   
+   </section>
+  </body>
+</document>
