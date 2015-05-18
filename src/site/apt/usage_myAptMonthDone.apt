@@ -33,7 +33,7 @@ Usage - myAptMonthDone
 
  Unix-based users can use the shorcut shell script <<myAptMonthDone>> and simply type: <<myAptMonthDone>>
 
- Output example to generate an apt "done" file for the current month (typed in May 2015):
+ Output example to generate an apt "done" file by default for the current month (typed in May 2015):
  
 +---+
 blerubrus@moon:~/workspace/myApt$ myAptMonthDone 
@@ -47,28 +47,63 @@ You may wish to add the following line in the site.xml file:
 
  The last line indicates the instruction to be copied pasted to the Maven site descriptor file <<<src/site/site.xml>>> 
  in order to add a link to the created file from the menu of the Maven site.
+ 
+ Another example of the command is given below to generate a "monthDone" apt file for May 2013:
+ 
+   * with the java command:
+   
++---+
+java -jar path/to/myApt.jar -Dtype=done -Dyear=2013 -Dmonth=5
++---+
+
+   * with the shortcut shell script:
+ 
++---+
+myAptMonthDone 2013 5
++---+
+
+ 
 
  Click the following link to see the content of the generated file, the screenshot below
- shows the start of the generated file in Eclipse IDE: {{{./2015-05_done.apt}2015-05_done.apt}}.
+ shows the start of the generated file in Eclipse IDE: {{{./2013-05_done.apt}2013-05_done.apt}}.
  
 [./myAptMonthDone.png]
+
++--+
+ ---
+ Done May 2013
+ ---
+ blerubrus (with bworld-myApt)
+ ---
+ 2015-05-18
+
+Done May 2013
+
+ This page lists the things I did in May 2013
+
+
+~~===============================================================================
+* 2013-05-01 (Wednesday)
+
+~~===============================================================================
+* 2013-05-02 (Thursday)
+
+~~===============================================================================
+* 2013-05-03 (Friday)
+
+~~===============================================================================
+~~* 2013-05-04 (Saturday)
+
+~~===============================================================================
+~~* 2013-05-05 (Sunday)
+
+~~===============================================================================
+* 2013-05-06 (Monday)
++--+
 
  Once generated to html via the <<mvn site>> command, the final output of this apt file in the Maven Web site is 
  shown below:
  
 [./myAptMonthDoneResult.png]
 
- Another example of the command is given below to generate a "done" apt file for August 2013:
  
-   * with the java command:
-   
-+---+
-java -jar path/to/myApt.jar -Dtype=done -Dyear=2013 -Dmonth=8
-+---+
-
-   * with the shortcut shell script:
- 
-+---+
-myAptMonthDone 2013 8
-+---+
-

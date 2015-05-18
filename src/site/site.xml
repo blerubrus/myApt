@@ -20,12 +20,15 @@
             <item name="myAptMonthDone" href="usage_myAptMonthDone.html"/>
             <item name="myAptImage" href="usage_myAptImage.html"/>
          </item>
-      </menu>
-      <menu name="Sample">
-         <item name="Gallery" href="gallery.html"/>
-         <item name="2014-03-09 SunsetLandscape" href="20140309_SunsetLandscape.jpg.html"/>
-         <item name="2014-03-09 SunsetPortrait" href="20140309_SunsetPortrait.jpg.html"/>
-         <item name="2014-03-09 SunsetShot" href="20140309_SunsetShot.jpg.html"/>
+         <item name="Sample" href="sample.html" collapse="true">
+            <item name="myApt" href="sample_myApt.html"/>
+            <item name="myAptResources" href="sample_myAptResources.html"/>
+            <item name="myAptMonthDone" href="sample_myAptMonthDone.html"/>
+            <item name="myAptImage 1" href="20140309_SunsetLandscape.jpg.html"/>
+            <item name="myAptImage 2" href="20140309_SunsetPortrait.jpg.html"/>
+            <item name="myAptImage 3" href="20140309_SunsetShot.jpg.html"/>
+            <item name="Gallery" href="gallery.html"/>
+         </item>
       </menu>
       <menu name="About" ref="reports"/>
    </body>
