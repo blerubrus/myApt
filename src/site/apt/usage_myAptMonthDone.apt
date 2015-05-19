@@ -11,6 +11,8 @@ Usage - myAptMonthDone
  APT format. I use this feature to list the things I do, month by month, hence the "<done>" name.
  Each day is an "APT section level 1". Weekends are "apt" commented (lines start with a double tilde).
  
+ See also the {{{./sample_myAptMonthDone.html}Sample - myAptMonthDone}} page for an example of the expected result.
+ 
  For this aim, invoke the jar file with the following parameters:
  
    * <<-Dtype=done>>\

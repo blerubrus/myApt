@@ -8,17 +8,19 @@
 Usage - Install
 
  The <<myApt>> program proposes a quick generator of custom files in the <Almost Plain Text> (APT) format.
- See {{{http://maven.apache.org/doxia/references/apt-format.html}The APT format}} on Maven Web Site for
- further information about this format mainly used for the creation of {{{http://maven.apache.org}Maven}}
+ See {{{http://maven.apache.org/doxia/references/apt-format.html}The APT format}} on {{{http://maven.apache.org}Maven}} Web Site for
+ further information about this format mainly used for the creation of Maven
  project documentation web site.
  
  Please read the {{Install}} section then the various features of the <<myApt>> tool:
  
- * {{{./usage_myApt.html}myApt}} to create a simple apt file;
+ * {{{./usage_myApt.html}myApt}} to create a simple apt file (see {{{./sample_myApt.html}Sample - myApt}});
  
- * {{{./usage_myAptResources.html}myAptResources}} to generate an apt file with a list of links to each file located in a given directory;
+ * {{{./usage_myAptResources.html}myAptResources}} to generate an apt file with a list of links to each file located in a given directory
+ (see {{{./sample_myAptResources.html}Sample - myAptResources}});
  
- * {{{./usage_myAptMonthDone.html}myAptMonthDone}} to generate an apt file with a calendar listing the days of a given month;
+ * {{{./usage_myAptMonthDone.html}myAptMonthDone}} to generate an apt file with a calendar listing the days of a given month
+ (see {{{./sample_myAptMonthDone.html}Sample - myAptMonthDone}});;
  
  * {{{./usage_myAptImage}myAptImage}} (<experimental>) to generate a custom apt file displaying an image.
  

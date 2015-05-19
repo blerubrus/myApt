@@ -7,5 +7,36 @@
 
 Sample - Overview
 
- todo...
+ This section proposes an overview of the different types of APT files that <<myApt>> can generate with a few arguments
+ given on the command line:
+ 
+   * {{{./sample_myApt.html}Sample - myApt}} shows the result of the following command:
+   
++--+
+myApt src/site/apt/myAptNewFile.apt MyTitle svn
++--+
+   
+   * {{{./sample_myAptResources.html}Sample - myAptResources}} shows the result of the following command:
+   
++--+
+myAptResources src/site/resources
++--+
+   
+   * {{{./sample_myAptMonthDone.html}Sample - myAptMonthDone}} shows the result of the following command:
+   
++--+
+myAptMonthDone 2013 8
++--+
+   
+   * {{{./20140309_SunsetLandscape.jpg.html}myAptImage 1}},
+   {{{./20140309_SunsetPortrait.jpg.html}myAptImage 2}}, {{{./20140309_SunsetShot.jpg.html}myAptImage 3}} and
+   {{{./gallery.html}Gallery}} pages have been generated with:
+   
+  
++--+
+myAptImageDir src/site/resources/myAptImageDirTest
++--+
 
+   []
+   
+ See {{{./usage.html}Usage}} for further information.

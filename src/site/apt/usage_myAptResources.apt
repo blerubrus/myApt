@@ -10,6 +10,8 @@ Usage - myAptResources
  Aim: generating an APT file whose body displays a list of links to the files contained
  in a specified folder. Of course, this folder must exist.
  
+ See also the {{{./sample_myAptResources.html}Sample - myAptResources}} page for an example of the expected result.
+ 
  For this aim, <<<myApt.jar>>> Main class supports the following arguments:
  
    * <<-Dtype=resources>>\

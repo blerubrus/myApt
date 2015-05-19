@@ -14,6 +14,8 @@ Usage - myAptImage
  instructions for the menu (one item per apt) + a file in xdoc format (see {{{https://maven.apache.org/doxia/references/xdoc-format.html}Doxia XDOC format}})
  to display a gallery of thumbs.
  
+ See also the {{{./sample.html}Sample}} menu section for an example of the expected result.
+ 
 ===
 
  Table Of Contents
@@ -39,19 +41,46 @@ Usage - myAptImage
 
  Usage example:
  
-   * assuming that this file path exists: <<<src/site/resources/myAptImageTest/>>>
+   * assuming that this file path exists: <<<src/site/resources/myAptImageTest/20140309_SunsetShot.jpg>>>
  
-   * type <<java -jar path/to/myApt.jar -DimageFile=myDirectoryOfImages/image1.png>>
+   * type <<java -jar path/to/myApt.jar -DimageFile=src/site/resources/myAptImageTest/20140309_SunsetShot.jpg>>
 
  (<Currently the shortcut script for Unix-based users does not exist>)
  
  Command execution expected output:
 
 +---+
-Successfully created the apt file: /home/blerubrus/Bureau/t2/logo_benartvic.png.apt
+$ java -jar ~/bin/myApt.jar -DimageFile=src/site/resources/myAptImageDirTest/20140309_SunsetShot.jpg
+Successfully created the apt file: /home/blerubrus/workspace/myApt/20140309_SunsetShot.jpg.apt
 Build succeeded!
-   Generated apt file logo_benartvic.png.apt 
+   Generated apt file 20140309_SunsetShot.jpg.apt
+You may wish to add the following line in the site.xml file:
+   <item name="2015-05-19_myApt.apt" href="20140309_SunsetShot.jpg.html"/>
+
 +---+
+
+ The generated filename is the name of the target image + the apt extension, it is created in the current folder.
+ This file contains the following APT code: 
+
++--+
+ ---
+ 20140309_SunsetShot.jpg
+ ---
+ blerubrus (with bworld-myApt)
+ ---
+ 2015-05-19
+
+20140309_SunsetShot.jpg
+
+
+
+[./images/20140309_SunsetShot.jpg]
+
+ View image only: {{./images/20140309_SunsetShot.jpg}}
+
++--+
+
+ Once the html version generated with the <<mvn site>> command, the document is shown in {{{./20140309_SunsetShot.jpg.html}Sample - myAptImage 3}}.
 
 * {myAptImageDir}
 
