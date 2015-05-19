@@ -191,8 +191,15 @@ $Date$
       </developer>
    </developers>
    
+   <!--
    <scm>
       <connection>scm:git+ssh://git@mars.local/home/git/myApt.git</connection>
       <tag>HEAD</tag>
+   </scm>
+   -->
+   <scm>
+      <url>http://github.com/blerubrus/myApt</url>      
+      <connection>scm:git:https://github.com/blerubrus/myApt.git</connection>      
+      <developerConnection>scm:git:git@github.com:blerubrus/myApt.git</developerConnection>
    </scm>
 </project>
