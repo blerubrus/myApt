@@ -1,17 +1,10 @@
 package fr.free.bworld.myapt.resources;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
-
-import fr.free.bworld.myapt.resources.Inspect;
-import fr.free.bworld.myapt.resources.InspectImpl;
-import fr.free.bworld.myapt.resources.Resource;
 
 
 /**
@@ -77,81 +70,7 @@ public class InspectJunitTest {
 		for (Resource r : resources){
 			System.out.println(r.toString());
 		}
-	}
-	
-	
-	
-	
-   /**Counts the number of checked resources in espon-m4d that could be found in m4d.*/
-   private static int FOUND_NB = 0;
-	   
-   /**Counts the number of checked resources in espon-m4d that could not be found in m4d.*/
-   private static int NOT_FOUND_NB = 0;
-
-   
-   
-   /**
-    * Executes the following external process: "find /home/blerubrus/workspace/m4d -name filename".
-    * <br/>
-    * Displays the result of this process (found or not).
-    * 
-    * @param path is the absolute path to the filename, used for the output message.
-    * @param filename is the filename to find.
-    */
-   public static void find(String path, String filename){
-      try {
-         String newLine = System.getProperty("line.separator");
-         String searchDir = "/home/blerubrus/workspace/m4d";
-         String[] cmdTab = { "find", searchDir, "-name", filename};
-         
-         Process p = Runtime.getRuntime().exec(cmdTab);
-         String line;
-
-         BufferedReader bri = new BufferedReader(new InputStreamReader(p.getInputStream()));
-         BufferedReader bre = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-         
-         // output messages
-         StringBuffer outBuf = new StringBuffer();
-         while ((line = bri.readLine()) != null) {
-            if (line.startsWith(searchDir)){
-               outBuf.append(line.substring(searchDir.length() - 3));
-            }
-            else{
-               outBuf.append(line);
-            }
-            
-            outBuf.append(newLine);
-         }
-         bri.close();
-         
-         //errors output for the cmd
-         StringBuffer errBuf = new StringBuffer();
-         while ((line = bre.readLine()) != null) {
-            errBuf.append(line);
-            errBuf.append(newLine);
-         }
-         bre.close();
-         
-         
-         if (! outBuf.toString().isEmpty()){
-            FOUND_NB++;
-            System.out.println("The resource '" + path.substring(26) + "/" + filename + "' has been found in: " + outBuf);// there are 26 characters in "/home/blerubrus/workspace/"
-         }
-         else{
-            NOT_FOUND_NB++;
-            System.out.println("The resource '" + path.substring(26) + "/" + filename + "' could not be found in m4d" + newLine);// there are 26 characters in "/home/blerubrus/workspace/"
-         }
-         //eventual erros
-         if (! errBuf.toString().isEmpty()){
-            System.err.println("* Error:");
-            System.err.println(errBuf);
-         }
-         p.waitFor();
-      }
-      catch (Exception err) {
-         err.printStackTrace();
-      }
-   }
+	}   
    
    
 
