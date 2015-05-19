@@ -23,6 +23,13 @@ $Date$
       <url>http://bworld.free.fr/</url>
    </organization>   
    <inceptionYear>2011</inceptionYear>
+
+   <distributionManagement>
+      <site>
+         <id>mars.local</id>
+         <url>scp://mars.local/var/www/bworld/myApt</url>
+      </site>
+   </distributionManagement>
    
    <!-- a custom property for build timestamp  -->
    <properties>
