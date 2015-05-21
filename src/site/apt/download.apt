@@ -59,7 +59,7 @@ Download
 
  Instead of Subversion, the project now uses {{{https://git-scm.com/}Git}}.
  
- Project sources are now hosted on {{https://github.com/blerubrus/myApt}GitHub}} (forge imag private project, previously).
+ Project sources are now hosted on {{{https://github.com/blerubrus/myApt}GitHub}} (forge imag private project, previously).
  
  This web site is now deployed at {{http://bworld.free.fr/myApt/}}.
   
