@@ -19,6 +19,9 @@ import java.util.List;
  */
 public class MyApt implements GenerateApt {
 
+	/**The APT instruction to add the table of contents Doxia Macro.*/
+	public static final String DEFAULT_TOC = "%{toc|fromDepth=2}";
+
 	/**Expected "property key value" argument on the command line when the user wants to set the title of the apt file to generate.*/
 	public static final String ARGUMENT_TITLE = "-Dtitle=";
 	
@@ -52,6 +55,9 @@ public class MyApt implements GenerateApt {
 	/**Depending on the value (git or svn), injects rcs keywords in the apt file to generate.*/
 	private String scm;
 	
+	/**Shows if the apt contains a table of contents.*/
+	private Object toc;
+	
 	
 	/**
 	 * Invokes {@link #MyApt(String, String)} with default file path and default title.
@@ -68,21 +74,7 @@ public class MyApt implements GenerateApt {
 		this(targetFile, DEFAULT_TITLE);
 	}
 	
-	/**
-	 * Getter.
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * Setter.
-	 * @param title the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+	
 
 	/**
 	 * Sets attributes.
@@ -90,8 +82,19 @@ public class MyApt implements GenerateApt {
 	 * @param title is the title of the document.
 	 */
 	public MyApt(String targetFile, String title){
-		this.aptFilename = targetFile;
-		this.title = title;
+		if (targetFile == null){
+			this.aptFilename = DEFAULT_TARGET_FILE_PATH;
+		}
+		else{
+			this.aptFilename = targetFile;
+		}
+		
+		if (title == null){
+			this.title = DEFAULT_TITLE;
+		}
+		else{
+			this.title = title;
+		}
 	}
 	
 	
@@ -107,6 +110,9 @@ public class MyApt implements GenerateApt {
 	public boolean generate(){
 		StringBuffer buf = new StringBuffer();
 		buf.append(generateHeader(title, null, scm));
+		if (toc != null){
+			buf.append(generateToc());
+		}
 		buf.append(MyApt.generateFooter(scm));
 		
 		File file;
@@ -273,7 +279,41 @@ public class MyApt implements GenerateApt {
 		return buf;
 	}
 	
+	/**
+	 * Generates the apt code to insert the Doxia Macro toc.
+	 * @return the apt code to display a line, the toc doxia macro and a line.
+	 */
+	protected static StringBuffer generateToc(){
+		StringBuffer buf = new StringBuffer();
+		buf.append(LINE_SEPARATOR);
+		buf.append(LINE_SEPARATOR);
+		buf.append("===");// apt line
+		buf.append(LINE_SEPARATOR);
+		buf.append(LINE_SEPARATOR);
+		buf.append(DEFAULT_TOC);
+		buf.append(LINE_SEPARATOR);
+		buf.append(LINE_SEPARATOR);
+		buf.append("===");// apt line
+		buf.append(LINE_SEPARATOR);
+		buf.append(LINE_SEPARATOR);
+		return buf;
+	}
+	
+	/**
+	 * Getter.
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
 
+	/**
+	 * Setter.
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	
 	/**
 	 * Getter.
@@ -309,4 +349,13 @@ public class MyApt implements GenerateApt {
 	public void setScm(String scm) {
 		this.scm = scm;	
 	}
+	
+	/**
+	 * Sets the {@link #toc} attribute.
+	 */
+	@Override
+	public void setToc(Object toc) {
+		this.toc = toc;
+	}
+
 }

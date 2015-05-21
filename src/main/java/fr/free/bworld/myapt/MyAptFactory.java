@@ -42,6 +42,7 @@ public class MyAptFactory {
          boolean aptForResources = false;//flag showing if the user wants to generate an apt file listing resources
          String resourcesArg = null;//if the generation concerns a "resources listing apt file", stores the expected argument value whose value is the directory to browse
          String scm = null;//eventual scm value
+         Object toc = null;//eventual toc
          
          for (String arg : args){//browses the input arguments and tries to match expected parameters
             if (arg.startsWith(Main.ARGUMENT_TARGET)){
@@ -92,6 +93,9 @@ public class MyAptFactory {
             		scm = null;
             	}
             }
+            else if (arg.startsWith(Main.ARGUMENT_TOC)){
+            	toc = true;
+            }
          }//end browsing arg
          
          // now knows the type of apt to generate
@@ -130,11 +134,15 @@ public class MyAptFactory {
         	 result = new MyAptResources(resourcesArg);
          }
          else{
-            result = new MyApt(targetFile, title);
+            result = new MyApt(targetFile, title);            
          }
          // manages scm
          if (scm != null){
         	 result.setScm(scm);
+         }
+         // manages toc
+         if (toc != null){
+         	result.setToc(toc);
          }
       }
       

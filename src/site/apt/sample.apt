@@ -10,11 +10,7 @@ Sample - Overview
  This section proposes an overview of the different types of APT files that <<myApt>> can generate with a few arguments
  given on the command line:
  
-   * {{{./sample_myApt.html}Sample - myApt}} shows the result of the following command:
-   
-+--+
-myApt src/site/apt/myAptNewFile.apt MyTitle svn
-+--+
+   * {{{./sample_myApt.html}Sample - myApt}} describes several possible options to generate simple apt files.
    
    * {{{./sample_myAptResources.html}Sample - myAptResources}} shows the result of the following command:
    

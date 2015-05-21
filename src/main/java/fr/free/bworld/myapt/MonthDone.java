@@ -293,5 +293,13 @@ public class MonthDone implements GenerateApt {
 		return buf.toString();
 	}
 
+	/**
+	 * Does nothing.
+	 */
+	@Override
+	public void setToc(Object toc) {
+		// TODO Auto-generated method stub
+	}
+
 
 }

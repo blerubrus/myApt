@@ -4,6 +4,7 @@
 # $1: the filename of the apt file to generate. Default is "src/site/apt/yyyyMMdd_myApt.apt" (with the current date)
 # $2: the title of the document (default: "yyyy-MM-dd myApt")
 # $3: "svn" optional option to inject svn Id URL Date Author Revision rcs auto-completed keywords in the generated file (header and footer)
+# Note: the "-Dtoc" argument is passed to myApt.jar to include the Doxia Macro TOC instruction in the apt file.
 # Note: typing "-v" or "-version" or "--version" as single argument will display the jar version.
 
 
@@ -54,4 +55,4 @@ esac
 
 
 # invokes the myApt jar file (expected in the bin directory) with given parameters
-java -jar ~/bin/myApt.jar -Dtarget=$FILENAME -Dtitle="$TITLE" $SCM_OPTION $VERSION
+java -jar ~/bin/myApt.jar -Dtarget=$FILENAME -Dtitle="$TITLE" $SCM_OPTION -Dtoc $VERSION

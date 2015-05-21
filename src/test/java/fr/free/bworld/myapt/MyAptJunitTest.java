@@ -203,4 +203,21 @@ public class MyAptJunitTest {
 		Assert.assertTrue("the file " + filename + " does not exist", f.exists());
 		Assert.assertTrue("the file " + filename + " could not be deleted", f.delete());
 	}
+	
+	/**
+	 * Chexks the indexes of the apt code "===" and toc instruction.
+	 */
+	@Test
+	public void testGenerateToc(){
+		StringBuffer buf = MyApt.generateToc();
+		String actual = buf.toString();
+		// the first occurrence of "==="
+		Assert.assertEquals("invalid index for first apt line code '==='", 2, actual.indexOf("==="));
+		
+		// checks the index of the toc apt instruction
+		Assert.assertEquals("invalid index for toc instruction", 7, actual.indexOf(MyApt.DEFAULT_TOC));
+		
+		// the second occurrence of "===", more than 3
+		Assert.assertEquals("invalid index for first apt line code '==='", 27, actual.indexOf("===",3));
+	}
 }

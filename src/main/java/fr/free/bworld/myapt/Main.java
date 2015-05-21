@@ -8,9 +8,12 @@ import java.util.Properties;
  * Entry point of the myApt program.
  * 
  * @author blerubrus
- * @version $Date$
+ * @version since 2015-05-21
  */
 public class Main {
+	
+   /**Possible argument to include a toc in the generated simple apt file.*/	
+   protected static final String ARGUMENT_TOC = "-Dtoc";
 
    /**Possible argument to display the version of the software.*/
    private static final String ARGUMENT_VERSION_3 = "-v";

@@ -32,5 +32,11 @@ public interface GenerateApt {
 	 */
 	public void setScm(String scm);
 	
+	/**
+	 * If set, the apt file will contain a table of contents.
+	 * @param toc if not null, adds a toc.
+	 */
+	public void setToc(Object toc);
+	
 	
 }

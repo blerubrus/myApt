@@ -8,8 +8,9 @@ Download
 
  This page proposes the latest binary distribution of the <<myApt>> software.
 
+~~ WARNING: the given version must be consistent with the value given in usage.apt page
 
-* bworld-myApt Version 1.1-SNAPSHOT Build 2015-05-15 11:07:23
+* bworld-myApt Version 1.1-SNAPSHOT Build 2015-05-21 16:18:58
  
  
    * Java Executable Archive : {{{./myApt.jar}myApt.jar}}
@@ -29,4 +30,41 @@ Download
    []
    
  Please consult the {{{./usage.html}Usage}} page for install configuration and usage.
+ 
+** {What's new?}
+
+*** {From Version 1.1-SNAPSHOT Build 2015-05-15 to Version 1.1-SNAPSHOT Build 2015-05-21}
+
+ Improvement suggested by Camille: add the Doxia Macro TOC instruction in generated apt files.
+ Consequently:
+ 
+   * the jar now manages the <<<-Dtoc>>> argument to include the Doxia Macro TOC instruction in the generated "myApt" files
+   (no meaning for myAptResources, myAptMonthDone or myAptImage).   
+   
+   * by default, the <<<myApt.sh>>> script now invokes the jar command with this <<<-Dtoc>>> argument.
+ 
+ Bug fixed:
+ 
+   * Fixed the console output message when typing "<<<java myApt.jar filename title>>>" without
+   the expected argument prefixes: "<<<-Dtarget=filename -Dtitle=title>>>". In the first
+   case (omitted argument prefixes), the myApt program considers than none argument has been given,
+   it generates an apt file with the default name and the default title. Before: the console output
+   could not find the title and the filename, it wrote "null".
+   
+   * Removed ignored JUnit tests.
+   
+   []
+ 
+*** {From Version 1.0-SNAPSHOT to Version 1.1-SNAPSHOT Build 2015-05-15}
+
+ Instead of Subversion, the project now uses {{{https://git-scm.com/}Git}}.
+ 
+ Project sources are now hosted on {{https://github.com/blerubrus/myApt}GitHub}} (forge imag private project, previously).
+ 
+ This web site is now deployed at {{http://bworld.free.fr/myApt/}}.
+  
+ The insertion of Subversion RCS auto-substituted keywords (<<<Id>>>, <<<URL>>>, <<<Author>>>, <<<Revision>>>, <<<Date>>>)
+ in the generated apt files is now optional and not the default behaviour anymore. To add these
+ keywords, add the argument "<<<-Dscm=svn>>>" when invoking the jar file, or "<<<svn>>>" when using
+ the shortcut shell scripts. 
 

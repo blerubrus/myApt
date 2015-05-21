@@ -129,6 +129,15 @@ public class BrowseImageDirGardi extends BrowseImageDir {
 	public String getMenuAdd() {
 		return "Please consult *" + BrowseImageDir.FILENAME_MENU_ITEMS_SITE_XML;
 	}
+
+	/**
+	 * Does nothing.
+	 */
+	@Override
+	public void setToc(Object toc) {
+		// TODO Auto-generated method stub
+	}
+
 	   
 
 }
