@@ -173,7 +173,7 @@ public class MonthDone implements GenerateApt {
             buf.append("~~");
          }
 
-         buf.append("* ");
+         buf.append("* {");
          buf.append(getYear());
          buf.append("-");
 
@@ -189,7 +189,7 @@ public class MonthDone implements GenerateApt {
          }
 
          buf.append(i);
-         buf.append(" (");
+         buf.append("} (");
          buf.append(cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH));
          buf.append(")");
 

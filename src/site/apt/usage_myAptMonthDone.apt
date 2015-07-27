@@ -69,6 +69,28 @@ myAptMonthDone 2013 5
  Click the following link to see the content of the generated file, the screenshot below
  shows the start of the generated file in Eclipse IDE: {{{./2013-05_done.apt}2013-05_done.apt}}.
  
+   [Note:] Since the 27th of July 2015, the new distribution of <<<myApt.jar>>> file creates
+   an apt calendar file with the following section pattern (added brackets around the yyyy-MM-dd to generate anchors):
+   
+      * before:
+   
++--+
+* 2013-05-01 (Wednesday)
++--+
+
+      * now:
+      
++--+
+* {2013-05-01} (Wednesday)
++--+
+
+      []
+      
+   The following screenshots and examples have not been updated yet.
+      
+   
+   []
+ 
 [./myAptMonthDone.png]
 
 +--+

@@ -110,7 +110,7 @@ ln -s path/to/myApt-version-folder/myAptImageDir.sh myAptImageDir
  Expected output (to be double-checked with the current version written in the {{{./download.html}download}} page): 
  
 +--+
-bworld-myApt Version 1.1-SNAPSHOT Build 2015-05-21 16:18:58
+bworld-myApt Version 1.1-SNAPSHOT Build 2015-07-27 10:15:57
 +--+
 
 ~~ WARNING: the given output must be consistent with the value given in download.apt page 
@@ -125,7 +125,7 @@ bworld-myApt Version 1.1-SNAPSHOT Build 2015-05-21 16:18:58
 
 +--+   
 project.version=1.1-SNAPSHOT
-build.date=2015-05-21 16:18:58
+build.date=2015-07-27 10:15:57
 +--+
 
    * <<<META-INF/MANIFEST.MF>>>
@@ -139,7 +139,7 @@ Implementation-Version: 1.1-SNAPSHOT
 Built-By: blerubrus
 Specification-Vendor: bworld
 Created-By: Apache Maven
-Build-date: 2015-05-21 16:18:58
+Build-date: 2015-07-27 10:15:57
 Implementation-Vendor: bworld
 Implementation-Vendor-Id: fr.free.bworld
 Build-Jdk: 1.6.0_35

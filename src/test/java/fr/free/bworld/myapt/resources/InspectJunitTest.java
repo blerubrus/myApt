@@ -42,7 +42,7 @@ public class InspectJunitTest {
 	}
 	
 	/**
-	 * Checks the user.dir directory: 4 expected resources: .classpath, .project, .gitignore, LICENSE, README.md and pom.xml 
+	 * Checks the user.dir directory: 6 expected resources: .classpath, .project, .gitignore, LICENSE, README.md and pom.xml 
 	 * 
 	 */
 	@Test
