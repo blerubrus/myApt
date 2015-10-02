@@ -127,6 +127,8 @@ MyTitle
 
 ===
 
+ Table of Contents
+
 %{toc|fromDepth=2}
 
 ===

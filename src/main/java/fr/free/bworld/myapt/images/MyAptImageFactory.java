@@ -5,10 +5,10 @@ import java.io.File;
 import fr.free.bworld.myapt.GenerateApt;
 
 /**
- * 
+ * Handles the arguments given to the main method of MyAptImage to return an adhoc apt generator.
  *
  * @author blerubrus
- * @version $Date$
+ * @version 2015-10
  *
  */
 public class MyAptImageFactory {
@@ -27,14 +27,20 @@ public class MyAptImageFactory {
       else{
          File f = new File(argument);
          if (f.isFile()){
-            generator = new MyAptImage("./images", f.getName());
+            generator = new MyAptImage(f.getParent(), f.getName());
          }
          else if (f.isDirectory()){
+        	 
+        	 // handles the possible output styles of apt
+        	 
         	 if (imageAptStyle == BrowseImageDirStyleEnum.NL){
         		 generator = new BrowseImageDirNL(argument);
         	 }
-        	 else{//default
+        	 else if(imageAptStyle == BrowseImageDirStyleEnum.GARDI){
         		 generator = new BrowseImageDirGardi(argument);
+        	 }
+        	 else{//default is LISTING
+        		 generator = new BrowseImageDirListing(argument);
         	 }
          }
          else{

@@ -205,7 +205,8 @@ public class MyAptJunitTest {
 	}
 	
 	/**
-	 * Chexks the indexes of the apt code "===" and toc instruction.
+	 * In the generated toc string buffer, checks the indexes of the apt line code "===",
+	 * of the toc label, of the toc macro instruction and of the last apt line.
 	 */
 	@Test
 	public void testGenerateToc(){
@@ -214,10 +215,13 @@ public class MyAptJunitTest {
 		// the first occurrence of "==="
 		Assert.assertEquals("invalid index for first apt line code '==='", 2, actual.indexOf("==="));
 		
+		// checks the index of the toc label
+		Assert.assertEquals("invalid index for toc label '==='", 7, actual.indexOf(MyApt.TOC_LABEL));
+		
 		// checks the index of the toc apt instruction
-		Assert.assertEquals("invalid index for toc instruction", 7, actual.indexOf(MyApt.DEFAULT_TOC));
+		Assert.assertEquals("invalid index for toc instruction", 27, actual.indexOf(MyApt.TOC_DOXIA_MACRO_INSTRUCTION));
 		
 		// the second occurrence of "===", more than 3
-		Assert.assertEquals("invalid index for first apt line code '==='", 27, actual.indexOf("===",3));
+		Assert.assertEquals("invalid index for first apt line code '==='", 47, actual.indexOf("===",3));
 	}
 }

@@ -11,10 +11,11 @@ import java.util.List;
 import fr.free.bworld.myapt.GenerateApt;
 
 /**
- * Abstract class that aims at browsing a directory to generate as many specific "my apt image" files as there are files in the given directory.
+ * Abstract class that aims at browsing a directory to generate a file with the 
+ * apt code to display links and images in the given directory.
  * 
  * @author blerubrus
- * @version $Date$
+ * @version 2015-10
  *
  */
 public abstract class BrowseImageDir implements GenerateApt {
@@ -50,7 +51,7 @@ public abstract class BrowseImageDir implements GenerateApt {
 	/**Depending on the value (git or svn), injects rcs keywords in the apt file to generate.*/
 	private String scm;
 
-   /**
+    /**
 	 * Getter.
 	 * @return the scm
 	 */
@@ -59,7 +60,7 @@ public abstract class BrowseImageDir implements GenerateApt {
 	}
 
 
-/**List of extensions for supported images.*/
+   /**List of image file supported extensions.*/
    public String[] SUPPORTED_FORMATS = {".JPG", ".jpg", ".JPEG", ".JPEG", ".png", ".PNG", ".SVG", ".svg", ".GIF", ".gif"};
 
    /**

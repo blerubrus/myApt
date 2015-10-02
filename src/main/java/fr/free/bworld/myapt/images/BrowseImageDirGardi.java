@@ -18,7 +18,10 @@ public class BrowseImageDirGardi extends BrowseImageDir {
 		super();
 	}
 	
-	
+	/**
+	 * Invokes super constructor.
+	 * @param path is the path to the image file.
+	 */
 	public BrowseImageDirGardi(String path) {
 		super(path);
 	}
@@ -31,7 +34,7 @@ public class BrowseImageDirGardi extends BrowseImageDir {
 	    */
 	   @Override
 	   public boolean generate(){
-	      StringBuffer bufMenu = new StringBuffer();//stores a link for the "site.xml", one per created apt file
+	      StringBuffer bufMenu = new StringBuffer();//stores links to generated apt files for the "site.xml", one per created apt file
 
 	      StringBuffer bufGal = new StringBuffer();//stores the html code for a gallery
 	      

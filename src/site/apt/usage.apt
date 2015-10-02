@@ -22,7 +22,7 @@ Usage - Install
  * {{{./usage_myAptMonthDone.html}myAptMonthDone}} to generate an apt file with a calendar listing the days of a given month
  (see {{{./sample_myAptMonthDone.html}Sample - myAptMonthDone}});;
  
- * {{{./usage_myAptImage.html}myAptImage}} (<experimental>) to generate a custom apt file displaying an image.
+ * {{{./usage_myAptImage.html}myAptImage}} to generate a custom apt file displaying an image.
  
  []
  
@@ -110,7 +110,7 @@ ln -s path/to/myApt-version-folder/myAptImageDir.sh myAptImageDir
  Expected output (to be double-checked with the current version written in the {{{./download.html}download}} page): 
  
 +--+
-bworld-myApt Version 1.1-SNAPSHOT Build 2015-07-27 10:15:57
+bworld-myApt Version 1.1-SNAPSHOT Build 2015-10-02 14:56:20
 +--+
 
 ~~ WARNING: the given output must be consistent with the value given in download.apt page 
@@ -125,7 +125,7 @@ bworld-myApt Version 1.1-SNAPSHOT Build 2015-07-27 10:15:57
 
 +--+   
 project.version=1.1-SNAPSHOT
-build.date=2015-07-27 10:15:57
+build.date=2015-10-02 14:56:20
 +--+
 
    * <<<META-INF/MANIFEST.MF>>>
@@ -139,7 +139,7 @@ Implementation-Version: 1.1-SNAPSHOT
 Built-By: blerubrus
 Specification-Vendor: bworld
 Created-By: Apache Maven
-Build-date: 2015-07-27 10:15:57
+Build-date: 2015-10-02 14:56:20
 Implementation-Vendor: bworld
 Implementation-Vendor-Id: fr.free.bworld
 Build-Jdk: 1.6.0_35

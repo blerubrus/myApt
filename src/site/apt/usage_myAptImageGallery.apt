@@ -1,0 +1,366 @@
+ ---
+ MyApt Image Gallery
+ ---
+ blerubrus (with bworld-myApt)
+ ---
+ 2015-10-02
+
+MyApt Image Gallery
+
+ This page proposes the usage of the "myAptImageDir" tool available in myApt versions
+ prior to October 2015. This tool used to generate an apt file for each image file found
+ in a given directory, then used to generate xdoc code to build a gallery with a custom css...
+ Quite complicated... Kept for historic.
+
+===
+
+%{toc|fromDepth=2}
+
+===
+
+* {MyAptImageDir}
+
+  Aim: generating an apt file containing the code to display a link and the image for each image file found in a specified folder, creates an apt file with the code to display the image
+ and a link to this image. This feature also generates the Maven site menu item xml instructions for
+ each generated apt file. It also creates a file in xdoc format proposing a gallery of thumbnails.
+ 
+ This feature is mainly designed for photos located in a directory of the Maven Web site.
+ Each photo should be available as the "big image" and as a thumbnail whose size is a 100 pixels side square.
+ This "<myAptImageDir>" feature also requires some setup.
+ 
+** {Input setup}
+
+ Let us assume that the photos are located in the directory <<<src/site/resources/myAptImageDirTest/>>>.
+ There are constraints for the names of files: image base name should contain the pattern <<<yyyyMMdd_Title>>> (example: <<<20140319_Sunset.jpg>>>)
+   
+ For this demonstration purpose, our test directory contains the following photo files:
+ 
++--+
+:~/workspace/myApt$ l src/site/resources/myAptImageDirTest/
+20140309_SunsetLandscape.jpg
+20140309_SunsetPortrait.jpg
+20140309_SunsetShot.jpg
++--+
+
+   * {{{./myAptImageDirTest/20140309_SunsetLandscape.jpg}20140309_SunsetLandscape.jpg}}
+
+   * {{{./myAptImageDirTest/20140309_SunsetPortrait.jpg}20140309_SunsetPortrait.jpg}}
+
+   * {{{./myAptImageDirTest/20140309_SunsetShot.jpg}20140309_SunsetShot.jpg}}
+   
+   
+** {Generate}
+ 
+ <<myApt.jar>> input arguments:
+ 
+   * <<<-DimageDir=path/to/folder/>>>\
+   indicates to browse the given directory and to create an apt image file for each file (should be
+   image only) found in this directory.
+   
+   * <<<-Dscm=svn>>>\
+   to inject Subversion RCS keywords in the generated apt file.
+   
+   []
+   
+ Usage example: 
+ 
+   * invoking the jar: <<java -jar path/to/myApt.jar -DimageDir=src/site/resources/myAptImageDirTest/>>
+   
+   * Unix-based users can use the shortcut shell script: <<myAptImageDir src/site/resources/myAptImageDirTest/>>
+   
+   []
+
+ Output example:
+ 
++--+
+:~/workspace/myApt$ myAptImageDir src/site/resources/myAptImageDirTest/
+Successfully created the apt file: /Users/blerubrus/workspace/myApt/20140309_SunsetLandscape.jpg.apt
+Successfully created the apt file: /Users/blerubrus/workspace/myApt/20140309_SunsetPortrait.jpg.apt
+Successfully created the apt file: /Users/blerubrus/workspace/myApt/20140309_SunsetShot.jpg.apt
+Successfully created the menu items xml file file '/Users/blerubrus/workspace/myApt/20150518103130_menu_items_site.xml'.
+Successfully created the overview in xdoc format file '/Users/blerubrus/workspace/myApt/20150518103130_overview.xml'.
+Build succeeded!
+   Generated apt file 20140309_SunsetLandscape.jpg.apt
+You may wish to add the following line in the site.xml file:
+   Please consult *_menu_items_site.xml
+   Generated apt file 20140309_SunsetPortrait.jpg.apt
+You may wish to add the following line in the site.xml file:
+   Please consult *_menu_items_site.xml
+   Generated apt file 20140309_SunsetShot.jpg.apt
+You may wish to add the following line in the site.xml file:
+   Please consult *_menu_items_site.xml
++--+
+
+ The command created the following files in the current directory:
+ 
+   * {{{./myAptImageDirOutput/20140309_SunsetLandscape.jpg.apt}20140309_SunsetLandscape.jpg.apt}}
+   
+   This file contains the apt code to display the photo {{{./myAptImageDirTest/20140309_SunsetLandscape.jpg}20140309_SunsetLandscape.jpg}}.
+   The title of the document has been set by extracting the date and the string <<<SunsetLandscape>>> from the input
+   image filename <<<<yyyyMMdd_ImageTitle>>> pattern.
+   
+
+   * {{{./myAptImageDirOutput/20140309_SunsetPortrait.jpg.apt}20140309_SunsetPortrait.jpg.apt}}
+   
+   This file contains the apt code to display the photo {{{./myAptImageDirTest/20140309_SunsetPortrait.jpg}20140309_SunsetPortrait.jpg}}.
+   Move this file to the <<<src/site/apt/>>> folder in order to take it into account by the <<mvn site>> command.
+
+   * {{{./myAptImageDirOutput/20140309_SunsetShot.jpg.apt}20140309_SunsetShot.jpg.apt}}
+   
+   This file contains the apt code to display the photo {{{./myAptImageDirTest/20140309_SunsetShot.jpg}20140309_SunsetShot.jpg}}.
+   Move this file to the <<<src/site/apt/>>> folder in order to take it into account by the <<mvn site>> command.
+
+   * {{{./myAptImageDirOutput/20150518103130_menu_items_site.xml}20150518103130_menu_items_site.xml}}
+   
+   This file contains the xml instructions for the menu items to be added to the Maven site descriptor <<<src/site/site.xml>>>.
+   Copy paste its content to the <<<src/site/site.xml>>> Maven site descriptor.
+   
++--+
+<item name="2014-03-09 SunsetLandscape" href="20140309_SunsetLandscape.jpg.html"/>
+<item name="2014-03-09 SunsetPortrait" href="20140309_SunsetPortrait.jpg.html"/>
+<item name="2014-03-09 SunsetShot" href="20140309_SunsetShot.jpg.html"/>
++--+
+
+   * {{{./myAptImageDirOutput/20150518103130_overview.xml}20150518103130_overview.xml}}
+   
+   This file in xdoc format is the code for the gallery. It must be moved to <<<src/site/xdoc/>>> folder
+   to be taken into account by the <<mvn site>> command. The following section further describes
+   how to set up this gallery.
+   
+ Then run <<mvn site>>. The following screenshot shows the result of the generated apt file to html.
+ 
+[./myAptImageDirOutput/ScreenShot_SunsetLandscape.png]
+
+ View image only: {{./myAptImageDirOutput/ScreenShot_SunsetLandscape.png}}
+
+[./myAptImageDirOutput/ScreenShot_SunsetPortrait.png]
+
+ View image only: {{./myAptImageDirOutput/ScreenShot_SunsetPortrait.png}}
+ 
+[./myAptImageDirOutput/ScreenShot_SunsetShot.png]
+
+ View image only: {{./myAptImageDirOutput/ScreenShot_SunsetShot.png}}  
+
+ 
+** {Gallery}
+
+ To setup the gallery created by the previous command, add the generated file 
+ <<yyyyMMddHHmmss_overview.xml>> 
+ (in our example: {{{./myAptImageDirOutput/20150518103130_overview.xml}20150518103130_overview.xml}})
+  to the xdoc subfolder of the maven site hierarchy: <<<src/site/xdoc/>>>.
+ 
+ Let's rename this file <<<gallery.xml>>>.
+ 
+  Let's add an instruction in the <<<src/site/site.xml>>> file to reference this file
+  from the Maven web site menu:
+  
++--+
+<item name="Gallery" href="gallery.html"/>
++--+
+
+ Let's embed the generated xdoc code in the xdoc expected frame (see {{{https://maven.apache.org/doxia/references/xdoc-format.html}Doxia XDOC format}}):
+ 
++--+
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  <properties>
+    <title>Page Title</title>
+    <author email="user@company.com">John Doe</author>
+  </properties>
+  
+  <body>
+    <section name="Test">
+  
+PUT THE GENERATED CODE HERE
+  
+    </section>
+  </body>
+</document>
++--+
+ 
+*** {Thumbnails}
+
+ The generated xml file contains a "<<<div>>>" section for each photo file in the input folder, 
+ with:
+ 
+   * an hypertexte link to the created apt file for this image (<<<20140309_SunsetLandscape.jpg.html>>>
+   is the name of the html file generated by <<mvn site>> for the created apt file named
+   <<<20140309_SunsetLandscape.jpg.apt>>>)
+   
+   * an image for this hypertext link: a path to an existing thumb for this image (<<<20140309_SunsetLandscape.jpg_thumb.png>>>)
+   
+ The labels have been extracted from the original input photo file (date and title).
+ 
+ Example:
+ 
++---+
+<div class="imgGal">
+   <a href="./20140309_SunsetLandscape.jpg.html" title="SunsetLandscape">
+      <img src="./20140309_SunsetLandscape.jpg_thumb.png"
+       alt="20140309_SunsetLandscape.jpg" width="100" height="100"/>
+   </a>
+   <div class="desc">2014-03-09</div>
+</div>
++---+
+
+
+ This feature assumes that the associated generated thumbnail exists, with 
+ the following name pattern for an image named <<<myImage.jpg>>>: <<<myImage.jpg_thumb.png>>>.
+ Ideally, the size of the thumbnail should be 100 x 100 pixels.
+ 
+ Let us now create thumbnails. For this purpose, the "Image Magick Convert" program can be used. See
+ {{{http://www.imagemagick.org/Usage/thumbnails/#height}Image Magick}} (2013-05-06) for further info.
+ 
+ For each image with the "<<<jpg>>>" extension found in the directory, the following command generates a thumb in png format,
+ the size of this thumb is 100x100 pixels, the ratio is conserved, and the gap between the image and
+ the the 100x100 frame is filled with a black background color. The generated thumb filename appends
+ "<<<_thumb.png>>>" suffix to the original image filename:
+ 
++--+
+#!/bin/sh 
+ls *.jpg | xargs -I FILE convert FILE -thumbnail '100x100>' -background black -gravity center -extent 100x100 FILE_thumb.png
++--+
+
+ Let us execute this command in the <<<src/site/resources/myAptImageDirTest/>>> folder that contains
+ the original photos.. This folder now contains:
+ 
++--+
+:~/workspace/myApt/src/site/resources/myAptImageDirTest$ ls
+20140309_SunsetLandscape.jpg
+20140309_SunsetLandscape.jpg_thumb.png
+20140309_SunsetPortrait.jpg
+20140309_SunsetPortrait.jpg_thumb.png
+20140309_SunsetShot.jpg
+20140309_SunsetShot.jpg_thumb.png
++--+ 
+ 
+ In our <<<src/site/xdoc/gallery.xml>>> file, we must now adjust the paths to the 
+ thumb files. The value of the "<<<src>>>" attribute of the "<<<img>>>" tag must
+ point to the directory where thumbs are located: change the line
+ 
++--+
+<img src="./20140309_SunsetLandscape.jpg_thumb.png"
++--+
+
+ by 
+ 
++--+
+<img src="./myAptImageDirTest/20140309_SunsetLandscape.jpg_thumb.png"
++--+ 
+ 
+ 
+ The "gallery" feature also assumes that the original image basename includes the date in yyyyMMdd format in 
+ its filename, used for the description "<div class=desc>".
+ 
+*** {CSS}
+ 
+ The last step is to ensure that the current Maven web site will take into account the
+ css instructions referenced from the <<<gallery.xml>>> file.
+ 
+ The gallery is based on CSS given and explained at the following URL:
+ 
+ {{{http://www.dynamicdrive.com/style/csslibrary/item/css-image-gallery/#thumb}Dynamic Drive}} (2013)  
+ 
+ If not existing yet, create your Maven site custom css file (<<<src/site/resources/css/site.css>>>)
+ and add the following css instructions:
+ 
+ 
++--+
+img{
+   max-width: 100%;
+}
+
+div.calaRight img {
+  /*float:left;*/
+  border:1px dotted black;
+  margin:5px 5px 5px 20px;
+}
+
+
+div.imgGal {
+  margin:2px;
+  border:1px solid #000000;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+}
+div.imgGal img {
+  /*display:inline;*/
+  margin:3px;
+  border:1px solid #ffffff;
+}
+div.imgGal a:hover img {
+  border:1px solid #0000ff;
+}
+div.desc {
+  text-align:center;
+  font-weight:normal;
+  width:120px;
+  margin:2px;
+}
+
+/*gallery based on http://www.dynamicdrive.com/style/csslibrary/item/css-image-gallery/#thumb */
+.gallerycontainer{
+position: relative;
+/*Add a height attribute and set to largest image's height to prevent overlaying*/
+height: 200;
+max-width: 100%; 
+}
+
+.thumbnail img{
+border: 1px solid white;
+margin: 0 5px 5px 0;
+}
+
+.thumbnail:hover{
+background-color: transparent;
+}
+
+.thumbnail:hover img{
+border: 1px solid blue;
+}
+
+.thumbnail span{ /*CSS for enlarged image*/
+position: absolute;
+background-color: lightyellow;
+padding: 5px;
+left: -1000px;
+border: 1px dashed gray;
+visibility: hidden;
+color: black;
+text-decoration: none;
+
+}
+
+.thumbnail span img{ /*CSS for enlarged image*/
+border-width: 0;
+padding: 2px;
+
+}
+
+.thumbnail:hover span{ /*CSS for enlarged image*/
+visibility: visible;
+top: 0;
+left: 10px; /*position where enlarged image should offset horizontally */
+z-index: 50;
+max-width: 500;
+}
++--+
+
+ That's it.
+ 
+ The gallery of thumb should be available at {{{./gallery.html}gallery}}, as shown
+ in the following screenshot:
+ 
+[./myAptImageDirOutput/ScreenShot_gallery.png]
+ 
+ 
+ 
+
+ 
+
+ 
+

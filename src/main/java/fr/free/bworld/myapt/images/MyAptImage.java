@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.security.InvalidParameterException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import fr.free.bworld.myapt.MyApt;
 
@@ -20,7 +22,15 @@ import fr.free.bworld.myapt.MyApt;
  */
 public class MyAptImage extends MyApt {//implements GenerateApt {
 	
-	private static String NEW_LINE = System.getProperty("line.separator");
+	/**The filename to generate, commposed of the date "yyyyMMddHHmm" then "_myAptImage.apt" suffix.*/
+	protected static final String DEFAULT_IMAGE_APT_TARGET_FILENAME = new SimpleDateFormat("yyyyMMddHHmm").format(new Date()) + "_myAptImage.apt";
+	
+	
+	/**The text before the link to the image.*/
+	protected static final String LINK_TO_THIS_IMAGE_FILE = " Link to this image file: ";
+
+	/**A shortcut to insert a new line in a string buffer.*/
+	public static String NEW_LINE = System.getProperty("line.separator");
 	
 	/**The relative path from the Maven "resources/" directory to the location of the image. Exemple: "images/20120830_holidays/".*/
 	private String resourcePath;
@@ -31,8 +41,6 @@ public class MyAptImage extends MyApt {//implements GenerateApt {
 	/**The title of the generated apt file (keyword of the image for example, in the case of the gardi project).*/
 	private String title;
 	
-	/**The default path to the image files relatively to the "resources" directory.*/
-	private static final String DEFAULT_RESOURCE_PATH = "./images";
 	
 	
 	
@@ -43,30 +51,24 @@ public class MyAptImage extends MyApt {//implements GenerateApt {
 	 */
 	public MyAptImage(String resourcePath, String imageFilename){
 		this(resourcePath, imageFilename, imageFilename);
-		if (resourcePath == null || resourcePath.isEmpty()){
-			resourcePath = DEFAULT_RESOURCE_PATH;
-		}
-		this.resourcePath = resourcePath;
-		
-		if (imageFilename == null || imageFilename.isEmpty()){
-			throw new InvalidParameterException("The image filename must neither be null nor empty!");
-		}
-		this.imageFilename = imageFilename;
-		//this.setAptFilename(new SimpleDateFormat("yyyyMMdd").format(new Date()) + "_" + imageFilename + ".apt");
-		this.setAptFilename(imageFilename + ".apt");
 	}
+	
+	
 	
 	/**
 	 * 
-	 * @param resourcePath expects a relative path from the Maven "src/resources/" directory to the image.
+	 * @param resourcePath expects a relative path from the Maven "src/site/resources/" directory to the image.
 	 * @param imageFilename is the filename of the image that will be used for the filename of the generated apt.
 	 * @param title is the title of the page.
 	 */
 	public MyAptImage(String resourcePath, String imageFilename, String title){
+		
 		if (resourcePath == null || resourcePath.isEmpty()){
-			resourcePath = DEFAULT_RESOURCE_PATH;
+			throw new InvalidParameterException("The resourcePath must neither be null nor empty!");
 		}
-		this.resourcePath = resourcePath;
+		
+		String relativePathToDir = extractRelativePath(resourcePath);//FIXME
+		this.resourcePath = relativePathToDir;
 		
 		if (imageFilename == null || imageFilename.isEmpty()){
 			throw new InvalidParameterException("The image filename must neither be null nor empty!");
@@ -80,6 +82,22 @@ public class MyAptImage extends MyApt {//implements GenerateApt {
 		
 		//this.setAptFilename(new SimpleDateFormat("yyyyMMdd").format(new Date()) + "_" + imageFilename + ".apt");
 		this.setAptFilename(imageFilename + ".apt");
+	}
+	
+	/**
+	 * If the browsed directory includes the "resources/" string, replaces its
+	 * full content start until "resources" by "./".
+	 * 
+	 * @return a relative path from the src/site/resources/ directory.
+	 */
+	protected String extractRelativePath(String path) {
+		int resIndex = path.indexOf("resources");
+		if (resIndex == -1) {// not found
+			return path;
+		}
+		else {
+			return "."	+ path.substring(resIndex + "resources".length());
+		}
 	}
 	
 	/**
@@ -103,11 +121,14 @@ public class MyAptImage extends MyApt {//implements GenerateApt {
 		buf.append(NEW_LINE);
 		
 		/*link to to see the image only*/
-		buf.append(" View image only: {{");
+		buf.append(LINK_TO_THIS_IMAGE_FILE);
+		buf.append("{{{");
 		buf.append(resourcePath);
 		if (! resourcePath.endsWith("/")){
 			buf.append("/");
 		}
+		buf.append(imageFilename);
+		buf.append("}");
 		buf.append(imageFilename);
 		buf.append("}}");
 		
@@ -124,7 +145,15 @@ public class MyAptImage extends MyApt {//implements GenerateApt {
 	public boolean generate(){
 		StringBuffer buf = new StringBuffer();
 		buf.append(generateHeader(title, null, null));
-		buf.append(generateBody());
+		
+		StringBuffer body = generateBody();
+		
+		System.out.println("=== Preview ===");
+		System.out.println(body);
+		System.out.println("===============");
+		
+		
+		buf.append(body);
 		buf.append(generateFooter(null));
 		
 		File file = new File(getAptFilename());
@@ -137,13 +166,13 @@ public class MyAptImage extends MyApt {//implements GenerateApt {
 			fos.close();
 			pw.close();
 			
-			System.out.println("Successfully created the apt file: " + file.getAbsolutePath());
+			System.out.println("Successfully created the apt 'image' file: " + file.getAbsolutePath());
 			
 			return true;
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.err.println("Failed at creating the apt file: " + file.getAbsolutePath());
+			System.err.println("Failed at creating the apt 'image' file: " + file.getAbsolutePath());
 			return false;
 		}
 	}   

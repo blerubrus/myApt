@@ -18,7 +18,9 @@ Download
 
 ~~ WARNING: the given version must be consistent with the value given in usage.apt page
 
-* {bworld-myApt Version 1.1-SNAPSHOT Build 2015-07-27 10:15:57}
+
+* {bworld-myApt Version 1.1-SNAPSHOT Build 2015-10-02 14:56:20}
+
  
    * Java Executable Archive : {{{./myApt.jar}myApt.jar}}
    
@@ -31,6 +33,8 @@ Download
       * {{{./myAptResources.sh}myAptResources.sh}}
       
       * {{{./myAptImageDir.sh}myAptImageDir.sh}}
+      
+      * {{{./myAptImageFile.sh}myAptImageFile.sh}}
    
       []
       
@@ -39,6 +43,15 @@ Download
  Please consult the {{{./usage.html}Usage}} page for install configuration and usage.
  
 * {What's new?}
+
+** {From Version 1.1-SNAPSHOT Build 2015-07-27 to Version 1.1-SNAPSHOT Build 2015-10-02 14:56:20}}
+
+ MyApt: the label "Table of Contents:" is now added before the macro doxia instruction.
+ 
+ MyAptImageDir: changed the specifications, new output style named "listing", allowing to generate an apt file with the listing
+ of all image files in the given directory as argument (no more gallery).
+ 
+ MyAptImageFile: for an unique image file, generates an apt file with a link and the display of the given image as argument.
 
 ** {From Version 1.1-SNAPSHOT Build 2015-05-21 to Version 1.1-SNAPSHOT Build 2015-07-27}
 

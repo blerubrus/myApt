@@ -19,8 +19,11 @@ import java.util.List;
  */
 public class MyApt implements GenerateApt {
 
+	/**The text before the links of the included toc doxia macro.*/
+	protected static final String TOC_LABEL = " Table of Contents";
+
 	/**The APT instruction to add the table of contents Doxia Macro.*/
-	public static final String DEFAULT_TOC = "%{toc|fromDepth=2}";
+	public static final String TOC_DOXIA_MACRO_INSTRUCTION = "%{toc|fromDepth=2}";
 
 	/**Expected "property key value" argument on the command line when the user wants to set the title of the apt file to generate.*/
 	public static final String ARGUMENT_TITLE = "-Dtitle=";
@@ -170,7 +173,7 @@ public class MyApt implements GenerateApt {
 	 * @param scm indicates the rcs keywords to inject as comments (svn: id url, git: none)
 	 * @return a custom header.
 	 */
-	protected static StringBuffer generateHeader(String title, String author, String scm){
+	public static StringBuffer generateHeader(String title, String author, String scm){
 		Calendar now = Calendar.getInstance();
 		
 		StringBuffer buf = new StringBuffer(" ---");
@@ -262,7 +265,7 @@ public class MyApt implements GenerateApt {
 	 * @param scm if svn, includes revision date author.
 	 * @return a custom footer including rcs keywords in italics that depend on the given parameter.
 	 */
-	protected static StringBuffer generateFooter(String scm) {
+	public static StringBuffer generateFooter(String scm) {
 		StringBuffer buf = new StringBuffer("");
 		if (scm != null && Main.ARGUMENT_SCM_SVN.equalsIgnoreCase(scm)){
 			buf.append(LINE_SEPARATOR);
@@ -280,7 +283,7 @@ public class MyApt implements GenerateApt {
 	}
 	
 	/**
-	 * Generates the apt code to insert the Doxia Macro toc.
+	 * Generates the apt code to insert the Doxia Macro toc, after a label and arounded with lines.
 	 * @return the apt code to display a line, the toc doxia macro and a line.
 	 */
 	protected static StringBuffer generateToc(){
@@ -290,7 +293,10 @@ public class MyApt implements GenerateApt {
 		buf.append("===");// apt line
 		buf.append(LINE_SEPARATOR);
 		buf.append(LINE_SEPARATOR);
-		buf.append(DEFAULT_TOC);
+		buf.append(TOC_LABEL);// label toc
+		buf.append(LINE_SEPARATOR);
+		buf.append(LINE_SEPARATOR);
+		buf.append(TOC_DOXIA_MACRO_INSTRUCTION);// doxia toc macro instruction
 		buf.append(LINE_SEPARATOR);
 		buf.append(LINE_SEPARATOR);
 		buf.append("===");// apt line

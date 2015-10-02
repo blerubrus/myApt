@@ -37,7 +37,7 @@ public class MyAptFactory {
          boolean aptForMonthDone = false;
          boolean aptForImage = false;//flag showing if the generation concerns an image
          String imageArg = null; // if the generation concerns an image, provides the path to the file or directory
-         BrowseImageDirStyleEnum imageAptStyleEnum = BrowseImageDirStyleEnum.GARDI;//if the generation concerns apt for images in a directory, the main may provide an argument "style"
+         BrowseImageDirStyleEnum imageAptStyleEnum = BrowseImageDirStyleEnum.LISTING;//if the generation concerns apt for images in a directory, the main may provide an argument "style"
          String imageAptStyle = null;// eventual input value
          boolean aptForResources = false;//flag showing if the user wants to generate an apt file listing resources
          String resourcesArg = null;//if the generation concerns a "resources listing apt file", stores the expected argument value whose value is the directory to browse
@@ -74,7 +74,7 @@ public class MyAptFactory {
             	imageAptStyleEnum = BrowseImageDirStyleEnum.valueOf(imageAptStyle);
             	if (imageAptStyleEnum == null){
             		System.err.println("Invalid argument for the image apt style, using default");
-            		imageAptStyleEnum = BrowseImageDirStyleEnum.GARDI;
+            		imageAptStyleEnum = BrowseImageDirStyleEnum.LISTING;
             	}
             }
             else if (arg.startsWith(Main.ARGUMENT_TYPE + Main.ARGUMENT_TYPE_VALUE_RESOURCES)){
