@@ -22,7 +22,7 @@ Usage - Install
  * {{{./usage_myAptMonthDone.html}myAptMonthDone}} to generate an apt file with a calendar listing the days of a given month
  (see {{{./sample_myAptMonthDone.html}Sample - myAptMonthDone}});;
  
- * {{{./usage_myAptImage}myAptImage}} (<experimental>) to generate a custom apt file displaying an image.
+ * {{{./usage_myAptImage.html}myAptImage}} (<experimental>) to generate a custom apt file displaying an image.
  
  []
  
