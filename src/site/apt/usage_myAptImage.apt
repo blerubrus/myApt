@@ -12,7 +12,7 @@ Usage - myAptImage
  
  Input: 
  
-   * a path to an image file (see {{myAptImageFile}}
+   * a path to an image file (see {{myAptImageFile}})
    
    * or a path to a directory containing images (see {{myAptImageDir}})
    
@@ -20,7 +20,8 @@ Usage - myAptImage
    
  Ideally, this image file or directory is located in a sub folder of a Maven Web site resources folder "<<<src/site/resources/>>>" directory.
  
- Output: the apt code to display a link and the image in apt format.
+ Output: both scripts <<<myAptImageFile.sh>>> and <<<myAptImageDir.sh>>> generate an apt file in the current directory,
+ this file contains the apt code to display a link and the image in apt format.
  
    [Note:] Previous version of myAptImage (before October 2015) used to have the following objective in terms of output:
    
@@ -57,16 +58,29 @@ Usage - myAptImage
 
  Usage example:
  
-   * assuming that this file path exists: <<<src/site/resources/myAptImageTest/20140309_SunsetShot.jpg>>>
+   * assuming that this Maven Web Site Project file path exists: <<<src/site/resources/myAptImageTest/20140309_SunsetShot.jpg>>>
  
-   * type <<java -jar path/to/myApt.jar -DimageFile=src/site/resources/myAptImageTest/20140309_SunsetShot.jpg>>
+   * type in the root folder of this maven project:
+   
++--+
+java -jar myApt.jar -DimageFile=src/site/resources/myAptImageTest/20140309_SunsetShot.jpg
++--+
 
- (<Currently the shortcut script for Unix-based users does not exist>)
+   The previous command is equivalent to the script:
+   
++--+
+myAptImageFile src/site/resources/myAptImageTest/20140309_SunsetShot.jpg
++--+
  
  Command execution expected output:
 
 +---+
 $ java -jar ~/bin/myApt.jar -DimageFile=src/site/resources/myAptImageDirTest/20140309_SunsetShot.jpg
+=== Preview ===
+[./images/20140309_SunsetShot.jpg]
+
+ View image only: {{./images/20140309_SunsetShot.jpg}}
+===============
 Successfully created the apt file: /home/blerubrus/workspace/myApt/20140309_SunsetShot.jpg.apt
 Build succeeded!
    Generated apt file 20140309_SunsetShot.jpg.apt
@@ -101,9 +115,9 @@ You may wish to add the following line in the site.xml file:
 
 * {myAptImageDir}
 
- Aim: generating an apt file containing the code to display a link and the image for each image file found in a specified folder.
+ Aim: generate an apt file containing the code to display a link and the image for each image file found in a specified folder.
  
- This tool considers a file as an image file if its filename extension is one of "jpg, jpeg, svg, gif, png" (case-unsensitive).
+ This tool considers that a file is an image file if its filename extension is one of "jpg, jpeg, svg, gif, png" (case-unsensitive).
  
   
  Input: a path to a directory.
@@ -131,10 +145,46 @@ myAptMonthDoneResult.png
  
  A preview of the generated apt file body is displayed to the console:
  
++--+
+blerubrus@mars:~/workspace/myApt$ myAptImageDir src/site/resources/
+=== Preview ===
 
 
- A file named <<<yyyyMMddhhmm_myAptImage.apt>>> is generated in the root folder, it contains
- the previous content.
+[./monthDoneExecution.png]
+
+ Link to this image file: {{{./monthDoneExecution.png}monthDoneExecution.png}}
+
+
+[./201505141158_myAptResources.png]
+
+ Link to this image file: {{{./201505141158_myAptResources.png}201505141158_myAptResources.png}}
+
+
+[./myAptMonthDoneResult.png]
+
+ Link to this image file: {{{./myAptMonthDoneResult.png}myAptMonthDoneResult.png}}
+
+
+[./201505141158_myAptResourcesResult.png]
+
+ Link to this image file: {{{./201505141158_myAptResourcesResult.png}201505141158_myAptResourcesResult.png}}
+
+
+[./myAptMonthDone.png]
+
+ Link to this image file: {{{./myAptMonthDone.png}myAptMonthDone.png}}
+
+===============
+Successfully created the apt 'image' file: /home/blerubrus/workspace/myApt/201510021523_myAptImage.apt
+Build succeeded!
+   Generated apt file 201510021523_myAptImage.apt
+You may wish to add the following line in the site.xml file:
+   null
++--+
+
+ As indicated by the message, a file named <<<yyyyMMddhhmm_myAptImage.apt>>> is generated 
+ (here, <<<201510021523_myAptImage.apt>>>) in the current folder, the body of this file contains
+ the code shown in the preview: for each file, the code to display it, and a link to this file.
  
  
 
