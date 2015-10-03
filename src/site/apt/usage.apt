@@ -109,8 +109,14 @@ ln -s path/to/myApt-version-folder/myAptImageDir.sh myAptImageDir
  
  Expected output (to be double-checked with the current version written in the {{{./download.html}download}} page): 
  
+ 
+
+~~ ***
+~~ WARNING: the version must be consistent in download.apt and usage.apt pages
+~~ ***
+
 +--+
-bworld-myApt Version 1.1-SNAPSHOT Build 2015-10-02 14:56:20
+bworld-myApt Version 1.1-SNAPSHOT Build 2015-10-03 10:56:31
 +--+
 
 ~~ WARNING: the given output must be consistent with the value given in download.apt page 
@@ -123,14 +129,27 @@ bworld-myApt Version 1.1-SNAPSHOT Build 2015-10-02 14:56:20
    This properties file is automatically updated by Maven during the build process of the jar file. It contains the
    project version and the build date as two key-value pairs, example:
 
+
+
+~~ ***
+~~ WARNING: the version must be consistent in download.apt and usage.apt pages
+~~ ***
+
+
 +--+   
 project.version=1.1-SNAPSHOT
-build.date=2015-10-02 14:56:20
+build.date=2015-10-03 10:56:31
 +--+
 
    * <<<META-INF/MANIFEST.MF>>>
    
    This file is also created by the Maven build process. Example of its content:
+
+
+
+~~ ***
+~~ WARNING: the version must be consistent in download.apt and usage.apt pages
+~~ ***
    
 +--+
 Manifest-Version: 1.0
@@ -139,7 +158,7 @@ Implementation-Version: 1.1-SNAPSHOT
 Built-By: blerubrus
 Specification-Vendor: bworld
 Created-By: Apache Maven
-Build-date: 2015-10-02 14:56:20
+Build-date: 2015-10-03 10:56:31
 Implementation-Vendor: bworld
 Implementation-Vendor-Id: fr.free.bworld
 Build-Jdk: 1.6.0_35
