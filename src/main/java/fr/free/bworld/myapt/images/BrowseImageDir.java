@@ -61,7 +61,7 @@ public abstract class BrowseImageDir implements GenerateApt {
 
 
    /**List of image file supported extensions.*/
-   public String[] SUPPORTED_FORMATS = {".JPG", ".jpg", ".JPEG", ".JPEG", ".png", ".PNG", ".SVG", ".svg", ".GIF", ".gif"};
+   public String[] SUPPORTED_FORMATS = {".JPG", ".jpg", ".JPEG", ".jpeg", ".png", ".PNG", ".SVG", ".svg", ".GIF", ".gif"};
 
    /**
     * The constructor with no arguments just sets an empty list of files.
