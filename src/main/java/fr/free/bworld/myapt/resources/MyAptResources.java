@@ -65,6 +65,11 @@ public class MyAptResources extends MyApt implements GenerateApt {
 	public boolean generate() {
 		Inspect inspector = new InspectImpl(dir);
 		String listing = inspector.toApt();
+		
+		//displays to console the body core content of the file that is going to be generated
+		System.out.println("=== Preview ===");
+		System.out.println(listing);
+		System.out.println("===============");
 
 		StringBuffer buf = new StringBuffer();
 		buf.append(generateHeader(DEFAULT_RESOURCES_APT_PAGE_TITLE, null, getScm()));

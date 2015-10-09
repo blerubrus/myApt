@@ -3,8 +3,9 @@ package fr.free.bworld.myapt;
 import java.util.List;
 
 /**
+ * Provides the methods that an apt generator must implement. 
+ * 
  * @author blerubrus
- * @version $Date$
  */
 public interface GenerateApt {
 

@@ -5,16 +5,12 @@
  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
                      http://maven.apache.org/maven-v4_0_0.xsd">
                      
-<!--
-Last change:
-$Date$
--->
 
    <modelVersion>4.0.0</modelVersion>
    <groupId>fr.free.bworld</groupId>
    <artifactId>bworld-myApt</artifactId>
    <packaging>jar</packaging>
-   <version>1.1-SNAPSHOT</version>
+   <version>1.2-SNAPSHOT</version>
    <name>bworld-myApt</name>
    <description>A simple java program to generate custom files in the Doxia APT format.</description>
    <url>http://bworld.free.fr/myApt/</url>

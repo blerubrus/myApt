@@ -68,7 +68,7 @@ public class BrowseImageDirListing extends BrowseImageDir {
 	       bufContent.append(MyAptImage.NEW_LINE);
 	    }
 		
-		//displays to console the content of the file that is going to be generated
+		//displays to console the body core content of the file that is going to be generated
 		System.out.println("=== Preview ===");
 		System.out.println(bufContent);
 		System.out.println("===============");
