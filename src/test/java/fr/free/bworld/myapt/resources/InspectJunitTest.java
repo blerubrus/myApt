@@ -10,8 +10,10 @@ import org.junit.Test;
 /**
  * Used to generate the apt file listing resources in the specified directory.
  * 
+ * TODO: For the given list of resources, checks the expected alphabetical sort of the "toApt" method.
+ * Not easy, since the sort is computed in the "toApt" method that returns a string...
+ * 
  * @author blerubrus
- * @version $Id: InspectJunitTest.java 231 2014-07-02 12:48:25Z blerubrus $
  */
 public class InspectJunitTest {
 	/**
@@ -70,8 +72,6 @@ public class InspectJunitTest {
 		for (Resource r : resources){
 			System.out.println(r.toString());
 		}
-	}   
-   
-   
+	}
 
 }

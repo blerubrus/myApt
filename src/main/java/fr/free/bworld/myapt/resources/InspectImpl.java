@@ -11,7 +11,6 @@ import java.util.List;
  * Simple implementation that lists the files in a sub directory of a Maven Web Site "site/resources" folder
  * and generates to the console a list in apt format of links to these files.
  * @author blerubrus
- * @version $Date$
  */
 public class InspectImpl implements Inspect {
 	
@@ -149,7 +148,7 @@ public class InspectImpl implements Inspect {
 		Collections.sort(resources, new Comparator<Resource>() {
 			@Override
 			public int compare(Resource o1, Resource o2) {
-				return o1.getPath().compareTo(o2.getPath());
+				return (o1.getPath() + o1.getFilename()).compareTo(o2.getPath() + o2.getFilename());
 			}
 		});
 		
