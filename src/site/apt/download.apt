@@ -20,8 +20,7 @@ Download
 ~~ WARNING: the version must be consistent in download.apt and usage.apt pages
 ~~ ***
 
-
-* {bworld-myApt Version 1.1-SNAPSHOT Build 2015-10-03 10:56:31}
+* {bworld-myApt Version 1.2-SNAPSHOT Build 2015-10-26 11:11:34}
 
  
    * Java Executable Archive : {{{./myApt.jar}myApt.jar}}
@@ -46,13 +45,19 @@ Download
  
 * {What's new?}
 
-** {From Version 2015-10-02 to Version 2015-10-03}
+** {From 2015-10-03 to 2015-10-26}
+
+ The "myAptResources" now displays a "preview" of the generated apt file core content to the console.
+ 
+ The listing is now alphabetically sorted on path and filename (not only path ;)
+
+** {From 2015-10-02 to 2015-10-03}
 
  Previous version of <<<myAptImageDir>>> returns an empty list for a directory only containing image files in the jpeg format.
  
  Fixed the list of supported images files extensions: added <<<.jpeg>>> (<<<.JPEG>>> was present twice)
 
-** {From Version 2015-07-27 to Version 2015-10-02}}
+** {From 2015-07-27 to 2015-10-02}
 
  MyApt: the label "Table of Contents:" is now added before the macro doxia instruction.
  
@@ -61,7 +66,7 @@ Download
  
  MyAptImageFile: for an unique image file, generates an apt file with a link and the display of the given image as argument.
 
-** {From Version 2015-05-21 to Version 2015-07-27}
+** {From 2015-05-21 to 2015-07-27}
 
  The "apt calendar" (when using myAptMonthDone script) section date format has been updated:
  (added brackets around the yyyy-MM-dd to generate anchors):
@@ -80,7 +85,7 @@ Download
 
       []
 
-** {From Version 1.1-SNAPSHOT Build 2015-05-15 to Version 1.1-SNAPSHOT Build 2015-05-21}
+** {From 2015-05-15 to 2015-05-21}
 
  Improvement suggested by Camille: add the Doxia Macro TOC instruction in generated apt files.
  Consequently:
@@ -102,7 +107,7 @@ Download
    
    []
  
-** {From Version 1.0-SNAPSHOT to Version 1.1-SNAPSHOT Build 2015-05-15}
+** {From 1.0-SNAPSHOT to 1.1-SNAPSHOT Build 2015-05-15}
 
  Instead of Subversion, the project now uses {{{https://git-scm.com/}Git}}.
  
