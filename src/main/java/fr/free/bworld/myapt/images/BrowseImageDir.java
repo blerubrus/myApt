@@ -6,6 +6,7 @@ import java.io.FilenameFilter;
 import java.io.PrintWriter;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import fr.free.bworld.myapt.GenerateApt;
@@ -124,6 +125,8 @@ public abstract class BrowseImageDir implements GenerateApt {
             files.add(currFile);
          }
       }
+      // sorts!
+      Collections.sort(files);
       result = files.size();
       return result;
    }
