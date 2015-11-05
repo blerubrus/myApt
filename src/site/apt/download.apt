@@ -20,7 +20,7 @@ Download
 ~~ WARNING: the version must be consistent in download.apt and usage.apt pages
 ~~ ***
 
-* {bworld-myApt Version 1.2-SNAPSHOT Build 2015-10-30 14:33:02}
+* {bworld-myApt Version 1.3-SNAPSHOT Build 2015-11-05 12:06:25}
 
  
    * Java Executable Archive : {{{./myApt.jar}myApt.jar}}
@@ -44,6 +44,20 @@ Download
  Please consult the {{{./usage.html}Usage}} page for install configuration and usage.
  
 * {What's new?}
+
+** {From 1.2-SNAPSHOT 2015-10-30 to 1.3-SNAPSHOT 2015-11-05}
+
+ New version of the <<<myApt.jar>>> file with esthetic modifications in terms of apt generation:
+ 
+   * the "<myAptResources>" now separates the files items with the name of the browsed folder (useful for recursive option).
+   Note that there may be some cuts of the listing for a given directory because of the alphabetic sort of
+   path and filename. For example, subfolders may be listed before the content of the current directory because of their names.
+   
+   * the "<myAptImageDir>" now separates   each image by a "===" apt code (generates a separator line in the html version).
+   
+ Upgraded to "1.3-SNAPSHOT" the version in the <<<pom.xml>>>. Please note that this version also tests an experiment on
+ the Maven multi-modules. myApt Maven module now references the "bworld" Maven parent module. Consequently, the <<<myApt/src/site/site.xml>>>
+ has been reduced and now inherits on the parent specifications. 
 
 ** {From 2015-10-26 to 2015-10-30}
 

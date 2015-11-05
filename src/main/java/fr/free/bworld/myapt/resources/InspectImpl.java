@@ -144,21 +144,35 @@ public class InspectImpl implements Inspect {
 	@Override
 	public String toApt() {
 		List<Resource> resources = list(true);
+		
 		//sort the list on file path
 		Collections.sort(resources, new Comparator<Resource>() {
 			@Override
-			public int compare(Resource o1, Resource o2) {
-				return (o1.getPath() + o1.getFilename()).compareTo(o2.getPath() + o2.getFilename());
+			public int compare(Resource r1, Resource r2) {
+				return (r1.getPath() + r1.getFilename()).compareTo(r2.getPath() + r2.getFilename());
 			}
 		});
 		
 		StringBuffer buf = new StringBuffer();
 		String newLine = System.getProperty("line.separator");
+		
+		String curFolderPath = "./";//
+		
 		for (Resource res : resources){
-			buf.append("   * {{{");
+			
 			String path = res.getPath();
 			//detects "resources/" to start the link at this path
 			path = extractRelativePathFromResourcesDirName(path);
+			
+			if (! curFolderPath.equals(path)){
+				curFolderPath = path;
+				buf.append(" Folder <<<");
+				buf.append(path);
+				buf.append(">>>");
+				buf.append(newLine);
+				buf.append(newLine);
+			}
+			buf.append("   * {{{");
 			buf.append(path);
 			if(! path.endsWith("/")){
 				buf.append("/");
@@ -184,6 +198,9 @@ public class InspectImpl implements Inspect {
     * @return a relative path from the src/site/resources/ directory.
     */
    protected String extractRelativePathFromResourcesDirName(String path) {
+	  if (path.endsWith("resources")){
+		  return "./";
+	  }
       int resIndex = path.indexOf("resources/");
       if (resIndex == -1){//not found
          return path;

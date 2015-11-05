@@ -132,6 +132,11 @@ public class MyAptImage extends MyApt {//implements GenerateApt {
 		buf.append(imageFilename);
 		buf.append("}}");
 		
+		/*line*/
+		buf.append(NEW_LINE);
+		buf.append(NEW_LINE);
+		buf.append("===");
+		
 		return buf;
 	}
 	
