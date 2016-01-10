@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import fr.free.bworld.myapt.images.BrowseImageDir;
+
 /**
  * Simple implementation that lists the files in a sub directory of a Maven Web Site "site/resources" folder
  * and generates to the console a list in apt format of links to these files.
@@ -160,34 +162,37 @@ public class InspectImpl implements Inspect {
 		
 		for (Resource res : resources){
 			
-			String path = res.getPath();
+			String respath = res.getPath();
 			//detects "resources/" to start the link at this path
-			path = extractRelativePathFromResourcesDirName(path);
+			respath = extractRelativePathFromResourcesDirName(path);
 			
-			if (! curFolderPath.equals(path)){
-				curFolderPath = path;
-				buf.append(" Folder <<<");
-				buf.append(path);
+			if (! curFolderPath.equals(respath)){
+				curFolderPath = respath;
+				buf.append(" Folder {{{");
+				buf.append(respath);
+				buf.append("}");
+				buf.append("<<<");
+				buf.append(respath);
 				buf.append(">>>");
+				buf.append("}}");
 				buf.append(newLine);
 				buf.append(newLine);
 			}
-			buf.append("   * {{{");
-			buf.append(path);
-			if(! path.endsWith("/")){
-				buf.append("/");
-			}
-			buf.append(res.getFilename());
-			buf.append("}");
-			if (res.getLabel() == null){//I do not know how to automatically set a label...
-				buf.append(res.getFilename());
-			}
-			else{
-				buf.append(res.getLabel());
-			}
-			buf.append("}}");
+			buf.append("   *");
+			
+			buf.append(res.getAptLink());
+			
+			
 			buf.append(newLine);
 			buf.append(newLine);
+			
+			// adds code to display the image, if the filename ends with one of the supported image file formats
+			for (String extension : BrowseImageDir.SUPPORTED_FORMATS){
+				if (res.getFilename().endsWith(extension)){
+					buf.append(res.getAptImageDisplay());
+					buf.append(newLine);
+				}
+			}
 		}
 		return buf.toString();
 	}

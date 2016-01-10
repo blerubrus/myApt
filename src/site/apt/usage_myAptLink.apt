@@ -1,0 +1,67 @@
+ ---
+ Usage: myAptLink
+ ---
+ blerubrus (with bworld-myApt)
+ ---
+ 2016-01-09
+
+Usage: myAptLink
+
+ Work in progress since 2016-01-09 11:54.
+
+===
+
+ Table of Contents
+
+%{toc|fromDepth=2}
+
+===
+
+ Usage examples:
+ 
+   * Typing: <<myAptLink param>> where <<<param>>> is a path to an existing file (ideally in the "<<<src/site/resources/>>>" folder
+   of the maven project) generates the apt code for a link to this file. Example:
+ 
++--+
+$ myAptLink src/site/resources/myDir/myFile
+ {{{./myDir/myFile}myFile}}
++--+
+
+   Note that if the extension of the target file is one of the supported image file extension (png svg gif jpg jpeg), the output will
+   also display the apt code to display the image. Example:
+
++--+
+$ myAptLink src/site/resources/myDir/myImageFile.png
+ {{{./myDir/myImageFile.png}myImageFile.png}}
+   
+[./myDir/myImageFile.png]
++--+
+
+   * Typing <<myAptLink param1 param2>> generates the apt code for a link to the file given as argument, with a label of the link
+   given as second argument. Example:
+ 
++--+
+$ myAptLink src/site/resources/myDir/myFile label
+ {{{./myDir/myFile}label}}
++--+
+
+   * Typing <<myAptLink param>> where <<<param>>> is a path to an existing directory (ideally in the "<<<src/site/resources/>>>" folder
+   of the maven project) generates the apt code of a recursive listing of links to each file in the directory ("<<<.svn>>>" and "<<<.git>>>" sub folders 
+   are ignored). For image files
+   (if the extension of the file is one of png svg jpg gif jpeg), the apt code to display this image in the generated html
+   is added to the item. Example:  
+ 
++--+
+$ myAptLink src/site/resources/myDir/
+
+ Folder {{{./myDir/}<<<myDir>>>}}:
+   
+   * {{{./myDir/myImageFile.png}myImageFile.png}}
+   
+[./myDir/myImageFile.png]
+
+   * {{{./myDir/myFile}myFile}}
++--+
+
+
+

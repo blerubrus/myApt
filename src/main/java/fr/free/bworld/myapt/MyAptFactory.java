@@ -43,6 +43,9 @@ public class MyAptFactory {
          String resourcesArg = null;//if the generation concerns a "resources listing apt file", stores the expected argument value whose value is the directory to browse
          String scm = null;//eventual scm value
          Object toc = null;//eventual toc
+         boolean linkFlag = false;//indicates if the generation concerns the "link" feature (string output to the console)
+         String linkTo = null;//eventual linkto value
+         String linkLabel = null;//eventual label for a link
          
          for (String arg : args){//browses the input arguments and tries to match expected parameters
             if (arg.startsWith(Main.ARGUMENT_TARGET)){
@@ -96,6 +99,17 @@ public class MyAptFactory {
             else if (arg.startsWith(Main.ARGUMENT_TOC)){
             	toc = true;
             }
+//            else if (arg.startsWith(Main.ARGUMENT_TYPE + Main.ARGUMENT_TYPE_VALUE_LINK)){
+//            	linkFlag = true;
+//            }
+            else if (arg.startsWith(Main.ARGUMENT_LINK_TO)){
+            	linkFlag = true;
+            	linkTo = arg.substring(Main.ARGUMENT_LINK_TO.length());
+            }
+            else if (arg.startsWith(Main.ARGUMENT_LINK_LABEL)){
+            	linkFlag = true;
+            	linkLabel = arg.substring(Main.ARGUMENT_LINK_LABEL.length());
+            }
          }//end browsing arg
          
          // now knows the type of apt to generate
@@ -132,6 +146,9 @@ public class MyAptFactory {
          }
          else if (aptForResources){
         	 result = new MyAptResources(resourcesArg);
+         }
+         else if (linkFlag){
+        	 result = new MyAptLink(linkTo, linkLabel);
          }
          else{
             result = new MyApt(targetFile, title);            

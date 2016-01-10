@@ -13,6 +13,7 @@
          <item name="Download" href="download.html"/>
          <item name="Usage" href="usage.html" collapse="true">
             <item name="myApt" href="usage_myApt.html"/>
+            <item name="myAptLink" href="usage_myAptLink.html"/>
             <item name="myAptResources" href="usage_myAptResources.html"/>
             <item name="myAptMonthDone" href="usage_myAptMonthDone.html"/>
             <item name="myAptImage" href="usage_myAptImage.html"/>

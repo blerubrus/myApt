@@ -10,7 +10,7 @@
    <groupId>fr.free.bworld</groupId>
    <artifactId>bworld-myApt</artifactId>
    <packaging>jar</packaging>
-   <version>1.3-SNAPSHOT</version>
+   <version>1.4-SNAPSHOT</version>
    <name>myApt</name>
    <description>A simple java program to generate custom files in the Doxia APT format.</description>
    <url>http://bworld.free.fr/myApt/</url>

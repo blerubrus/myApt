@@ -16,18 +16,22 @@ Download
 
 === 
 
+
+ 
 ~~ ***
 ~~ WARNING: the version must be consistent in download.apt and usage.apt pages
 ~~ ***
 
-* {bworld-myApt Version 1.3-SNAPSHOT Build 2015-11-05 12:06:25}
+* {bworld-myApt Version 1.4-SNAPSHOT Build 2016-01-10 12:36:41}
 
  
    * Java Executable Archive : {{{./myApt.jar}myApt.jar}}
    
    * Shortcut shell scripts for Unix-based users:
 
-      * {{{./myApt.sh}myApt.sh}}   
+      * {{{./myApt.sh}myApt.sh}}
+      
+      * {{{./myAptLink.sh}myAptLink.sh}} (<<new>>)
    
       * {{{./myAptMonthDone.sh}myAptMonthDone.sh}}
       
@@ -45,6 +49,41 @@ Download
  
 * {What's new?}
 
+** {From 1.3-SNAPSHOT to 1.4-SNAPSHOT Build 2016-01-10 12:36:41}
+
+ Warning: pending, work in progress version... The code is the more and more duplicated to manage resources, images and links... To be refactored in myApt v2!!!
+ 
+ Created a git branch named <<<myaptlink>>> (then merged) in order to manage a new type of output. Quick Specifications of this new feature (upgrading the pom.xml project version to <<<1.4-SNAPSHOT>>>):
+
+ Objective: output to the console the apt code for an hyperlink to a resource file or directory whose name is given on the command line. Without second parameter given on the command line, the label of the link is the filename (or dir name, with or without path, to be discussed). If a given label is given as second parameter on the command line, this input is used in the apt code.
+
+ Examples:
+
+   * typing "<<<myAptLink src/site/resources/folder/filename>>>" (assuming that <<<src/site/resources/folder/filename>>> exists) returns to the console the following string:
+
++--+
+$ myAptLink src/site/resources/folder/filename
+ {{{./folder/filename}filename}}
+$
++--+
+
+
+   * With two parameters on the command line:
+
++--+
+$ myAptLink src/site/resources/folder/filename label
+ {{{./folder/filename}label}}
+$
++--+
+
+ This feature allows to simply insert the apt code for a link to a resource file (copy paste or using from vim the <<!r:>> command, for example).
+
+ When the path to an existing directory is given as first argument, this "myAptLink" is quite similar to "myAptResources" in previous version, but towards version 2 of the project.
+
+ To be discussed: for an image file (baseed on the extension), the output also includes the apt code to display the image. "myAptLink" might replace both "myAptImage*" and "myAptResources" scripts...
+
+ In myApt v2, perhaps the generation of the apt file should be poarametered with for example an "<<<-outputFileName>>>" argument on the command line...
+ 
 ** {From 1.2-SNAPSHOT 2015-10-30 to 1.3-SNAPSHOT 2015-11-05}
 
  New version of the <<<myApt.jar>>> file with esthetic modifications in terms of apt generation:

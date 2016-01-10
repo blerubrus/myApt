@@ -11,7 +11,14 @@ import java.util.Properties;
  * @version since 2015-05-21
  */
 public class Main {
-	
+
+   /**Argument for the link type generation, specifies the path to directory or file to be the target of the link to generate.*/	
+   protected static final String ARGUMENT_LINK_TO = "-Dlinkto=";
+   
+   /**Argument for the link type generation, specifies the label for the link to the file that is the target of the link to generate.*/	
+   protected static final String ARGUMENT_LINK_LABEL = "-Dlinklabel=";
+   
+   
    /**Possible argument to include a toc in the generated simple apt file.*/	
    protected static final String ARGUMENT_TOC = "-Dtoc";
 
@@ -57,6 +64,9 @@ public class Main {
    
    /**Expected value for the argument prefix {@link #ARGUMENT_TYPE}, in order to generate a listing or resources apt document.*/
    protected static final String ARGUMENT_TYPE_VALUE_RESOURCES = "resources";
+   
+   /**Expected value for the argument prefix {@link #ARGUMENT_TYPE}, in order to generate a string that represents the apt code for links and image display to the file(s) given as other parameter.*/
+   //protected static final String ARGUMENT_TYPE_VALUE_LINK = "link";
 
    /**Expected argument prefix for specifying the year of the "month done" apt file.*/
    protected static final String ARGUMENT_DONE_YEAR = "-Dyear=";
@@ -99,12 +109,17 @@ public class Main {
       // not "-v" as argument: let's create a file
 	  GenerateApt ma = MyAptFactory.getMyApt(args);
       if (ma.generate()){
-         System.out.println("Build succeeded!");         
-         for (String currGeneratedFilename : ma.getGeneratedFilenames()){
-            System.out.println("   Generated apt file " + currGeneratedFilename);
-            System.out.println("You may wish to add the following line in the site.xml file:");
-            System.out.println("   " + ma.getMenuAdd());
-         }
+    	 if (ma instanceof MyAptLink){
+    		 //does nothting
+    	 }
+    	 else{
+	         System.out.println("Build succeeded!");         
+	         for (String currGeneratedFilename : ma.getGeneratedFilenames()){
+	            System.out.println("   Generated apt file " + currGeneratedFilename);
+	            System.out.println("You may wish to add the following line in the site.xml file:");
+	            System.out.println("   " + ma.getMenuAdd());
+	         }
+    	 }
       }
       else{
          System.out.println("Build failed: could not generate an apt file :(");

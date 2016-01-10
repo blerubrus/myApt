@@ -23,5 +23,18 @@ public interface Resource {
 	 * @return the relative path starting from the Maven convention of "src/site/resources" directory.
 	 */
 	public String getPath();
+	
+	/**
+	 * 
+	 * @return the apt code to generate a link to this resource in the html output.
+	 */
+	public String getAptLink();
+	
+	
+	/**
+	 * 
+	 * @return the apt code to display the image in the html output.
+	 */
+	public String getAptImageDisplay();
 
 }

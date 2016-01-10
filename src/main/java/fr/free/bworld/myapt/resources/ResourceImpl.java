@@ -18,15 +18,26 @@ public class ResourceImpl implements Resource {
 	private String label;
 	
 	/**
-	 * Sets path and filename attributes.
+	 * Invokes the other constructor with a null label.
 	 * @param path is the path to the parent folder of this resource.
 	 * @param filename is the name of the file.
 	 */
 	public ResourceImpl(String path, String filename){
-		this.path = path;
-		this.filename = filename;
+		this(path, filename, null);
 	}
 	
+	/**
+	 * Sets path filename and label attributes.
+	 * @param linkTo
+	 * @param name
+	 * @param linkLabel
+	 */
+	public ResourceImpl(String linkTo, String name, String linkLabel) {
+		this.path = extractRelativePathFromResourcesDirName(linkTo);
+		this.filename = name;
+		this.label = linkLabel;
+	}
+
 	/**
 	 * 
 	 * @return a custom message showing the values of the attributes.
@@ -39,6 +50,28 @@ public class ResourceImpl implements Resource {
 		buf.append(getFilename());
 		buf.append(" ; Label: ");
 		buf.append(getLabel());
+		return buf.toString();
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @return the apt code to display an image.
+	 */
+	public String getAptImageDisplay(){
+		StringBuffer buf = new StringBuffer();
+		//String linkpath = extractRelativePathFromResourcesDirName(path);
+		
+		buf.append("[");
+		buf.append(path);
+		if(! path.endsWith("/")){
+			buf.append("/");
+		}
+		buf.append(getFilename());
+		buf.append("]");
+		buf.append(System.getProperty("line.separator"));
+		
 		return buf.toString();
 	}
 
@@ -64,6 +97,47 @@ public class ResourceImpl implements Resource {
 	@Override
 	public String getPath() {
 		return this.path;
+	}
+	
+	/**
+	    * If the browsed directory includes the "resources/" string, replaces its full content start until "resources" by "./".
+	    * 
+	    * @return a relative path from the src/site/resources/ directory.
+	    */
+	   protected String extractRelativePathFromResourcesDirName(String path) {
+		  if (path.endsWith("resources")){
+			  return "./";
+		  }
+	      int resIndex = path.indexOf("resources/");
+	      if (resIndex == -1){//not found
+	         return path;
+	      }
+	      else{
+	         return "./" + path.substring(resIndex + "resources/".length());
+	      }
+	   }
+
+	@Override
+	public String getAptLink() {
+		StringBuffer buf = new StringBuffer();
+		String linkpath = extractRelativePathFromResourcesDirName(path);
+		
+		buf.append(" {{{");
+		buf.append(linkpath);
+		if(! linkpath.endsWith("/")){
+			buf.append("/");
+		}
+		buf.append(getFilename());
+		buf.append("}");
+		if (getLabel() == null){//I do not know how to automatically set a label...
+			buf.append(getFilename());
+		}
+		else{
+			buf.append(getLabel());
+		}
+		buf.append("}}");
+		
+		return buf.toString();
 	}
 	
 
