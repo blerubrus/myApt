@@ -16,6 +16,13 @@ Home
  For further information, see {{{http://maven.apache.org/doxia/references/apt-format.html}The APT format}}
  on the Maven Web Site (2012-02-15).
  
+ [Note:]
+
+ More and more badly designed in terms of Object Oriented Program! The more quick new functionalities are developped, the more repeats there are, the more the lack of a complete refactoring is necessary... Nevertheless, I have used the myApt and myAptLink functions tens of times a day since 2 years without any bug ;)
+
+ []
+
+
  Site content: please consult
  
    * the {{{./download.html}Download}} page to get the <<bworld-myApt>> program.

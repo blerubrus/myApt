@@ -7,28 +7,29 @@
 
 Usage: myAptLink
 
- Work in progress since 2016-01-09 11:54.
+ Work in progress since 2016-01-09 11:54. Successfully used in its first version (links to files in "<<<src/site/resources/>>>" folder), updated on the 2017-05-31 for creating links towards the html version of an apt file referenced by a path in the "<<<src/site/apt>>>" folder).
 
-===
+~~===
 
- Table of Contents
+~~ Table of Contents
 
-%{toc|fromDepth=2}
+~~%{toc|fromDepth=2}
 
 ===
 
  Usage examples:
  
-   * Typing: <<myAptLink param>> where <<<param>>> is a path to an existing file (ideally in the "<<<src/site/resources/>>>" folder
-   of the maven project) generates the apt code for a link to this file. Example:
+   * Typing: <<myAptLink param>> where <<<param>>> is a path to an existing file (ideally in the "<<<src/site/resources/>>>" or "<<<src/site/apt/>>>" folder  of a maven project) generates the apt code for a link to this file. Examples:
+
+      * creating a link to a file under the "<<<src/site/resources/>>>" hierarchy:
  
 +--+
 $ myAptLink src/site/resources/myDir/myFile
  {{{./myDir/myFile}myFile}}
 +--+
 
-   Note that if the extension of the target file is one of the supported image file extension (png svg gif jpg jpeg), the output will
-   also display the apt code to display the image. Example:
+      Note that if the extension of the target file is one of the supported image file extension (png svg gif jpg jpeg), the output will
+      also display the apt code to display the image. Example:
 
 +--+
 $ myAptLink src/site/resources/myDir/myImageFile.png
@@ -37,16 +38,33 @@ $ myAptLink src/site/resources/myDir/myImageFile.png
 [./myDir/myImageFile.png]
 +--+
 
+      * creating a link to the html version expected to be generated from an apt file (the label crops the extension ".apt"):
+
++--+
+$ myAptLink src/site/index.apt
+ {{{./index.html}index}}
++--+
+
    * Typing <<myAptLink param1 param2>> generates the apt code for a link to the file given as argument, with a label of the link
-   given as second argument. Example:
+   given as second argument. Examples:
+
+      * a file under the "<<<src/site/resources>>>" hierarchy:
  
 +--+
 $ myAptLink src/site/resources/myDir/myFile label
  {{{./myDir/myFile}label}}
 +--+
 
-   * Typing <<myAptLink param>> where <<<param>>> is a path to an existing directory (ideally in the "<<<src/site/resources/>>>" folder
-   of the maven project) generates the apt code of a recursive listing of links to each file in the directory ("<<<.svn>>>" and "<<<.git>>>" sub folders 
+      * a file under the "<<<src/site/apt/>>>" folder:
+
++--+
+$ myAptLink src/site/apt/index.apt Home
+ {{{./index.html}Home}}
++--+
+
+
+
+   * Typing <<myAptLink param>> where <<<param>>> is a path to an existing directory in the "<<<src/site/resources/>>>" folder of the maven project generates the apt code of a recursive listing of links to each file in the directory ("<<<.svn>>>" and "<<<.git>>>" sub folders 
    are ignored). For image files
    (if the extension of the file is one of png svg jpg gif jpeg), the apt code to display this image in the generated html
    is added to the item. Example:  

@@ -20,11 +20,10 @@ import fr.free.bworld.myapt.MyApt;
 public class MonthDoneJunitTest {
 	
 	/**
-	 * Checks the constructor with 0 and 13.
-	 * @throws Exception
+	 * Checks the constructor with 0 and 13. 
 	 */
 	@Test
-	public void testConstructorInvalidMonth() throws Exception {
+	public void testConstructorInvalidMonth() {
 		try{
 			new MonthDone(0, 0);
 			Assert.assertFalse("should get an exception for month parameter = 0", true);
@@ -43,7 +42,7 @@ public class MonthDoneJunitTest {
 	
 	/**
 	 * Checks the july 2011 expected calendar.
-	 * @throws Exception
+	 * @throws Exception for MonthDone constructor needs.
 	 */
 	@Test
 	public void testGenerateCalendarJuly2011() throws Exception {
@@ -213,8 +212,7 @@ public class MonthDoneJunitTest {
 	}
 	
 	/**
-	 * Checks the generated header for july 2011 without an scm specified.
-	 * @throws Exception
+	 * Checks the generated header for july 2011 without an scm specified. 
 	 */
 	@Test
 	public void testGenerateHeader()  {
@@ -277,7 +275,7 @@ public class MonthDoneJunitTest {
 	
 	/**
 	 * Tests the creation of the file, then deletes it.
-	 * @throws Exception
+	 * @throws Exception for MonthDone class constructor needs.
 	 */
 	@Test
 	public void testCreate() throws Exception {

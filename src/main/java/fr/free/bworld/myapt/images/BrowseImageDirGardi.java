@@ -97,7 +97,7 @@ public class BrowseImageDirGardi extends BrowseImageDir {
 	    *  
 	    * @param imageBaseName is the name of the image without path.
 	    * @param resRelPath is the relative path from the "resources" directory.
-	    * @return a code based on the template: <div class="imgGal"><a href="./imageBaseName.html"><img src="./images/imageBaseName_thumb.png" alt="todo" width="100" height="100"/></a><div class="desc">2013-MM-dd</div></div>
+	    * @return a code based on the template: &lt;div class="imgGal"&gt;&lt;a href="./imageBaseName.html"&gt;&lt;img src="./images/imageBaseName_thumb.png" alt="todo" width="100" height="100"/&gt;&lt;/a&gt;&lt;div class="desc"&gt;2013-MM-dd&lt;/div&gt;&lt;/div&gt;
 	    */
 	   protected String getGalleryDiv(String imageBaseName, String resRelPath){
 		   String dateDescription = extractDate(imageBaseName);
@@ -126,7 +126,7 @@ public class BrowseImageDirGardi extends BrowseImageDir {
 
 	/**
 	 * Returns the filename of the generated menu extract.
-	 * @see fr.free.bworld.myapt.GenerateApt#getTitles()
+	 * 
 	 */
 	@Override
 	public String getMenuAdd() {

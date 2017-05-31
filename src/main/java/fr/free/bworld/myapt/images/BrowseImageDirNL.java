@@ -21,14 +21,14 @@ public class BrowseImageDirNL extends BrowseImageDir {
 	}
 	
 	/**
-	 * @param path
+	 * @param path is the path to the dir...
 	 */
 	public BrowseImageDirNL(String path) {
 		super(path);
 	}
 
 	/**
-	 * @see fr.free.bworld.myapt.images.BrowseImageDirAbstract#generate()
+	 * 
 	 */
 	@Override
 	public boolean generate() {
@@ -91,7 +91,7 @@ public class BrowseImageDirNL extends BrowseImageDir {
 	}
 
 	/**
-	 * @see fr.free.bworld.myapt.images.BrowseImageDirAbstract#getGalleryDiv(java.lang.String, String)
+	 * ?
 	 */
 	@Override
 	protected String getGalleryDiv(String imageBaseName, String resRelPath) {
@@ -126,7 +126,7 @@ public class BrowseImageDirNL extends BrowseImageDir {
 	
 	/**
 	 * Returns the filename of the generated menu extract.
-	 * @see fr.free.bworld.myapt.GenerateApt#getTitles()
+	 * @see fr.free.bworld.myapt.GenerateApt
 	 */
 	@Override
 	public String getMenuAdd() {

@@ -122,7 +122,7 @@ ln -s path/to/myApt-version-folder/myAptImageDir.sh myAptImageDir
 ~~ ***
 
 +--+
-bworld-myApt Version 1.4-SNAPSHOT Build 2016-01-10 12:36:41
+bworld-myApt Version 1.5-SNAPSHOT Build 2017-05-31 14:05:21
 +--+
 
  The version of the jar file can also be checked by unzipping the jar file (<<unzip myApt.jar>>) then read the content
@@ -141,8 +141,8 @@ bworld-myApt Version 1.4-SNAPSHOT Build 2016-01-10 12:36:41
 
 
 +--+   
-project.version=1.4-SNAPSHOT
-build.date=2016-01-10 12:36:41
+project.version=1.5-SNAPSHOT
+build.date=2017-05-31 14:05:21
 +--+
 
    * <<<META-INF/MANIFEST.MF>>>

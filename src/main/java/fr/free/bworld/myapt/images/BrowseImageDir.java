@@ -170,9 +170,9 @@ public abstract class BrowseImageDir implements GenerateApt {
     * For a given image, generates a link to the apt/html file with the link
     * content made of the thumbnail and date.
     *  
-    * @param imageBaseName
+    * @param imageBaseName is the basename of the image (without extension?)
     * @param resRelPath is the relative path from the "resources" directory.
-    * @return a code based on the template: <div class="imgGal"><a href="./imageBaseName.html"><img src="./images/imageBaseName_thumb.png" alt="todo" width="100" height="100"/></a><div class="desc">2013-MM-dd</div></div>
+    * @return a code based on the template: &lt;div class="imgGal"&gt;&lt;a href="./imageBaseName.html"&gt;&lt;img src="./images/imageBaseName_thumb.png" alt="todo" width="100" height="100"&gt;&lt;/img&gt;&lt;/a&gt;&lt;div class="desc"&gt;2013-MM-dd&lt;/div&gt;&lt;/div&gt;&lt;
     */
    protected abstract String getGalleryDiv(String imageBaseName, String resRelPath);
 

@@ -11,16 +11,16 @@ import java.util.Locale;
 
 /**
  * Usefull to generate a new "b2do month todo" apt (Doxia) file.
- * <br/>
+ * 
  * Usage, example for July 2011:
  * <ol>
  * <li>MonthDone md = new MonthDone(2011, 7);</li>
  * <li>md.create();</li>
  * </ol>
  * The "2011-07_done.apt" file has been generated.
- * <br/>
+ * 
  * The <code>setOutputFilePath</code> method allows to set a custom output file path and name.
- * <br/>
+ * 
  * See <code>MonthDoneJunitTest</code> for examples and usage.
  * 
  *

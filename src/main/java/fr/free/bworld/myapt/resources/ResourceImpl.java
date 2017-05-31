@@ -1,5 +1,6 @@
 package fr.free.bworld.myapt.resources;
 
+
 /**
  * Simple bean representing a Maven Web Site resource file.
  * 
@@ -28,9 +29,9 @@ public class ResourceImpl implements Resource {
 	
 	/**
 	 * Sets path filename and label attributes.
-	 * @param linkTo
-	 * @param name
-	 * @param linkLabel
+	 * @param linkTo is the path to parent directory of the resource
+	 * @param name is the filename
+	 * @param linkLabel is the label for the link
 	 */
 	public ResourceImpl(String linkTo, String name, String linkLabel) {
 		this.path = extractRelativePathFromResourcesDirName(linkTo);
@@ -99,23 +100,33 @@ public class ResourceImpl implements Resource {
 		return this.path;
 	}
 	
-	/**
-	    * If the browsed directory includes the "resources/" string, replaces its full content start until "resources" by "./".
-	    * 
-	    * @return a relative path from the src/site/resources/ directory.
-	    */
-	   protected String extractRelativePathFromResourcesDirName(String path) {
-		  if (path.endsWith("resources")){
-			  return "./";
-		  }
-	      int resIndex = path.indexOf("resources/");
-	      if (resIndex == -1){//not found
-	         return path;
-	      }
-	      else{
-	         return "./" + path.substring(resIndex + "resources/".length());
-	      }
-	   }
+   /**
+    * If the browsed directory includes the "resources/" string, replaces its full content start until "resources" by "./".
+    * If the browsed dir includes "apt/"
+    * @param path is the the path to the resource referenced by the user...
+    * @return a relative path from the src/site/resources/ directory.
+    */
+	protected String extractRelativePathFromResourcesDirName(String path) {
+	  if (path.endsWith("resources")){
+		  return "./";
+	  }
+      int resIndex = path.indexOf("resources/");
+      if (resIndex == -1){//not in resources folder
+    	 if (path.endsWith("apt")){
+    		 return "./";
+    	 }
+         int aptIndex = path.indexOf("apt/");
+         if (aptIndex == -1){//not in apt folder
+        	 return path;
+         }
+         else{// in apt folder
+        	 return "./" + path.substring(aptIndex + "apt/".length());//there may be a subfolder under apt
+         }
+      }
+      else{//in resources folder
+         return "./" + path.substring(resIndex + "resources/".length());
+      }
+   }
 
 	@Override
 	public String getAptLink() {
@@ -127,10 +138,30 @@ public class ResourceImpl implements Resource {
 		if(! linkpath.endsWith("/")){
 			buf.append("/");
 		}
-		buf.append(getFilename());
+		// manages raw resources or apt file
+		if (getFilename().endsWith(".apt")){//apt file
+			String htmlFilename = replaceAptByHtml();
+			if (htmlFilename != null){
+				buf.append(htmlFilename);
+			}
+			else{
+				System.err.println("html/apt filename possible problem... null return");
+				buf.append(getFilename());
+			}
+		}
+		else{//resource file
+			buf.append(getFilename());
+		}
+		
 		buf.append("}");
 		if (getLabel() == null){//I do not know how to automatically set a label...
-			buf.append(getFilename());
+			if (getFilename().endsWith(".apt")){//apt file: remove extension
+				buf.append(getFilename().substring(0, getFilename().length() - 4));
+			}
+			else{
+				buf.append(getFilename());
+			}
+			
 		}
 		else{
 			buf.append(getLabel());
@@ -138,6 +169,19 @@ public class ResourceImpl implements Resource {
 		buf.append("}}");
 		
 		return buf.toString();
+	}
+	
+	
+	/**
+	 * Replaces the apt extension by the html extention for a filename with the .apt extentsion.
+	 * @return null if not apt, or the filename with the html extension.
+	 */
+	public String replaceAptByHtml(){
+		String result = null;
+		if (getFilename().endsWith(".apt")){
+			result = getFilename().substring(0, getFilename().length() - 3) + "html";
+		}
+		return result;
 	}
 	
 

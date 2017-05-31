@@ -12,7 +12,7 @@ public interface Inspect {
 	/**
 	 * 
 	 * @param recursive shows if the inspection must be recursive or not.
-	 * @return 
+	 * @return a list of resources.
 	 */
 	public List<Resource> list(boolean recursive);
 	

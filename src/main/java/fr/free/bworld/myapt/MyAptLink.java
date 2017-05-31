@@ -9,6 +9,7 @@ import java.util.List;
 import fr.free.bworld.myapt.images.BrowseImageDir;
 import fr.free.bworld.myapt.resources.Inspect;
 import fr.free.bworld.myapt.resources.InspectImpl;
+import fr.free.bworld.myapt.resources.Resource;
 import fr.free.bworld.myapt.resources.ResourceImpl;
 
 /**
@@ -19,15 +20,17 @@ import fr.free.bworld.myapt.resources.ResourceImpl;
  */
 public class MyAptLink implements GenerateApt {
 	
+	/**The input  path to the resource file or directory.*/
 	private String linkTo;
 	
+	/**The label requested for the link.*/
 	private String linkLabel;
 	
 	
 	/**
 	 * 
-	 * @param linkTo
-	 * @param linkLabel
+	 * @param linkTo is the path to the resource.
+	 * @param linkLabel is the label for the link.
 	 */
 	public MyAptLink(String linkTo, String linkLabel) {
 		if (linkTo == null){
@@ -40,30 +43,45 @@ public class MyAptLink implements GenerateApt {
 			}
 			else{
 				this.linkTo = linkTo;
-			}
-			
-		}
-		
+			}			
+		}		
 		this.linkLabel = linkLabel;
 	}
 
+	/**
+	 * Getter
+	 * @return {@link #linkTo}
+	 */
 	public String getLinkTo() {
 		return linkTo;
 	}
 
+	/**
+	 * Setter.
+	 * @param linkTo is the pointed file.
+	 */
 	public void setLinkTo(String linkTo) {
 		this.linkTo = linkTo;
 	}
 
+	/**
+	 * Getter.
+	 * @return the link label.
+	 */
 	public String getLinkLabel() {
 		return linkLabel;
 	}
 
+	/**
+	 * Setter.
+	 * @param linkLabel is a label for the link to create.
+	 */
 	public void setLinkLabel(String linkLabel) {
 		this.linkLabel = linkLabel;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Checks if the input is a file or directory then invokes inspector or resource impl to generate the link(s).
 	 * @see fr.free.bworld.myapt.GenerateApt#generate()
 	 */
 	@Override
@@ -75,7 +93,7 @@ public class MyAptLink implements GenerateApt {
 			System.out.println(listing);
 		}
 		else{// file
-			ResourceImpl res = new ResourceImpl(f.getParent(), f.getName(), linkLabel);
+			Resource res = new ResourceImpl(f.getParent(), f.getName(), linkLabel);
 			System.out.println(res.getAptLink());
 			// if image file
 			for (String extension : BrowseImageDir.SUPPORTED_FORMATS){

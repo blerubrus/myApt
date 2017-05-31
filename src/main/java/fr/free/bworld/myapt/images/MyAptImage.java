@@ -87,7 +87,7 @@ public class MyAptImage extends MyApt {//implements GenerateApt {
 	/**
 	 * If the browsed directory includes the "resources/" string, replaces its
 	 * full content start until "resources" by "./".
-	 * 
+	 * @param path is the path to the file referenced by the user
 	 * @return a relative path from the src/site/resources/ directory.
 	 */
 	protected String extractRelativePath(String path) {

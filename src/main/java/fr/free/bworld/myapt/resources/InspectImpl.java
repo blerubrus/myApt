@@ -84,12 +84,14 @@ public class InspectImpl implements Inspect {
 		this.filenameFilter = filenameFilter;
 	}
 
-
-
 	/**
 	 * If non recursive, returns the files in the current directory.
 	 * For recursive option, returns the files in the hierarchy.
 	 * @see fr.free.bworld.myapt.resources.Inspect#list(boolean)
+	 * @param listing is the list of resources
+	 * @param path is the path to this list of resources
+	 * @param recursive shows if the program must browse sub directories
+	 * @return the list of resources....
 	 */
 	public List<Resource> list(List<Resource> listing, String path, boolean recursive) {
 		File pathFile = new File(path);
@@ -199,7 +201,7 @@ public class InspectImpl implements Inspect {
 	
    /**
     * If the browsed directory includes the "resources/" string, replaces its full content start until "resources" by "./".
-    * 
+    * @param path is the the path to the file referenced by the user of this program.
     * @return a relative path from the src/site/resources/ directory.
     */
    protected String extractRelativePathFromResourcesDirName(String path) {

@@ -48,5 +48,47 @@ public class MyAptResourcesJunitTest {
 		Assert.assertTrue("could not delete the generated apt file '" + createdAptFilename + "' does not exist", generatedFile.delete());
 		
 	}
+	
+	/**
+	 * Simply tests the "replaceAptByHtml" for a test file named index.apt.
+	 */
+	@Test
+	public void testReplaceAptByHtml_index() {
+		ResourceImpl ri = new ResourceImpl("src/site/apt", "index.apt");
+		String actual = ri.replaceAptByHtml();
+		Assert.assertEquals("apt not transformed to html", "index.html", actual);
+	}
+	
+	/**
+	 * Simply tests the "replaceAptByHtml" for a test file named index.apt.
+	 */
+	@Test
+	public void testReplaceAptByHtml_indexNotApt() {
+		ResourceImpl ri = new ResourceImpl("src/site/apt", "index.ap");
+		String actual = ri.replaceAptByHtml();
+		Assert.assertNull("ap file name should be null", actual);
+	}
+	
+	@Test
+	public void testExtractRelativePath_aptIndex(){
+		ResourceImpl ri = new ResourceImpl("src/site/apt", "toto");
+		String actual = ri.extractRelativePathFromResourcesDirName("src/site/apt");
+		Assert.assertEquals("no good extract", "./", actual);
+	}
+	
+	@Test
+	public void testExtractRelativePath_aptSlash(){
+		ResourceImpl ri = new ResourceImpl("src/site/apt/", "toto");
+		String actual = ri.extractRelativePathFromResourcesDirName("src/site/apt/");
+		Assert.assertEquals("no good extract", "./", actual);
+	}
+	
+	@Test
+	public void testExtractRelativePath_aptSubfolder(){
+		ResourceImpl ri = new ResourceImpl("src/site/apt/toto", "titi");
+		String actual = ri.extractRelativePathFromResourcesDirName("src/site/apt/toto");
+		Assert.assertEquals("no good extract", "./toto", actual);
+	}
+	
 
 }

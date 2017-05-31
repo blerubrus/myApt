@@ -10,7 +10,7 @@
    <groupId>fr.free.bworld</groupId>
    <artifactId>bworld-myApt</artifactId>
    <packaging>jar</packaging>
-   <version>1.4-SNAPSHOT</version>
+   <version>1.5-SNAPSHOT</version>
    <name>myApt</name>
    <description>A simple java program to generate custom files in the Doxia APT format.</description>
    <url>http://bworld.free.fr/myApt/</url>
@@ -19,12 +19,14 @@
       <url>http://bworld.free.fr/</url>
    </organization>   
    <inceptionYear>2011</inceptionYear>
+<!--
    <parent>
       <groupId>fr.free.bworld</groupId>
       <artifactId>bworld</artifactId>
       <version>1.0-SNAPSHOT</version>
       <relativePath>../bworld/pom.xml</relativePath>
    </parent>
+-->
    <distributionManagement>
       <site>
          <id>mars.local</id>
@@ -49,6 +51,7 @@
             <reportSets>
                <reportSet>
                   <reports>
+                     <report>summary</report>
                      <report>project-team</report>
                      <report>scm</report>
                   </reports>
@@ -161,7 +164,7 @@
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-site-plugin</artifactId>
-            <version>3.0</version>
+            <!--<version>3.0</version>-->
             <configuration>
                <locales>en</locales>
             </configuration>

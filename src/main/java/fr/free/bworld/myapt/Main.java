@@ -80,7 +80,7 @@ public class Main {
    /**Expected argument prefix for specifying the directory to browse when the type of apt file to generate is "resources". Expects the absolute path.*/
    public static final String ARGUMENT_RESOURCES_DIR = "-DresourcesDir=";
    
-   /**Expected argument prefix for specifying if the apt will contain rcs keywords, depending on the value ({@link #ARGUMENT_SCM_GIT} or {@link #ARGUMENT_SCM_GIT}.*/
+   /**Expected argument prefix for specifying if the apt will contain rcs keywords, depending on the value ARGUMENT_SCM_GIT (abandonned) or {@link #ARGUMENT_SCM_SVN}.*/
    public static final String ARGUMENT_SCM = "-Dscm=";
    
    /**Possible value for the argument {@link #ARGUMENT_SCM}. If set so, the apt files will contain rcs Id URL Author and Date keywords.*/
