@@ -9,7 +9,7 @@ Home
 
  Welcome to <<bworld-myApt>> Web site!
  
- <<myApt>> is a Java standalone command-line application that aims at generating files in the
+ <<myApt>> is a Java standalone command-line application that aims at generating code in the
  <Almost Plain Text> (APT) Doxia Format.
  
  APT is a convenient plain text format mainly useful to write a Maven project documentation Web site.
@@ -18,7 +18,7 @@ Home
  
  [Note:]
 
- More and more badly designed in terms of Object Oriented Program! The more quick new functionalities are developped, the more repeats there are, the more the lack of a complete refactoring is necessary... Nevertheless, I have used the myApt and myAptLink functions tens of times a day since 2 years without any bug ;)
+ More and more badly designed in terms of Object Oriented Program! The more quick new functionalities are developped, the more repeats there are, the more the lack of a complete refactoring is necessary... Nevertheless, I have used the {{{./myApt.sh}myApt.sh}} and {{{./myAptLink.sh}myAptLink.sh}} scripts tens of times a day since 2 years without any bug ;) If these two previous scripts are extremly useful to me, I have not used the other shortcut scripts to invoke the {{{./myApt.jar}myApt.jar}} with custom options ("myAptMonth" or "myAptImage") for a long time...
 
  []
 
@@ -41,4 +41,4 @@ Home
  
    []
    
- Note: this project is hosted on GitHub at the following URL: {{https://github.com/blerubrus/myApt}}
+ Note: the sources of this project are hosted on GitHub at the following URL: {{https://github.com/blerubrus/myApt}}

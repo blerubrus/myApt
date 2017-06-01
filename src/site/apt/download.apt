@@ -22,10 +22,7 @@ Download
 ~~ WARNING: the version must be consistent in download.apt and usage.apt pages
 ~~ ***
 
-* {bworld-myApt Version 1.5-SNAPSHOT Build 2017-05-31}
-
-
-
+* {bworld-myApt Version 1.6-SNAPSHOT Build 2017-06-01 13:02:09}
  
    * Java Executable Archive : {{{./myApt.jar}myApt.jar}}
    
@@ -52,11 +49,17 @@ Download
 * {What's new?}
 
 
+** {From 1.5-SNAPSHOT to 1.6-SNAPSHOT}
+
+ "myAptLink" now handles input first parameter that starts with "<<<http>>>" as an external link to this given URL. 
+
+ Please see  {{{./usage_myAptLink.html}usage_myAptLink}} for further info.
+
 ** {From 1.4-SNAPSHOT to 1.5-SNAPSHOT}
 
-  "myAptLink" now manages a reference to an apt file by the user input. To be clear, the previous version of myAptLink was designed to create a link to a file in the <<<src/site/resources/>>> folder, this new version aims at also creating a link to the html version that will be generated from an apt file referenced by the user in the <<<src/site/apt>>> folder.
+  "myAptLink" now manages the user input first parameter that can be a reference to an apt source file. To be clear, the previous version of myAptLink was designed to create a link to a file in the <<<src/site/resources/>>> folder, this new version aims at also creating a link to the html version that will be generated from an apt file referenced by the user in the <<<src/site/apt>>> folder.
 
- 
+ Please see  {{{./usage_myAptLink.html}usage_myAptLink}} for further info.
 
 ** {From 1.3-SNAPSHOT to 1.4-SNAPSHOT Build 2016-01-10 12:36:41}
 

@@ -4,6 +4,9 @@
 package fr.free.bworld.myapt;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import fr.free.bworld.myapt.images.BrowseImageDir;
@@ -20,7 +23,7 @@ import fr.free.bworld.myapt.resources.ResourceImpl;
  */
 public class MyAptLink implements GenerateApt {
 	
-	/**The input  path to the resource file or directory.*/
+	/**The input  path to the resource file or directory. Since 20170601, can also be an http(s).*/
 	private String linkTo;
 	
 	/**The label requested for the link.*/
@@ -35,6 +38,9 @@ public class MyAptLink implements GenerateApt {
 	public MyAptLink(String linkTo, String linkLabel) {
 		if (linkTo == null){
 			throw new IllegalArgumentException("myAptLink expects at least one argument: the path to a file or directory...");
+		}
+		else if (linkTo.startsWith("http")){
+			this.linkTo = linkTo;
 		}
 		else{//checks the dir or file exists
 			File f = new File(linkTo);
@@ -86,21 +92,26 @@ public class MyAptLink implements GenerateApt {
 	 */
 	@Override
 	public boolean generate() {
-		File f = new File(linkTo);
-		if (f.isDirectory()){
-			Inspect inspector = new InspectImpl(linkTo);
-			String listing = inspector.toApt();
-			System.out.println(listing);
+		if (linkTo.startsWith("http")){
+			System.out.println(getAptHref());
 		}
-		else{// file
-			Resource res = new ResourceImpl(f.getParent(), f.getName(), linkLabel);
-			System.out.println(res.getAptLink());
-			// if image file
-			for (String extension : BrowseImageDir.SUPPORTED_FORMATS){
-				if (f.getName().endsWith(extension)){
-					System.out.println();
-					System.out.println();
-					System.out.println(res.getAptImageDisplay());
+		else{
+			File f = new File(linkTo);
+			if (f.isDirectory()){
+				Inspect inspector = new InspectImpl(linkTo);
+				String listing = inspector.toApt();
+				System.out.println(listing);
+			}
+			else{// file
+				Resource res = new ResourceImpl(f.getParent(), f.getName(), linkLabel);
+				System.out.println(res.getAptLink());
+				// if image file
+				for (String extension : BrowseImageDir.SUPPORTED_FORMATS){
+					if (f.getName().endsWith(extension)){
+						System.out.println();
+						System.out.println();
+						System.out.println(res.getAptImageDisplay());
+					}
 				}
 			}
 		}
@@ -143,6 +154,38 @@ public class MyAptLink implements GenerateApt {
 
 	}
 
-	
+	/**
+	 * Checks that the "linkTo" starts with "http", else returns null. Else, builds the apt code for this link,
+	 * if the label is null or empty, only the link. Then adds the date in parenthesis.
+	 * then adds the date between parenthesis. Example: 
+	 * @return null if the linkTo does not start with http, or the APT code for a link to this hrefa 
+	 */
+	public String getAptHref(){
+		String result = null;
+		if (linkTo.startsWith("http")){
+			StringBuffer buf = new StringBuffer();
+			buf.append(" {{");
+			if (linkLabel == null || linkLabel.trim().isEmpty()){
+				buf.append(linkTo);
+				buf.append("}}");
+			}
+			else{
+				buf.append("{");
+				buf.append(linkTo);
+				buf.append("}");
+				buf.append(linkLabel);
+				buf.append("}}");
+			}
+			// displays the current date in yyyy-MM-dd between parenthesis
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			Date date = cal.getTime();
+			buf.append(" (");
+			buf.append(sdf.format(date));
+			buf.append(")");
+			result = buf.toString();
+		}
+		return result;
+	}
 
 }
